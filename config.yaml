@@ -1,0 +1,44 @@
+baseURL: /
+languageCode: en-us
+title: PX-Backup Documentation
+pygmentsUseClasses: true
+pygmentsCodeFences: true
+enableGitInfo: true
+theme: pxdocs-tooling
+
+params:
+  narrowToolbarTitle: PX-Backup Documentation narrowtoolbar
+  wideToolbarTitle: PX-Backup Documentation widetoolbar
+  description: Find out more about PX-Backup, the persistent storage solution for containers. Come check us out for step-by-step guides and tips!
+  keywords: PX-Backup, px-enterprise, px-developer, containers, storage
+  githubRepo: https://github.com/portworx/pxdocs-backup
+  # algolia:
+  #   vars:
+  #     - title
+  #     - summary
+  #     - date
+  #     - publishdate
+  #     - expirydate
+  #     - permalink
+  #   params:
+  #     - categories
+  #     - tags
+
+outputFormats:
+  # Algolia:
+  #   baseName: algolia
+  #   isPlainText: true
+  #   mediaType: application/json
+  #   notAlternative: true
+  Redirects:
+    baseName: redirects
+    isPlainText: true
+    mediaType: application/json
+    notAlternative: true
+
+outputs:
+  home:
+    - HTML
+    - RSS
+    # - Algolia
+    - Redirects
