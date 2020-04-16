@@ -1,0 +1,3 @@
+[submodule "themes/pxdocs-tooling"]
+	path = themes/pxdocs-tooling
+	url = https://github.com/portworx/pxdocs-tooling

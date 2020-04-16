@@ -2,16 +2,12 @@ BUILDER_IMAGE?=pxbackup:developer
 # SEARCH_INDEX_IMAGE?=pxbackup-search-index:developer
 DEPLOYMENT_IMAGE?=pxbackup-deployment:developer
 TOOLING_BRANCH?=master
-PORT?=1515
+PORT?=1313
 CONTAINER_NAME=pxbackup-develop
 
 .PHONY: image
 image:
 	docker build -t $(BUILDER_IMAGE) .
-
-# .PHONY: search-index-image
-# search-index-image:
-# 	docker build -t $(SEARCH_INDEX_IMAGE) themes/pxdocs-tooling/deploy/algolia
 
 .PHONY: deployment-image
 deployment-image:
@@ -42,18 +38,15 @@ develop: image
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
 		-e VERSIONS_BASE_URL \
-		# -e ALGOLIA_APP_ID \
-		# -e ALGOLIA_API_KEY \
-		# -e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
-		-p $(PORT):1515 \
-		-v "$(PWD):/pxdocs" \
+		-p $(PORT):1313 \
+		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
 
 .PHONY: publish-docker
 publish-docker:
 	docker run --rm \
-		--name pxdocs-publish \
+		--name pxbackup-publish \
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
 		-e VERSIONS_BASE_URL \
@@ -63,18 +56,6 @@ publish-docker:
 		-e TRAVIS_BRANCH \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
-
-# .PHONY: search-index-docker
-# search-index-docker:
-# 	docker run --rm \
-# 		--name pxdocs-search-index \
-# 		-v "$(PWD)/public/algolia.json:/app/indexer/public/algolia.json" \
-# 		-e ALGOLIA_APP_ID \
-# 		-e ALGOLIA_API_KEY \
-# 		-e ALGOLIA_ADMIN_KEY \
-# 		-e ALGOLIA_INDEX_NAME \
-# 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
-# 		$(SEARCH_INDEX_IMAGE)
 
 .PHONY: start-deployment-container
 start-deployment-container:
@@ -94,6 +75,3 @@ check-links:
 
 .PHONY: publish
 publish: image publish-docker
-
-# .PHONY: search-index
-# search-index: image search-index-image publish-docker search-index-docker
