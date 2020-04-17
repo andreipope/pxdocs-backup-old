@@ -19,7 +19,7 @@ script:
   - export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
   # - export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
   - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
-  - export VERSIONS_CURRENT=$(bash themes/pxbackup-tooling/deploy/scripts/versions.sh get-current-branch-version)
+  - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
   - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
   # - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG

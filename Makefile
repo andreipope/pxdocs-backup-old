@@ -50,9 +50,6 @@ publish-docker:
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
 		-e VERSIONS_BASE_URL \
-		-e ALGOLIA_APP_ID \
-		-e ALGOLIA_API_KEY \
-		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
