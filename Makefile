@@ -2,7 +2,7 @@ BUILDER_IMAGE?=pxbackup:developer
 # SEARCH_INDEX_IMAGE?=pxbackup-search-index:developer
 DEPLOYMENT_IMAGE?=pxbackup-deployment:developer
 TOOLING_BRANCH?=master
-PORT?=1313
+PORT?=1515
 CONTAINER_NAME=pxbackup-develop
 
 .PHONY: image
@@ -39,9 +39,9 @@ develop: image
 		-e VERSIONS_CURRENT \
 		-e VERSIONS_BASE_URL \
 		-e TRAVIS_BRANCH \
-		-p $(PORT):1313 \
+		-p $(PORT):$(PORT) \
 		-v "$(PWD):/pxbackup" \
-		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
+		$(BUILDER_IMAGE) server --bind=0.0.0.0 --port $(PORT) --disableFastRender
 
 .PHONY: publish-docker
 publish-docker:
