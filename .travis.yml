@@ -16,13 +16,13 @@ script:
   # make the build fail if there are any errors
   - set -e
   # setup variables based on travis env
-  - export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
-  - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
-  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
-  - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
+  - export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
+  # - export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
+  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
+  - export VERSIONS_CURRENT=$(bash themes/pxbackup-tooling/deploy/scripts/versions.sh get-current-branch-version)
   - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-  - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
+  # - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
   # build images
   - travis_retry make image
   # publish site -> public
