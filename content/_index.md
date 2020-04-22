@@ -9,6 +9,7 @@ scrollspy-container: false
 type: common-landing
 ---
 
+<!-- alternative material:
 
 PX-Backup is a Kubernetes backup solution that allows you to backup applications and data together and restore them at a later point. Using PX-Central as the multi-cluster management UI, one or more users within the organization can perform backup/restore operations for their namespaces/applications on-demand or in a scheduled manner. PX-Backup can also backup/restore applications that are deployed in managed (cloud) Kubernetes environments with cloud storage drives and does not require Portworx Enterprise Storage running on those clusters. PX-Backup is container granular, namespace aware and application consistent way of protecting applications and data in multi-cloud environments.
 
@@ -69,8 +70,9 @@ From a central application view, you can see all of the resources currently on y
 
 Avoid tedious prep-work and minimize interruptions to your cluster associated with backup tasks by creating rules that run before and after backups are taken. As with schedule policies, you can associate rules with multiple backups. 
 
-
 ---
+Document starts here! 
+ -->
 
 PX-Backup is a Kubernetes backup solution that allows you to back up and restore applications and their data across multiple clusters. PX-Backup works through PX-Central, allowing you or any other approved users to manage multiple clusters and their backups from a single UI. Under this principle of multitenancy, authorized users connect through OIDC to create and manage backups for clusters and apps which they have permissions without needing to go through an administrator. 
 
@@ -81,12 +83,6 @@ PX-Backup integrates with major block storage providers:
 * Google Persistent Disk
 * Azure Managed Disks
 * Portworx PX-Store
-
-PX-Backup stores backups on any compatible object storage:
-
-* AWS S3 or compatible object stores
-* Azure Blob Storage
-* Google Cloud Storage
 
 PX-Backup is capable of backing up the following Kubernetes resources:
 
@@ -128,6 +124,14 @@ A cluster in PX-Backup is any Kubernetes cluster that PX-Backup makes backups fr
 
 Backups in PX-Backup contain backup images and configuration data. You can attach schedule policies to run them at designated times and keep a designated amount of rolling backups, and attach rules to perform commands before or after a backup runs. 
 
+### Backup locations
+
+Backup locations are object stores you've added to PX-Backup. PX-Backup stores backups on any compatible object storage:
+
+* AWS S3 or compatible object stores
+* Azure Blob Storage
+* Google Cloud Storage
+
 ### Restores
 
 Restore your backups to the original cluster or different clusters, replace applications on the original cluster or restore to a new namespace. Perform partial restores to selected namespaces from the backup. 
@@ -142,13 +146,15 @@ Create commands which run before or after a backup operation is performed. Speci
 
 ### Application view
 
+<!-- This doesn't really fit here, need to find a better place -->
 You interact with PX-Backup through a central application view. From here, you can see all of the resources currently on your cluster, filter them by namespace and labels, and create a backup. 
 
 ## Get Started
 
 Perform the following tasks to quickly get started with PX-Backup and perform your first backup:
 
-1. Install PX-Backup
-2. Add a cluster
-3. Configure backup locations
-4. Perform a backup
+1. [Install PX-Backup](/install)
+2. [Add a cluster](/add-a-cluster)
+3. [Configure backup locations](/configure-backup-location)
+4. [Perform a backup](/perform-backup)
+
