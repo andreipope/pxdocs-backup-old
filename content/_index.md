@@ -108,7 +108,8 @@ PX-Backup is capable of backing up the following Kubernetes resources:
 
 ## Understand how PX-Backup works
 
-PX-Backup provides namespace and label selectors, allowing you to create granular backups of the application you want. You can broadly backup an entire namespace, or you can use label selectors to select only certain resources to backup. This selection method also helps preserve associated configuration and pod data, ensuring that your backups will work properly once restored. For example, PX-backup can back up a mySQL deployment containing pods, PVCs, and volumes tagged with a `app = mysql` label. Given this system, PX-Backup can backup stateful apps as easily as stateless ones. <??? True? Better validate this step. ???>
+PX-Backup provides namespace and label selectors, allowing you to create granular backups of the application you want. You can broadly backup an entire namespace, or you can use label selectors to select only certain resources to backup. This selection method also helps preserve associated configuration and pod data, ensuring that your backups will work properly once restored. For example, PX-backup can back up a mySQL deployment containing pods, PVCs, and volumes tagged with a `app = mysql` label. Given this system, PX-Backup can backup stateful apps as easily as stateless ones. 
+<!-- <??? True? Better validate this step. ???> -->
 
 You can schedule backups by creating an independent schedule policy that defines when backups run and how many rolling copies they keep, and you can associate this schedule policy with as many backups as you want. 
 
@@ -116,7 +117,12 @@ Avoid tedious prep-work and minimize interruptions to your cluster associated wi
 
 ## PX-Backup components
 
-In order to use PX-Backup, it’s helpful to understand the concepts that make it up. You’ll use these components to perform backup and restore operations: 
+<!-- this section now just feels like a rehash of a lot of what was said above with some new information sprinkled in. It does make the components clear though. Perhaps some repetition wouldn't be too harmful in getting these new concepts across. -->
+In order to use PX-Backup, it’s helpful to understand the components that make it up. You’ll use these components to perform backup and restore operations: 
+
+### Clusters 
+
+A cluster in PX-Backup is any Kubernetes cluster that PX-Backup makes backups from or restores backups to. PX-Backup supports pretty much any Kubernetes cluster that’s internet accessible <??? and some that aren’t ???>. With PX-Backup, you can monitor, backup, and restore across all of your Kubernetes clusters.
 
 ### Backups
 
@@ -133,3 +139,16 @@ Create schedule policies and attach them to backups to run them at designated ti
 ### Rules 
 
 Create commands which run before or after a backup operation is performed. Specify labels
+
+### Application view
+
+You interact with PX-Backup through a central application view. From here, you can see all of the resources currently on your cluster, filter them by namespace and labels, and create a backup. 
+
+## Get Started
+
+Perform the following tasks to quickly get started with PX-Backup and perform your first backup:
+
+1. Install PX-Backup
+2. Add a cluster
+3. Configure backup locations
+4. Perform a backup
