@@ -16,13 +16,13 @@ script:
   # make the build fail if there are any errors
   - set -e
   # setup variables based on travis env
-  - export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
-  - export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
-  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
+  - export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
+  # - export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
+  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$TRAVIS_BRANCH:$TRAVIS_COMMIT"
   - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
   - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-  - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
+  # - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
   # build images
   - travis_retry make image
   # publish site -> public
@@ -38,18 +38,18 @@ script:
   # this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
   - if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
   # update the algolia index
-  - travis_retry make search-index-image
-  - travis_retry make search-index-docker
+  #- travis_retry make search-index-image
+  #- travis_retry make search-index-docker
   # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
-  - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
+ # - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
   # push the image to gcr
-  - echo "pushing image $DEPLOYMENT_IMAGE"
-  - gcloud docker -- push $DEPLOYMENT_IMAGE
-  - echo "deploying image $DEPLOYMENT_IMAGE"
-  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst
-  - cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
-  - cat themes/pxdocs-tooling/deploy/manifests/service-template.yaml | envsubst
-  - cat themes/pxdocs-tooling/deploy/manifests/service-template.yaml | envsubst | kubectl apply -f -
+  #- echo "pushing image $DEPLOYMENT_IMAGE"
+  #- gcloud docker -- push $DEPLOYMENT_IMAGE
+  #- echo "deploying image $DEPLOYMENT_IMAGE"
+  #- cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst
+  #- cat themes/pxdocs-tooling/deploy/manifests/deployment.yaml | envsubst | kubectl apply -f -
+  #- cat themes/pxdocs-tooling/deploy/manifests/service-template.yaml | envsubst
+  #- cat themes/pxdocs-tooling/deploy/manifests/service-template.yaml | envsubst | kubectl apply -f -
 
 notifications:
   email:
