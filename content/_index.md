@@ -90,5 +90,5 @@ Perform the following tasks to quickly get started with PX-Backup and perform yo
 
 1. [Install PX-Backup](/install)
 2. [Add a cluster](/add-a-cluster)
-3. [Configure backup locations](/configure-backup-location)
+3. [Configure backup locations](/configure-backup-locations)
 4. [Perform a backup](/perform-backup)
