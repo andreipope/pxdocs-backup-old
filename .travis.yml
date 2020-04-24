@@ -46,8 +46,8 @@ script:
   # connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
   - bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
   # push the image to gcr
-  #- echo "pushing image $DEPLOYMENT_IMAGE"
-  #- gcloud docker -- push $DEPLOYMENT_IMAGE
+  - echo "pushing image $DEPLOYMENT_IMAGE"
+  - gcloud docker -- push $DEPLOYMENT_IMAGE
   #- echo "deploying image $DEPLOYMENT_IMAGE"
   #- cat themes/pxdocs-tooling/deploy/manifests/pxbackup/deployment.yaml | envsubst
   #- cat themes/pxdocs-tooling/deploy/manifests/pxbackup/deployment.yaml | envsubst | kubectl apply -f -
