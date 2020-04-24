@@ -50,9 +50,9 @@ script:
   - gcloud docker -- push $DEPLOYMENT_IMAGE
   - echo "deploying image $DEPLOYMENT_IMAGE"
   - cat themes/pxdocs-tooling/deploy/manifests/pxbackup/deployment.yaml | envsubst
-  #- cat themes/pxdocs-tooling/deploy/manifests/pxbackup/deployment.yaml | envsubst | kubectl apply -f -
+  - cat themes/pxdocs-tooling/deploy/manifests/pxbackup/deployment.yaml | envsubst | kubectl apply -f -
   - cat themes/pxdocs-tooling/deploy/manifests/pxbackup/service-template.yaml | envsubst
-  #- cat themes/pxdocs-tooling/deploy/manifests/pxbackup/service-template.yaml | envsubst | kubectl apply -f -
+  - cat themes/pxdocs-tooling/deploy/manifests/pxbackup/service-template.yaml | envsubst | kubectl apply -f -
 
 notifications:
   email:
