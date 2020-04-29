@@ -1,7 +1,7 @@
 ---
-title: Deploy a license
+title: Manage licenses
 keywords: 
-weight: 7
+weight: 4
 hidesections: true
 disableprevnext: true
 ---
