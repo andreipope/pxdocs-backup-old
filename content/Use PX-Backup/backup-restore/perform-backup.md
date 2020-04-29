@@ -35,9 +35,18 @@ Backup rules:
 
 Once you’ve created a backup rule and schedule, you can use them to create a backup. 
 
-1. From the PX-Central home page, select the **Backup** button for the cluster you want to back up.
-2. Select the namespace and any labels you want to back up
-3. Select the **Create Backup** button
+1. From the PX-Central home page, select the **Backup** button for the cluster you want to back up:
+
+    ![](/img/select-backup.png)
+
+2. Select the namespace and any labels you want to back up:
+
+    ![](/img/select-namespace-labels.png)
+
+3. Select the **Backup** button:
+
+    ![](/img/select-create-backup.png)
+
 4. From the dialog box, specify the following:
     
     * **Backup name**: the name of the backup you want displayed in the PX-Backup UI
