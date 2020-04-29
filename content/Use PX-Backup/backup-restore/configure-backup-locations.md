@@ -9,7 +9,13 @@ disableprevnext: true
 
 1. Generate a key with your GCP or AWS provider. PX-Central uses this key to authenticate with your cloud provider and store and retrieve backup images from your cloud storage buckets. 
 2. From the home page, select **Settings**, **Cloud Settings** to open the cloud settings page. From this page you’ll both configure a cloud account using the key you generated on step 1 and backup locations.
-3. Under the **Cloud Accounts** section, select **Add More**.
+
+    ![cloud settings](/img/cloud-settings.png)
+
+3. Under the **Cloud Accounts** section, select **Add New**.
+
+    ![add new cloud account](/img/add-new.png)
+
 4. Choose the appropriate cloud provider, and populate the fields with your key information:
 
     * **Account Name**: specify the name with which this account will show in PX-Central
@@ -17,8 +23,13 @@ disableprevnext: true
 
         * **Public Key**: the public key credentials you generated on AWS in step 1
         * **Secret Key**: the secret key credentials you generated in AWS in step 1
+    
+    ![populate cloud fields](/img/add-cloud-account.png)
 
-5. Under **Backup Locations**, select **Add More**.
+5. Under **Backup Locations**, select **Add New**.
+
+    ![add new backup location](/img/add-new-backup-location.png)
+
 6. Populate the fields:
 
     * **Name**: specify the name with which backup location will show in PX-Central
@@ -27,3 +38,5 @@ disableprevnext: true
     * **Encryption key**: enter the optional encryption key to encrypt your backups in-transit
     * **Endpoint**: with the URL of your cloud storage server or provider.
     * **Disable SSL**: 
+
+    ![configre backup location](/img/config-backup-location.png)
