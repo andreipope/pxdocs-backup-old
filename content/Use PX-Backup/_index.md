@@ -1,10 +1,10 @@
 ---
 title: Use PX-Backup
-description: 
+description: Add clusters, create and restore backups, and perform other tasks.
 keywords: 
 weight: 3
-hidesections: true
 disableprevnext: true
 scrollspy-container: false
 type: common-landing
+series: backup
 ---

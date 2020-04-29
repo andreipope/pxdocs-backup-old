@@ -1,10 +1,11 @@
 ---
 title: Install PX-Backup
-description: 
+description: Get started with PX-Backup by installing it.
 keywords: 
 weight: 2
 hidesections: true
 disableprevnext: true
+series: backup
 ---
 
 Install PX-Backup through [PX-Central](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/). 

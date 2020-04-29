@@ -1,10 +1,10 @@
 ---
 title: PX-Backup Reference
-description: 
+description: Look up API endpoints and parameters.
 keywords: 
 weight: 10
-hidesections: true
 disableprevnext: true
 scrollspy-container: false
 type: common-landing
+series: backup
 ---
