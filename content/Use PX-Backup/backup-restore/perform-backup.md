@@ -56,9 +56,23 @@ Once you’ve created a backup rule and schedule, you can use them to create a b
     * **Post-exec rule**: any rules you want to execture after the backup runs
     * **Backup labels**: any labels you want to attach to the backup once it's created
 
+    ![](/img/populate-backup-fields.png)
 
 ## Perform a namespace-level backup
 
 ## Perform an app-level backup
 
 ## Search for set of backups based on dates and restore from them
+
+1. From the PX-Central home page, select the **Backup** button for the cluster you want to back up:
+
+    ![](/img/select-backup.png)
+
+2. Select the **Backups** tab:
+
+3. Select the calendar icon in the upper left portion of the page:
+
+    ![](/img/select-date.png)
+
+4. Define a range of backups you want to see:
+
