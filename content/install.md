@@ -8,6 +8,15 @@ disableprevnext: true
 series: backup
 ---
 
+## Prerequisites
+
+
+    csi is not supported, security is not supported, essentials is not supported
+
+    minimum version: stork 2.4.0, PX-Enterprise
+
+## Install
+
 Install PX-Backup through [PX-Central](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/). 
 
 
