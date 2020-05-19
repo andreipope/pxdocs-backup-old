@@ -23,5 +23,6 @@ disableprevnext: true
     kubectl create secret generic -n kube-system px-azure --from-literal=AZURE_TENANT_ID=<tenant> \
                                                         --from-literal=AZURE_CLIENT_ID=<appId> \
                                                         --from-literal=AZURE_CLIENT_SECRET=<password>
+    kubectl set env --from=secret/px-azure deploy/stork -n kube-system
     ```
 
