@@ -17,7 +17,6 @@ series: backup
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
 
-* CSI
 * PX-Security
 * PX-Essentials
 {{</info>}}
