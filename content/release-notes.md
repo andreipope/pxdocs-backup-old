@@ -19,7 +19,15 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 | **Improvement Number** | **Improvement Description** |
 |----|----|
 | PB-547 | PX-Backup now allows more than 12 backups to be retained while creating a schedule. |
-| PB-515 | Users can now add and edit a cluster to Lighthouse independently from PX-Backup. <!-- need to confirm this. --> |
+| PB-515 | Users can now add and edit a cluster to Lighthouse independently from PX-Backup. |
+| PB-389 | The App View page now includes a refresh button, allowing you refresh the list. |
+| PB-485 | The credential settings page now includes info icons explaining what should be entered into the input fields. |
+| PB-480 | The **Remove** button no longer appears when there is no entry in the pod selector during Rule creation. |
+| PB-479 | When a backup deletion is pending, PX-Backup no longer shows a restore option. |
+| PB-455 | An improved error message now displays when Stork is not installed on the application cluster. |
+| PB-453 | Selections on the namespace selection list now persist when you switch between tabs. |
+| PB-451 | When adding a Goole cloud account, you can now upload your json key using the file browser. |
+| PB-444 | Improved clarity around options for pasting or uploading your kubeconfig on the **Add Cluster** page. |
 
 
 ### Fixes
@@ -35,25 +43,14 @@ Portworx, Inc. has fixed the following issues:
 | PB-499 | When PX-Backup failed to create a backup, the UI became stuck, showing only the creation failure message. <br/><br/>**User Impact:**  Due to the stuck message, users may have been unable to see the real reason for a backup deletion failure.<br/><br/>**Resolution:** Creation failure messages no longer stick, allowing users to see more recent messages. |
 | PB-493 |The PX-Backup UI did not update to reflect invalid underlying backup object statuses.<br/><br/>**User Impact:** If a backup object was deleted, users may still have seen the backup appear as valid on the PX-Backup UI.<br/><br/>**Resolution:** PX-Backup now properly displays the invalid backup status. |
 | PB-468 | Users could create more backups than their license allows.<br/><br/>**User Impact:** Users who created more backups than their license allows would experience backup failures and error messages.<br/><br/>**User Impact:** PX-Backup now stops users from creating excess backups before they exceed their license capacity. |
+| PB-395 | The PX-Backup app view took a long time to load when multiple namespaces were selected. <br/><br/>**User Impact:** Users selecting a large number of namespaces in the app view would either not see, or have to wait a long time for resources to appear <br/><br/>**Resolution:** PX-Backup now loads resources for multiple namespaces faster. |
+| PB-486 | When PX-Backup deleted a backup, the status would show as "DELETING", but the message would only show the previous message: "Volumes and resources were backed up successfully"<br/><br/>**User Impact:** Users may have seen confusing information about their backup status during deletion<br/><br/>**Resolution:** PX-Backup now shows an appropriate message indicating volumes and resources are being deleted. |
+| PB-477 | The `enter` key did not work in search box on the **All backups** page. <br/><br/> **User Impact:** Users couldn't filter their results on the **All backups** page using the search box. <br/><br/>**Resolution:** The search box now filters results when a user inputs a term and presses `enter`. | 
 
-
-<!-- I don't think these need release notes
-| PB-395 | UI: App view take a long time to load when multiple namespaces were seclected |
-| PB-389 | UX: Application View: There should be a refresh button in the App View page |
-| PB-486 | There should be a reason displayed when the backup is in deleting state |
-| PB-485 | Need help/info icons explaining input fields in credential settings page |
-| PB-480 | "Remove" should be disabled when there is no entry in the pod selector during Rule creation |
-| PB-479 | When a backup is in Delete pending, we should not show restore option. |
-| PB-477 | Enter key doesnt work in search box | 
-| PB-455 | Improve error message when stork is not running on the application cluster |
-| PB-453 | UI: Namespace selection list must be persistent when the user switches between tabs |
-| PB-451 | UI: Goole credential creation: Give an option to upload the json file |
-| PB-444 | UX: It should be made clear in the UI that that Kubeconfig can be pasted OR can be uploaded from a file |
 | PB-435 | Warning message to user to indicate that backup that belongs to deleted backuplocation will also be deleted. |
 | PB-507 | A cluster with a status of **Inactive** is now highlighted when the cluster is down for improved visibility. |
 | PB-500 | The field labels in the **Add cloud account** page have been improved. |
 | PB-467 | Backsync should avoid printing error while processing Backup location with out bucket. |
--->
 
 ## 1.0
 
