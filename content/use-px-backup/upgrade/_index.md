@@ -2,7 +2,7 @@
 title: Upgrade PX-Backup
 description: Upgrade your version of PX-Backup
 keywords: upgrade, 
-weight: 8
+weight: 10
 hidesections: true
 disableprevnext: true
 scrollspy-container: false
