@@ -61,7 +61,27 @@ If you don't want to specify your cloud credentials in the spec generator, you c
     bash <(curl -s https://raw.githubusercontent.com/portworx/px-central-onprem/<version>/install.sh) --px-store --px-backup --admin-password 'examplePassword' --oidc --pxcentral-namespace portworx --px-license-server --license-password 'examplePassword' --px-backup-organization backup --cluster-name px-central --admin-email admin@portworx.com --admin-user admin
     ```
 
+## Post install
 
+If you enabled an external OIDC during PX-Central with PX-Backup installation, you must configure the endpoint as the login redirect/callback URL in the External OIDC you provided. 
+
+Refer to your external OIDC provider for more information:
+    * link 1
+    * link 2
+
+
+
++================================================+
+SAVE THE FOLLOWING DETAILS FOR FUTURE REFERENCES
++================================================+
+PX-Central User Interface Access URL : http://70.0.24.54:31234/pxcentral
+PX-Central PX-Backup Organization ID: backup
+Keycloak Endpoint: http://70.0.24.54:31241/auth
+Keycloak admin user: admin
+Keycloak admin password: P@$$w0rd!
+OIDC CLIENT ID: pxcentral, OIDC CLIENT SECRET: "f33f3d5a-5ba4-45d1-943d-a78ce9ef0adc", OIDC ENDPOINT: 70.0.24.54:31241/auth
+Configure following endpoint as login redirect/callback URL in External OIDC provider: http://70.0.24.54:31241/auth/realms/master/broker/oidc/endpoint
++================================================+
 <!-- ### Manually install using the PX-Central on-prem install script 
 
 Install PX-Backup through [PX-Central](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/). By default, PX-Central installations include PX-Backup. 
