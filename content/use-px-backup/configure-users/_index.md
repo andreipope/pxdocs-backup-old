@@ -13,6 +13,6 @@ Your non-admin PX-Backup users need certain Kubernetes permissions to perform ba
 
 ensure your users have the following minimum cluster roles:
 
-    * 
+* 
 
 
