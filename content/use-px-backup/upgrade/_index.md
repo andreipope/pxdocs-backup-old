@@ -14,7 +14,7 @@ Upgrade PX-Backup downloading and running a script which upgrades PX-Central on-
 1. Download the PX-Central install script and make it executable:
 
     ```text
-    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.1/upgrade.sh' && chmod +x install.sh
+    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.2/upgrade.sh' && chmod +x upgrade.sh
     ```
 
 2. Run the script with any of [the options](/use-px-backup/upgrade/upgrade-script-reference) required to upgrade PX-Central according to your needs:

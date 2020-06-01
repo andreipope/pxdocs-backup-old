@@ -16,7 +16,7 @@ type: common-landing
 ```
 
 {{<info>}}
-**NOTE:**  The script name px-backup-upgrade.sh reflects the default name specified in the installation instructions, but can be whatever you named the script file when you downloaded it.
+**NOTE:**  The script name `upgrade.sh` reflects the default name specified in the installation instructions, but can be whatever you named the script file when you downloaded it.
 {{</info>}}
 
 ## Options
