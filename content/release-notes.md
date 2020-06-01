@@ -28,6 +28,9 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 | PB-453 | Selections on the namespace selection list now persist when you switch between tabs. |
 | PB-451 | When adding a Goole cloud account, you can now upload your json key using the file browser. |
 | PB-444 | Improved clarity around options for pasting or uploading your kubeconfig on the **Add Cluster** page. |
+| PB-435 | A new warning message now indicates that any backups that belong to a deleted backuplocation will also be deleted. |
+| PB-507 | A cluster with a status of **Inactive** is now highlighted when the cluster is down for improved visibility. |
+| PB-500 | The field labels in the **Add cloud account** page have been improved. |
 
 
 ### Fixes
@@ -47,10 +50,9 @@ Portworx, Inc. has fixed the following issues:
 | PB-486 | When PX-Backup deleted a backup, the status would show as "DELETING", but the message would only show the previous message: "Volumes and resources were backed up successfully"<br/><br/>**User Impact:** Users may have seen confusing information about their backup status during deletion<br/><br/>**Resolution:** PX-Backup now shows an appropriate message indicating volumes and resources are being deleted. |
 | PB-477 | The `enter` key did not work in search box on the **All backups** page. <br/><br/> **User Impact:** Users couldn't filter their results on the **All backups** page using the search box. <br/><br/>**Resolution:** The search box now filters results when a user inputs a term and presses `enter`. | 
 
-| PB-435 | Warning message to user to indicate that backup that belongs to deleted backuplocation will also be deleted. |
-| PB-507 | A cluster with a status of **Inactive** is now highlighted when the cluster is down for improved visibility. |
-| PB-500 | The field labels in the **Add cloud account** page have been improved. |
+<!-- need more info
 | PB-467 | Backsync should avoid printing error while processing Backup location with out bucket. |
+-->
 
 ## 1.0
 
