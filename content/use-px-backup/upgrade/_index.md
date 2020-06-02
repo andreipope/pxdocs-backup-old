@@ -9,16 +9,4 @@ scrollspy-container: false
 type: common-landing
 ---
 
-Upgrade PX-Backup downloading and running a script which upgrades PX-Central on-premises:
-
-1. Download the PX-Central install script and make it executable:
-
-    ```text
-    curl -o install.sh 'https://raw.githubusercontent.com/portworx/px-central-onprem/1.0.2/upgrade.sh' && chmod +x upgrade.sh
-    ```
-
-2. Run the script with any of [the options](/use-px-backup/upgrade/upgrade-script-reference) required to upgrade PX-Central according to your needs:
-
-    ```text
-    ./upgrade.sh
-    ```
+To upgrade PX-Backup, follow the steps for [upgrading PX-Central on-premises](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/upgrade/) in the PX-Enterprise documentation.
