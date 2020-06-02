@@ -2,7 +2,7 @@
 title: Configure users
 description: 
 keywords: 
-weight: 3
+weight: 2
 hidesections: true
 disableprevnext: true
 scrollspy-container: false
