@@ -13,6 +13,7 @@ series: backup
 * Stork 2.4.0 or newer
 * PX-Enterprise 2.5.0 or newer
 * PX-Central. Refer to the [Install PX-Central on-premises](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/) page for details.
+* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -47,7 +48,7 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
 
 ## Install
 
-1. To install PX-Backup, generate the install script through the **PX-Backup using PX-Central** [spec generator](link_here). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
+1. To install PX-Backup, generate the install script through the **PX-Backup using PX-Central** [spec generator](https://central-staging.portworx.co/specGen/wizard). If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
 
 2. Once you've generated the script, paste it into the command line of the Kubernetes master node in which you want to install PX-Backup and run it. The following example installs PX-Central with PX-Backup enabled:
 
@@ -60,3 +61,4 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
 If you enabled an external OIDC during PX-Central with PX-Backup installation, you must you must manually configure the redirect URI in your OIDC provider.
 
 Refer to the [Set up login redirects](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/set-up-login-redirects) section of the PX-Enterprise documentation for instructions.
+

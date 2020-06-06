@@ -10,7 +10,7 @@ series: backup
 
 ## 1.0.1
 
-June 1, 2020
+June 5, 2020
 
 ### Improvements
 
@@ -19,7 +19,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 | **Improvement Number** | **Improvement Description** |
 |----|----|
 | PB-547 | PX-Backup now allows more than 12 backups to be retained while creating a schedule. |
-| PB-515 | Users can now add and edit a cluster to Lighthouse independently from PX-Backup. |
+| PB-515 | Users can now add a cluster to Lighthouse and and edit it independently from PX-Backup. |
 | PB-389 | The App View page now includes a refresh button, allowing you refresh the list. |
 | PB-485 | The credential settings page now includes info icons explaining what should be entered into the input fields. |
 | PB-480 | The **Remove** button no longer appears when there is no entry in the pod selector during Rule creation. |
