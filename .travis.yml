@@ -24,7 +24,7 @@ script:
   - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
   - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-  - export ALGOLIA_INDEX_NAME=$VERSIONS_TAG
+  - export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
   - echo $ALGOLIA_INDEX_NAME
   # build images
   - travis_retry make image
