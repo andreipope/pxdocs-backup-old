@@ -46,6 +46,7 @@ develop: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
+		-e PRODUCT_NAME \
 		-p $(PORT):$(PORT) \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) server --bind=0.0.0.0 --port $(PORT) --disableFastRender
@@ -61,6 +62,7 @@ publish-docker:
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
+		-e PRODUCT_NAME \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
 
@@ -74,6 +76,7 @@ search-index-docker:
 		-e ALGOLIA_ADMIN_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
+		-e PRODUCT_NAME \
 		$(SEARCH_INDEX_IMAGE)
 
 .PHONY: start-deployment-container
