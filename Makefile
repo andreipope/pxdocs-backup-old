@@ -1,3 +1,4 @@
+SHELL := /bin/bash
 BUILDER_IMAGE?=pxbackup:developer
 SEARCH_INDEX_IMAGE?=pxbackup-search-index:developer
 DEPLOYMENT_IMAGE?=pxbackup-deployment:developer
@@ -54,7 +55,7 @@ develop: image
 
 .PHONY: publish-docker
 publish-docker:
-	docker run --rm \
+	source ./export-product-url.sh && docker run --rm \
 		--name pxbackup-publish \
 		-e VERSIONS_ALL \
 		-e VERSIONS_CURRENT \
@@ -63,6 +64,7 @@ publish-docker:
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
+		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
