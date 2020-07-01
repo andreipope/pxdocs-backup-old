@@ -37,7 +37,7 @@ reset-theme:
 
 .PHONY: develop
 develop: image
-	docker run --rm \
+	source ./export-product-url.sh && docker run --rm \
 		$(DOCKER_EXTRA_ARGS) \
 		--name $(CONTAINER_NAME) \
 		-e VERSIONS_ALL \
@@ -47,6 +47,7 @@ develop: image
 		-e ALGOLIA_API_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
+		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
 		-p $(PORT):$(PORT) \
 		-v "$(PWD):/pxbackup" \
@@ -70,7 +71,7 @@ publish-docker:
 
 .PHONY: search-index-docker
 search-index-docker:
-	docker run --rm \
+	source ./export-product-url.sh && docker run --rm \
 		--name pxbackup-search-index \
 		-v "$(PWD)/public/algolia.json:/app/indexer/public/algolia.json" \
 		-e ALGOLIA_APP_ID \
@@ -78,6 +79,7 @@ search-index-docker:
 		-e ALGOLIA_ADMIN_KEY \
 		-e ALGOLIA_INDEX_NAME \
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
+		-e PRODUCT_URL \
 		-e PRODUCT_NAME \
 		$(SEARCH_INDEX_IMAGE)
 
