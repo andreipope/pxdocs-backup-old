@@ -70,7 +70,7 @@ publish-docker:
 .PHONY: search-index-docker
 search-index-docker:
 	source ./export-product-url.sh && docker run --rm \
-		--name pxdocs-search-index \
+		--name pxbackup-search-index \
 		-v "$(PWD)/public/algolia.json:/app/indexer/public/algolia.json" \
 		-e ALGOLIA_APP_ID \
 		-e ALGOLIA_API_KEY \
