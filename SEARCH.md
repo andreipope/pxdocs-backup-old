@@ -6,7 +6,7 @@ If you want the Algolia search bar to be activated locally for testing - you wil
 export ALGOLIA_APP_ID=XXX
 export ALGOLIA_API_KEY=XXX
 export ALGOLIA_ADMIN_KEY=XXX
-export ALGOLIA_INDEX_NAME=local-backup
+export PRODUCT_NAMES_AND_INDICES=<PRODUCT_NAME>=<INDEX_NAME>,<PRODUCT_NAME>=<INDEX_NAME>
 ```
 
 Then you will need to update the remote algolia index with the contents of the site:
@@ -15,6 +15,6 @@ Then you will need to update the remote algolia index with the contents of the s
 make search-index
 ```
 
-Finally run `make develop` as normal and the algolia search bar should display with the content of the site indexed.
+Finally run `make develop` as normal and the Algolia search bar should display with the content of the site indexed.
 
-You can always re-run the `make search-index` command again to re-index.
+You can always re-run the `make search` command again to re-index.
