@@ -2,7 +2,7 @@ SHELL := /bin/bash
 BUILDER_IMAGE?=pxbackup:developer
 SEARCH_INDEX_IMAGE?=pxbackup-search-index:developer
 DEPLOYMENT_IMAGE?=pxbackup-deployment:developer
-TOOLING_BRANCH?=px-backup
+TOOLING_BRANCH?=master
 PORT?=1515
 CONTAINER_NAME=pxbackup-develop
 
