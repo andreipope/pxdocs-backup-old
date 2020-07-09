@@ -30,6 +30,9 @@ script:
   - travis_retry make image
   # publish site -> public
   - make publish-docker
+  # set the value of the `NGINX_REDIRECTS_FILE` environment variable
+  - if [ "${VERSIONS_BASE_URL}" '==' "docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf ; fi
+  - if [ "${VERSIONS_BASE_URL}" '==' "backup.docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-backup-redirects.conf ; fi
   # build the deployment image
   - travis_retry make deployment-image
   # start a container using the deployment image
