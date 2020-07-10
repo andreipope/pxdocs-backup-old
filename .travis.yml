@@ -25,7 +25,15 @@ script:
   - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
   - export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
-  - echo $ALGOLIA_INDEX_NAME
+  - export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
+  - export ALGOLIA_APP_ID=EWKZLLNQ9L
+  - export BRANCH_VERSION_CONFIG=1.0=1.0
+  - export GCP_CLUSTER_ID=production-app-cluster
+  - export GCP_PROJECT_ID=production-apps-210001
+  - export GCP_ZONE=us-west1-b
+  - export LATEST_VERSION=1.0
+  - export PRODUCT_NAME=PX-Backup
+  - export VERSIONS_BASE_URL=backup.docs.portworx.com
   - export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-5
   - export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
   # build images
