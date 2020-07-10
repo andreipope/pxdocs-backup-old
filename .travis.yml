@@ -26,6 +26,8 @@ script:
   - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
   - export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
   - echo $ALGOLIA_INDEX_NAME
+  - export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-5
+  - export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
   # build images
   - travis_retry make image
   # publish site -> public
