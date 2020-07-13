@@ -5,7 +5,7 @@ PROTO_AND_VERSION=""
 
 if [ -z "$TRAVIS_BRANCH" ] || [ -z "$BRANCH_VERSION_CONFIG" ] || [ -z "$VERSIONS_BASE_URL" ]
 then
-  echo "One of the following env variables is not defined: \$TRAVIS_BRANCH, \$BRANCH_VERSION_CONFIG, \$VERSIONS_BASE_URL."
+  echo "One of the following env variable is not defined: \$TRAVIS_BRANCH, \$BRANCH_VERSION_CONFIG."
 else
   if [[ $BRANCH_VERSION_CONFIG == *$TRAVIS_BRANCH* ]]
   then
@@ -25,10 +25,5 @@ else
   fi
 fi
 
-PRODUCT_URL="$PROTO_AND_VERSION$URL"
-if [ -z $PRODUCT_URL ]
-then
-  echo "\$PRODUCT_URL is an empty string."
-else
-  echo "\$PRODUCT_URL is $PRODUCT_URL"
-fi
+echo "\$PRODUCT_URL is $PROTO_AND_VERSION$URL"
+export PRODUCT_URL=$PROTO_AND_VERSION$URL
