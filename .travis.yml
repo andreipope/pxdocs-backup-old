@@ -16,15 +16,6 @@ script:
   # make the build fail if there are any errors
   - set -e
   # setup variables based on travis env
-  # docker builds cannot use uppercase characters in the image name
-  - export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
-  - export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
-  - export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
-  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
-  - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
-  - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
-  - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-  - export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
   - export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
   - export ALGOLIA_APP_ID=EWKZLLNQ9L
   - export BRANCH_VERSION_CONFIG=1.0=1.0
@@ -34,6 +25,15 @@ script:
   - export LATEST_VERSION=1.0
   - export PRODUCT_NAME=PX-Backup
   - export VERSIONS_BASE_URL=backup.docs.portworx.com
+  # docker builds cannot use uppercase characters in the image name
+  - export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
+  - export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
+  - export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
+  - export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
+  - export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
+  - export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
+  - export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
+  - export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
   - export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-5
   - export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
   # build images
