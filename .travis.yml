@@ -2,6 +2,9 @@ sudo: required
 dist: xenial
 services:
   - docker
+cache:
+  directories:
+    - ./htmltest/tmp
 
 before_install:
   # update gcloud apt source
@@ -45,9 +48,6 @@ script:
   - if [ "${VERSIONS_BASE_URL}" '==' "backup.docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-backup-redirects.conf ; fi
   # build the deployment image
   - travis_retry make deployment-image
-  # start a container using the deployment image
-  - make start-deployment-container
-  # check the links in the deployment container
   - travis_retry make check-links
   # if this is a pull request then we don't want to update algolia or deploy
   - if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi

@@ -2,3 +2,6 @@ public
 .env
 node_modules
 .DS_Store
+htmltest/bin/htmltest
+htmltest/tmp/.htmltest/refcache.json
+htmltest/tmp/.htmltest/htmltest.log
