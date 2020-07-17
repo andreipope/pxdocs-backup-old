@@ -1,0 +1,19 @@
+DirectoryPath: "../public"
+IgnoreURLs:
+- "linkedin.com"
+- "rackspace.com" # TODO: https?:\/\/[www]*[\.]*[support]*\.rackspace\.com[\/a-z\-]*
+- "youtube.com" # TODO: https?:\/\/[www]*[\.]*\.youtube\.com[\/a-zA-Z0-9\-\?\=\_\&]*
+- "https://cloud.ibm.com/registration"
+- "https://cloud.ibm.com/docs/"
+IgnoreDirs:
+- "css"
+- "icons"
+- "images"
+- "img"
+- "js"
+- "logos"
+- "samples"
+CacheExpires: "24h"
+IgnoreInternalEmptyHash: true
+IgnoreDirectoryMissingTrailingSlash: true
+IgnoreAltMissing: true
