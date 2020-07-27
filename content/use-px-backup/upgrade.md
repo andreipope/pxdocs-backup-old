@@ -9,7 +9,7 @@ scrollspy-container: false
 type: common-landing
 ---
 
-To upgrade PX-Backup, follow the steps for 
+To upgrade PX-Backup from an operator-based install to the Helm-based install introduced with 1.0.3, you must download, modify, and apply the following specs:
 
 ## Download the create_new_pvc_from_snapshot script
 
@@ -95,5 +95,5 @@ To upgrade PX-Backup, follow the steps for
     ```
     
     {{<info>}}
-    **NOTE:** In the helm install command above, mention the same organization name which was used in previous operator based install.
+**NOTE:** In the helm install command above, mention the same organization name which was used in previous operator based install.
     {{</info>}}

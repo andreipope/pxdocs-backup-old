@@ -11,12 +11,15 @@ series: backup
 ## Prerequisites
 
 * Stork 2.4.0 or newer
+* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
+* Helm
+
 <!--  I think we can remove this now:
 * {{< pxEnterprise >}} 2.5.0 or newer 
 * PX-Central. Refer to the [Install PX-Central on-premises](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/) page for details.
 -->
-* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
-* Helm
+
+
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -56,8 +59,8 @@ Create a Kubnernetes secret, save the name and namespace in which it's located f
 1. To install PX-Backup, generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
     <!-- if the step above is removed, remove this as well --> If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
 
-<!-- I may instead just push these two steps together and refer users to the spec generator -->
 2. Using helm, Add the {{< pxEnterprise >}} repo to your cluster and update it:
+    <!-- I may instead just push these two steps together and refer users to the spec generator -->
 
     ```text
     helm repo add portworx http://charts.portworx.io/ && helm repo update
