@@ -11,15 +11,9 @@ series: backup
 ## Prerequisites
 
 * Stork 2.4.0 or newer
-* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority.
+* If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
+* If you're using PX-Backup with {{< pxEnterprise >}}, you must use {{< pxEnterprise >}} version 2.5.0 or newer
 * Helm
-
-<!--  I think we can remove this now:
-* {{< pxEnterprise >}} 2.5.0 or newer 
-* PX-Central. Refer to the [Install PX-Central on-premises](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/pxcentral-onprem/install-pxcentral/) page for details.
--->
-
-
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -28,38 +22,25 @@ series: backup
 * PX-Essentials
 {{</info>}}
 
-## Save your cloud credentials in a Kubernetes secret (Optional)
+## Install PX-Backup
 
-<!-- is this still relevant? -->
-
-As part of the installation process, the spec generator asks you to input your cloud credentials. If you don't want to specify your cloud credentials in the spec generator, you can create a Kubernetes secret and point the spec generator to that Kubernetes secret:
-
-Create a Kubnernetes secret, save the name and namespace in which it's located for use in the installation steps. The contents of the secret you create depend on the cloud you're using:
-
-* **AWS**:
+1. If you're installing PX-Backup alone -- without Portworx -- skip this step. If you do want to install PX-Backup with Portworx, you must first create a storage class on your Kubernetes cluster:
 
     ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AWS_ACCESS_KEY_ID=$AWS_ACCESS_KEY_ID --from-literal=AWS_SECRET_ACCESS_KEY=$AWS_SECRET_ACCESS_KEY --namespace $PXCNAMESPACE
+    kind: StorageClass
+    apiVersion: storage.k8s.io/v1
+    metadata:
+        name: portworx-sc
+    provisioner: kubernetes.io/portworx-volume
+    parameters:
+    repl: "3"
     ```
 
-* **Azure**:
+2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
 
-    ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=AZURE_CLIENT_SECRET=$AZURE_CLIENT_SECRET --from-literal=AZURE_CLIENT_ID=$AZURE_CLIENT_ID --from-literal=AZURE_TENANT_ID=$AZURE_TENANT_ID --namespace $PXCNAMESPACE
-    ```
+    If you're installing Portworx alongside PX-Backup, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above. 
 
-* **vSphere**:
-
-    ```text
-    kubectl --kubeconfig=$KC create secret generic $CLOUD_SECRET_NAME --from-literal=VSPHERE_USER=$VSPHERE_USER --from-literal=VSPHERE_PASSWORD=$VSPHERE_PASSWORD --namespace $PXCNAMESPACE
-    ```
-
-## Install
-
-1. To install PX-Backup, generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
-    <!-- if the step above is removed, remove this as well --> If you saved your cloud credentials as a Kubernetes secret ahead of time, enter the name and namespace of your secret.
-
-2. Using helm, Add the {{< pxEnterprise >}} repo to your cluster and update it:
+2. Using Helm, add the {{< pxEnterprise >}} repo to your cluster and update it:
     <!-- I may instead just push these two steps together and refer users to the spec generator -->
 
     ```text
