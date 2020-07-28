@@ -1,0 +1,2582 @@
+openapi: 3.0.1
+info:
+  title: pkg/apis/v1/api.proto
+  version: version not set
+servers:
+- url: /
+paths:
+  /v1/backup:
+    put:
+      tags:
+      - Backup
+      summary: Update given backup details
+      operationId: Backup_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - Backup
+      summary: Create creates a new backup object
+      operationId: Backup_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/backup/{org_id}:
+    get:
+      tags:
+      - Backup
+      summary: Enumerate returns a list of objects
+      operationId: Backup_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        description: Organization id
+        required: true
+        schema:
+          type: string
+      - name: enumerate_options.page_size
+        in: query
+        description: max objects to fetch.
+        schema:
+          type: string
+          format: int64
+      - name: enumerate_options.continuation_token
+        in: query
+        description: continuation token.
+        schema:
+          type: string
+      - name: enumerate_options.time_range.start_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: enumerate_options.time_range.end_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: enumerate_options.name_filter
+        in: query
+        description: |-
+          Filter to use for name of objects. Any object that contains the filter
+          will be returned.
+        schema:
+          type: string
+      - name: enumerate_options.cluster_name_filter
+        in: query
+        description: |-
+          Filter to use for cluster name of objects. Any object that contains the
+          filter will be returned.
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/backup/{org_id}/{name}:
+    get:
+      tags:
+      - Backup
+      summary: Inspect returns detail information about a specified object
+      operationId: Backup_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - Backup
+      summary: Delete triggers delete of a backup
+      operationId: Backup_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/backuplocation:
+    put:
+      tags:
+      - BackupLocation
+      summary: Update given backup location details
+      operationId: BackupLocation_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupLocationUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupLocationUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - BackupLocation
+      summary: Create creates new backup location
+      operationId: BackupLocation_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupLocationCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupLocationCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/backuplocation/{org_id}:
+    get:
+      tags:
+      - BackupLocation
+      summary: Enumerate returns a list of backup locations
+      operationId: BackupLocation_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupLocationEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/backuplocation/{org_id}/{name}:
+    get:
+      tags:
+      - BackupLocation
+      summary: Inspect returns detailed information about a specified backup location
+      operationId: BackupLocation_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupLocationInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - BackupLocation
+      summary: Delete removes a backup location
+      operationId: BackupLocation_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: delete_backups
+        in: query
+        description: |-
+          delete_backups indicates whether the cloud backup files need to
+          be deleted or retained.
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupLocationDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/backupschedule:
+    put:
+      tags:
+      - BackupSchedule
+      summary: Update updates a backup schedule
+      operationId: BackupSchedule_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupScheduleUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - BackupSchedule
+      summary: Create creates new backup schedule
+      operationId: BackupSchedule_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/BackupScheduleCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/backupschedule/{org_id}:
+    get:
+      tags:
+      - BackupSchedule
+      summary: Enumerate returns a list of backup schedule
+      operationId: BackupSchedule_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/backupschedule/{org_id}/{name}:
+    get:
+      tags:
+      - BackupSchedule
+      summary: Inspect returns detail information about a specified backup schedule
+      operationId: BackupSchedule_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - BackupSchedule
+      summary: Delete removes a backup schedule
+      operationId: BackupSchedule_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: delete_backups
+        in: query
+        description: |-
+          delete_backups indicates whether the cloud backup files need to
+          be deleted or retained.
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/BackupScheduleDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/cloudcredential:
+    put:
+      tags:
+      - CloudCredential
+      summary: Update given cloud credential details
+      operationId: CloudCredential_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudCredentialUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudCredentialUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - CloudCredential
+      summary: Create creates new cloud credential
+      operationId: CloudCredential_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/CloudCredentialCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudCredentialCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/cloudcredential/{org_id}:
+    get:
+      tags:
+      - CloudCredential
+      summary: Enumerate returns a list of cloud credentials
+      operationId: CloudCredential_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: include_secrets
+        in: query
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudCredentialEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/cloudcredential/{org_id}/{name}:
+    get:
+      tags:
+      - CloudCredential
+      summary: Inspect returns detailed information about the specified cloud credential
+      operationId: CloudCredential_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: include_secrets
+        in: query
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudCredentialInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - CloudCredential
+      summary: Delete removes a cloud credential
+      operationId: CloudCredential_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CloudCredentialDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/cluster:
+    put:
+      tags:
+      - Cluster
+      summary: Update given cluster details
+      operationId: Cluster_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - Cluster
+      summary: Create creates a new cluster
+      operationId: Cluster_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/ClusterCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/cluster/{org_id}:
+    get:
+      tags:
+      - Cluster
+      summary: Enumerate returns a list of clusters
+      operationId: Cluster_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/cluster/{org_id}/{name}:
+    get:
+      tags:
+      - Cluster
+      summary: Inspect returns detail information about a specified cluster
+      operationId: Cluster_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - Cluster
+      summary: Delete removes a cluster
+      operationId: Cluster_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: delete_backups
+        in: query
+        description: |-
+          delete_backups indicates whether the backup related to cluster need to
+          be deleted or retained.
+        schema:
+          type: boolean
+          format: boolean
+      - name: delete_restores
+        in: query
+        description: |-
+          delete_restores indicates whether the restore related to cluster  need to
+          be deleted or retained.
+        schema:
+          type: boolean
+          format: boolean
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ClusterDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/health:
+    get:
+      tags:
+      - Health
+      summary: Status checks the health of the server
+      operationId: Health_Status
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatusResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/license:
+    post:
+      tags:
+      - License
+      summary: Activate activate a new license
+      operationId: License_Activate
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/LicenseActivateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseActivateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/license/{org_id}:
+    get:
+      tags:
+      - License
+      summary: Enumerate returns a list of license for given cluster
+      operationId: License_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/LicenseInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/organization:
+    get:
+      tags:
+      - Organization
+      summary: Enumerate returns a list of organization object
+      operationId: Organization_Enumerate
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    post:
+      tags:
+      - Organization
+      summary: Create creates new organization object in datastore
+      operationId: Organization_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OrganizationCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/organization/{name}:
+    get:
+      tags:
+      - Organization
+      summary: Inspect returns detailed information about specified organization object
+      operationId: Organization_Inspect
+      parameters:
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OrganizationInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/restore:
+    put:
+      tags:
+      - Restore
+      summary: Update given restore details
+      operationId: Restore_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - Restore
+      summary: |-
+        Create creates new restore object in datastore
+        It will also trigger a restore operation on the target cluster
+      operationId: Restore_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RestoreCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/restore/{org_id}:
+    get:
+      tags:
+      - Restore
+      summary: Enumerate returns a list of restore objects
+      operationId: Restore_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        description: Organization id
+        required: true
+        schema:
+          type: string
+      - name: enumerate_options.page_size
+        in: query
+        description: max objects to fetch.
+        schema:
+          type: string
+          format: int64
+      - name: enumerate_options.continuation_token
+        in: query
+        description: continuation token.
+        schema:
+          type: string
+      - name: enumerate_options.time_range.start_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: enumerate_options.time_range.end_time
+        in: query
+        schema:
+          type: string
+          format: date-time
+      - name: enumerate_options.name_filter
+        in: query
+        description: |-
+          Filter to use for name of objects. Any object that contains the filter
+          will be returned.
+        schema:
+          type: string
+      - name: enumerate_options.cluster_name_filter
+        in: query
+        description: |-
+          Filter to use for cluster name of objects. Any object that contains the
+          filter will be returned.
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/restore/{org_id}/{name}:
+    get:
+      tags:
+      - Restore
+      summary: Inspect returns detailed information about specified restore object
+      operationId: Restore_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - Restore
+      summary: Delete removes a restore object
+      operationId: Restore_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RestoreDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/rule:
+    put:
+      tags:
+      - Rules
+      summary: Update given rule details
+      operationId: Rules_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - Rules
+      summary: Create creates new rule
+      operationId: Rules_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/RuleCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/rule/{org_id}:
+    get:
+      tags:
+      - Rules
+      summary: Enumerate returns a list of rules
+      operationId: Rules_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/rule/{org_id}/{name}:
+    get:
+      tags:
+      - Rules
+      summary: Inspect returns detailed information about the specified rule
+      operationId: Rules_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - Rules
+      summary: Delete removes rule from px-backup
+      operationId: Rules_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/RuleDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/schedulepolicy:
+    put:
+      tags:
+      - SchedulePolicy
+      summary: Update given schedule policy details
+      operationId: SchedulePolicy_Update
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchedulePolicyUpdateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulePolicyUpdateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+    post:
+      tags:
+      - SchedulePolicy
+      summary: Create creates new schedule policy.
+      operationId: SchedulePolicy_Create
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/SchedulePolicyCreateRequest'
+        required: true
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulePolicyCreateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+      x-codegen-request-body-name: body
+  /v1/schedulepolicy/{org_id}:
+    get:
+      tags:
+      - SchedulePolicy
+      summary: Enumerate returns a list of schedule policy
+      operationId: SchedulePolicy_Enumerate
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulePolicyEnumerateResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/schedulepolicy/{org_id}/{name}:
+    get:
+      tags:
+      - SchedulePolicy
+      summary: Inspect returns detail information about a specified schedule policy
+      operationId: SchedulePolicy_Inspect
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulePolicyInspectResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+    delete:
+      tags:
+      - SchedulePolicy
+      summary: Delete removes a schedule policy
+      operationId: SchedulePolicy_Delete
+      parameters:
+      - name: org_id
+        in: path
+        required: true
+        schema:
+          type: string
+      - name: name
+        in: path
+        required: true
+        schema:
+          type: string
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SchedulePolicyDeleteResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+  /v1/version:
+    get:
+      tags:
+      - Version
+      summary: Get gets the version of the server
+      operationId: Version_Get
+      responses:
+        200:
+          description: A successful response.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/VersionGetResponse'
+        default:
+          description: An unexpected error response
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/runtimeError'
+components:
+  schemas:
+    AWSConfig:
+      type: object
+      properties:
+        access_key:
+          type: string
+        secret_key:
+          type: string
+    AzureConfig:
+      type: object
+      properties:
+        account_name:
+          type: string
+        account_key:
+          type: string
+        client_secret:
+          type: string
+        client_id:
+          type: string
+        tenant_id:
+          type: string
+        subscription_id:
+          type: string
+          description: 'TODO: Need to see if this has to be here or in the backup
+            object.'
+    BackupCreateRequest:
+      title: Request message structure for backup create
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        backup_location:
+          title: Name or UID + orgid of BackupLocation
+          type: string
+        cluster:
+          title: Name or UID of Cluster
+          type: string
+        namespaces:
+          title: Namespaces to backup. Only an admin can provide multiple namespaces
+          type: array
+          items:
+            type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        pre_exec_rule:
+          title: Pre check rule to run before backup is started
+          type: string
+        post_exec_rule:
+          title: Post check rule to run after backup is completed
+          type: string
+    BackupCreateResponse:
+      title: Response message structure for backup create
+      type: object
+    BackupDeleteResponse:
+      title: Response message strcuture for object delete
+      type: object
+    BackupEnumerateResponse:
+      title: Response message structure for enumerate create
+      type: object
+      properties:
+        backups:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupObject'
+        continuation_token:
+          title: continuation token
+          type: string
+    BackupInfo:
+      type: object
+      properties:
+        backup_location:
+          title: Name of BackupLocation
+          type: string
+        cluster:
+          title: Name of Cluster
+          type: string
+        namespaces:
+          title: Namespaces to backup. Only an admin can provide multiple namespaces
+          type: array
+          items:
+            type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        status:
+          $ref: '#/components/schemas/BackupInfoStatusInfo'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupInfoResource'
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupInfoVolume'
+        backup_path:
+          type: string
+        stage:
+          $ref: '#/components/schemas/BackupInfoStage'
+        pre_exec_rule:
+          type: string
+        post_exec_rule:
+          type: string
+        backup_schedule:
+          $ref: '#/components/schemas/BackupInfoBackupSchedule'
+        cr_name:
+          type: string
+    BackupInfoBackupSchedule:
+      type: object
+      properties:
+        uid:
+          type: string
+        name:
+          type: string
+    BackupInfoResource:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        group:
+          type: string
+        kind:
+          type: string
+        version:
+          type: string
+    BackupInfoStage:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Initial
+      - PreExecRule
+      - PostExecRule
+      - Volumes
+      - Applications
+      - Final
+    BackupInfoStatusInfo:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/BackupInfoStatusInfoStatus'
+        reason:
+          type: string
+      description: Message for maintaing status of the object.
+    BackupInfoStatusInfoStatus:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Pending
+      - InProgress
+      - Aborted
+      - Failed
+      - Deleting
+      - Success
+      - Captured
+      - PartialSuccess
+      - DeletePending
+    BackupInfoVolume:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        pvc:
+          type: string
+        backup_id:
+          type: string
+        status:
+          $ref: '#/components/schemas/BackupInfoStatusInfo'
+        driver_name:
+          type: string
+        zones:
+          type: array
+          items:
+            type: string
+        options:
+          type: object
+          additionalProperties:
+            type: string
+    BackupInspectResponse:
+      title: Response message strcuture for object inspect
+      type: object
+      properties:
+        backup:
+          $ref: '#/components/schemas/BackupObject'
+    BackupLocationCreateRequest:
+      title: Define BackupLocationCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        backup_location:
+          $ref: '#/components/schemas/BackupLocationInfo'
+    BackupLocationCreateResponse:
+      title: Define BackupLocationCreateResponse struct
+      type: object
+    BackupLocationDeleteResponse:
+      title: Define BackupLocationInspectResponse struct
+      type: object
+    BackupLocationEnumerateResponse:
+      title: Define BackupLocationEnumerateResponse struct
+      type: object
+      properties:
+        backup_locations:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupLocationObject'
+    BackupLocationInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/BackupLocationInfoType'
+        path:
+          type: string
+        encryption_key:
+          type: string
+        cloud_credential:
+          type: string
+        status:
+          $ref: '#/components/schemas/BackupLocationInfoStatusInfo'
+        delete_backups:
+          type: boolean
+          format: boolean
+        s3_config:
+          $ref: '#/components/schemas/S3Config'
+    BackupLocationInfoStatusInfo:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/BackupLocationInfoStatusInfoStatus'
+        reason:
+          type: string
+      description: Message for maintaing status of the object.
+    BackupLocationInfoStatusInfoStatus:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Valid
+      - DeletePending
+    BackupLocationInfoType:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - S3
+      - Azure
+      - Google
+    BackupLocationInspectResponse:
+      title: Define BackupLocationInspectResponse struct
+      type: object
+      properties:
+        backup_location:
+          $ref: '#/components/schemas/BackupLocationObject'
+    BackupLocationObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        backup_location_info:
+          $ref: '#/components/schemas/BackupLocationInfo'
+    BackupLocationUpdateRequest:
+      title: Define BackupLocationUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        backup_location:
+          $ref: '#/components/schemas/BackupLocationInfo'
+    BackupLocationUpdateResponse:
+      title: Define BackupLocationUpdateResponse struct
+      type: object
+    BackupObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        backup_info:
+          $ref: '#/components/schemas/BackupInfo'
+      description: Message for Backup object which will be stored in Datastore.
+    BackupScheduleCreateRequest:
+      title: Define BackupScheduleCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        schedule_policy:
+          type: string
+        reclaim_policy:
+          $ref: '#/components/schemas/BackupScheduleInfoReclaimPolicyType'
+        backup_location:
+          title: Name of BackupLocation
+          type: string
+        cluster:
+          title: Name of Cluster
+          type: string
+        namespaces:
+          title: Namespaces to backup. Only an admin can provide multiple namespaces
+          type: array
+          items:
+            type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        pre_exec_rule:
+          type: string
+        post_exec_rule:
+          type: string
+    BackupScheduleCreateResponse:
+      title: Define BackupScheduleCreateResponse struct
+      type: object
+    BackupScheduleDeleteResponse:
+      title: Define BackupScheduleDeleteResponse struct
+      type: object
+    BackupScheduleEnumerateResponse:
+      title: Define BackupScheduleEnumerateResponse struct
+      type: object
+      properties:
+        backup_schedules:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupScheduleObject'
+    BackupScheduleInfo:
+      type: object
+      properties:
+        schedule_policy:
+          type: string
+        suspend:
+          type: boolean
+          format: boolean
+        reclaim_policy:
+          $ref: '#/components/schemas/BackupScheduleInfoReclaimPolicyType'
+        backup_status:
+          type: object
+          additionalProperties:
+            $ref: '#/components/schemas/BackupScheduleInfoStatusInfoList'
+        backup_location:
+          title: Name of BackupLocation
+          type: string
+        cluster:
+          title: Name of Cluster
+          type: string
+        namespaces:
+          title: Namespaces to backup. Only an admin can provide multiple namespaces
+          type: array
+          items:
+            type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        pre_exec_rule:
+          type: string
+        post_exec_rule:
+          type: string
+        delete_backups:
+          type: boolean
+          format: boolean
+        status:
+          $ref: '#/components/schemas/BackupScheduleInfoStatusInfo'
+        suspended_by:
+          $ref: '#/components/schemas/BackupScheduleInfoSuspendedBy'
+    BackupScheduleInfoReclaimPolicyType:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Delete
+      - Retain
+    BackupScheduleInfoStatusInfo:
+      type: object
+      properties:
+        backup_name:
+          title: backup name
+          type: string
+        create_time:
+          type: string
+          format: date-time
+        finish_time:
+          type: string
+          format: date-time
+        status:
+          $ref: '#/components/schemas/BackupScheduleInfoStatusInfoStatus'
+    BackupScheduleInfoStatusInfoList:
+      type: object
+      properties:
+        status:
+          type: array
+          items:
+            $ref: '#/components/schemas/BackupScheduleInfoStatusInfo'
+    BackupScheduleInfoStatusInfoStatus:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Pending
+      - InProgress
+      - Aborted
+      - Failed
+      - Deleting
+      - Success
+      - Captured
+      - PartialSuccess
+      - DeletePending
+    BackupScheduleInfoSuspendedBy:
+      type: object
+      properties:
+        source:
+          $ref: '#/components/schemas/SuspendedBySource'
+    BackupScheduleInspectResponse:
+      title: Define BackupScheduleInspectResponse struct
+      type: object
+      properties:
+        backup_schedule:
+          $ref: '#/components/schemas/BackupScheduleObject'
+    BackupScheduleObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        backup_schedule_info:
+          $ref: '#/components/schemas/BackupScheduleInfo'
+    BackupScheduleUpdateRequest:
+      title: Define BackupScheduleUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        schedule_policy:
+          type: string
+        reclaim_policy:
+          $ref: '#/components/schemas/BackupScheduleInfoReclaimPolicyType'
+        backup_location:
+          title: Name of BackupLocation
+          type: string
+        cluster:
+          title: Name of Cluster
+          type: string
+        namespaces:
+          title: Namespaces to backup. Only an admin can provide multiple namespaces
+          type: array
+          items:
+            type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        pre_exec_rule:
+          type: string
+        post_exec_rule:
+          type: string
+        suspend:
+          type: boolean
+          format: boolean
+    BackupScheduleUpdateResponse:
+      title: Define BackupScheduleUpdateResponse struct
+      type: object
+    BackupUpdateRequest:
+      title: Define BackupUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+    BackupUpdateResponse:
+      title: Define BackupUpdateResponse struct
+      type: object
+    CloudCredentialCreateRequest:
+      title: Define CloudCredentialCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        cloud_credential:
+          $ref: '#/components/schemas/CloudCredentialInfo'
+    CloudCredentialCreateResponse:
+      title: Define CloudCredentialCreateResponse struct
+      type: object
+    CloudCredentialDeleteResponse:
+      title: Define CloudCredentialInspectResponse struct
+      type: object
+    CloudCredentialEnumerateResponse:
+      title: Define CloudCredentialEnumerateResponse struct
+      type: object
+      properties:
+        cloud_credentials:
+          type: array
+          items:
+            $ref: '#/components/schemas/CloudCredentialObject'
+    CloudCredentialInfo:
+      type: object
+      properties:
+        type:
+          $ref: '#/components/schemas/CloudCredentialInfoType'
+        aws_config:
+          $ref: '#/components/schemas/AWSConfig'
+        azure_config:
+          $ref: '#/components/schemas/AzureConfig'
+        google_config:
+          $ref: '#/components/schemas/GoogleConfig'
+    CloudCredentialInfoType:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - AWS
+      - Azure
+      - Google
+    CloudCredentialInspectResponse:
+      title: Define CloudCredentialInspectResponse struct
+      type: object
+      properties:
+        cloud_credential:
+          $ref: '#/components/schemas/CloudCredentialObject'
+    CloudCredentialObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        cloud_credential_info:
+          $ref: '#/components/schemas/CloudCredentialInfo'
+    CloudCredentialUpdateRequest:
+      title: Define CloudCredentialUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        cloud_credential:
+          $ref: '#/components/schemas/CloudCredentialInfo'
+    CloudCredentialUpdateResponse:
+      title: Define CloudCredentialUpdateResponse struct
+      type: object
+    ClusterCreateRequest:
+      title: Define ClusterCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        px_config:
+          $ref: '#/components/schemas/PXConfig'
+        kubeconfig:
+          type: string
+        cloud_credential:
+          type: string
+    ClusterCreateResponse:
+      title: Define ClusterCreateResponse struct
+      type: object
+    ClusterDeleteResponse:
+      title: Define ClusterInspectResponse struct
+      type: object
+    ClusterEnumerateResponse:
+      title: Define ClusterEnumerateResponse struct
+      type: object
+      properties:
+        clusters:
+          type: array
+          items:
+            $ref: '#/components/schemas/ClusterObject'
+    ClusterInfo:
+      type: object
+      properties:
+        px_config:
+          $ref: '#/components/schemas/PXConfig'
+        kubeconfig:
+          type: string
+        cloud_credential:
+          type: string
+        status:
+          $ref: '#/components/schemas/ClusterInfoStatusInfo'
+        delete_backups:
+          type: boolean
+          description: |-
+            delete_backups will determine whether the backups
+            belong to given cluster needs to be deleted or not.
+          format: boolean
+        delete_restores:
+          type: boolean
+          description: |-
+            delete_restores will determine whether the restore
+            belong to given cluster needs to be deleted or not.
+          format: boolean
+    ClusterInfoStatusInfo:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ClusterInfoStatusInfoStatus'
+        reason:
+          type: string
+      description: Message for maintaing status of the cluster.
+    ClusterInfoStatusInfoStatus:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Online
+      - Offline
+      - DeletePending
+    ClusterInspectResponse:
+      title: Define ClusterInspectResponse struct
+      type: object
+      properties:
+        cluster:
+          $ref: '#/components/schemas/ClusterObject'
+    ClusterObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        clusterInfo:
+          $ref: '#/components/schemas/ClusterInfo'
+    ClusterUpdateRequest:
+      title: Define ClusterUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        px_config:
+          $ref: '#/components/schemas/PXConfig'
+        kubeconfig:
+          type: string
+        cloud_credential:
+          type: string
+    ClusterUpdateResponse:
+      title: Define ClusterUpdateResponse struct
+      type: object
+    CreateMetadata:
+      type: object
+      properties:
+        name:
+          title: name of the object
+          type: string
+        org_id:
+          title: org id of the object
+          type: string
+        owner:
+          title: owner of the object
+          type: string
+        labels:
+          title: labels associated with the object
+          type: object
+          additionalProperties:
+            type: string
+    EnumerateOptions:
+      type: object
+      properties:
+        labels:
+          title: label selectors for the object for filtering
+          type: object
+          additionalProperties:
+            type: string
+        page_size:
+          title: max objects to fetch
+          type: string
+          format: int64
+        continuation_token:
+          title: continuation token
+          type: string
+        time_range:
+          $ref: '#/components/schemas/TimeRange'
+        name_filter:
+          title: |-
+            Filter to use for name of objects. Any object that contains the filter
+            will be returned
+          type: string
+        cluster_name_filter:
+          title: |-
+            Filter to use for cluster name of objects. Any object that contains the
+            filter will be returned
+          type: string
+    GoogleConfig:
+      type: object
+      properties:
+        project_id:
+          type: string
+        json_key:
+          type: string
+    HealthStatusResponse:
+      type: object
+    LicenseActivateRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        activation_id:
+          type: string
+        license_data:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+    LicenseActivateResponse:
+      type: object
+    LicenseInspectResponse:
+      type: object
+      properties:
+        response_info:
+          type: array
+          items:
+            $ref: '#/components/schemas/LicenseResponseInfo'
+    LicenseResponseInfo:
+      type: object
+      properties:
+        name:
+          title: Represents feature name of license
+          type: string
+        count:
+          title: Number of nodes/clusters supporting the feature
+          type: string
+          format: int64
+        expires:
+          title: Expire time of license
+          type: string
+          format: date-time
+        starts:
+          title: Start time of license
+          type: string
+          format: date-time
+    Metadata:
+      type: object
+      properties:
+        name:
+          title: name of the object
+          type: string
+        uid:
+          title: uid for the object
+          type: string
+        owner:
+          type: string
+        org_id:
+          title: organization uid
+          type: string
+        create_time:
+          type: string
+          format: date-time
+        last_update_time:
+          type: string
+          format: date-time
+        labels:
+          title: label selectors for the object for filtering
+          type: object
+          additionalProperties:
+            type: string
+    OrganizationCreateRequest:
+      title: Define OrganizationCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+    OrganizationCreateResponse:
+      title: Define OrganizationCreateResponse struct
+      type: object
+    OrganizationEnumerateResponse:
+      title: Define OrganizationEnumerateResponse struct
+      type: object
+      properties:
+        organizations:
+          type: array
+          items:
+            $ref: '#/components/schemas/OrganizationObject'
+    OrganizationInspectResponse:
+      title: Define OrganizationInspectResponse struct
+      type: object
+      properties:
+        organization:
+          $ref: '#/components/schemas/OrganizationObject'
+    OrganizationObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+    PXConfig:
+      type: object
+      properties:
+        access_token:
+          type: string
+    ReplacePolicyType:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Retain
+      - Delete
+    RestoreCreateRequest:
+      title: Define RestoreCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        backup:
+          title: uid or name of backup
+          type: string
+        cluster:
+          title: uid or name of cluster
+          type: string
+        namespace_mapping:
+          title: mapping of the namespaces from the backup to which restore should
+            be done
+          type: object
+          additionalProperties:
+            type: string
+        replace_policy:
+          $ref: '#/components/schemas/ReplacePolicyType'
+    RestoreCreateResponse:
+      title: Define RestoreCreateResponse struct
+      type: object
+    RestoreDeleteResponse:
+      title: Define RestoreDeleteResponse struct
+      type: object
+    RestoreEnumerateResponse:
+      title: Define RestoreEnumerateResponse struct
+      type: object
+      properties:
+        restores:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestoreObject'
+        continuation_token:
+          title: continuation token
+          type: string
+    RestoreInfo:
+      title: Message for restore info
+      type: object
+      properties:
+        backup:
+          title: Name of backup to restore from
+          type: string
+        backup_location:
+          title: Name of backup location to restore from
+          type: string
+        label_selectors:
+          title: Label selectors to choose resources
+          type: object
+          additionalProperties:
+            type: string
+        namespace_mapping:
+          title: Namespace Mapping
+          type: object
+          additionalProperties:
+            type: string
+        replace_policy:
+          $ref: '#/components/schemas/ReplacePolicyType'
+        status:
+          $ref: '#/components/schemas/RestoreInfoStatusInfo'
+        resources:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestoreInfoResource'
+        volumes:
+          type: array
+          items:
+            $ref: '#/components/schemas/RestoreInfoVolume'
+        cluster:
+          title: Name of the cluster
+          type: string
+    RestoreInfoResource:
+      type: object
+      properties:
+        name:
+          type: string
+        namespace:
+          type: string
+        group:
+          type: string
+        kind:
+          type: string
+        version:
+          type: string
+        status:
+          $ref: '#/components/schemas/RestoreInfoStatusInfo'
+    RestoreInfoStatusInfo:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/RestoreInfoStatusInfoStatus'
+        reason:
+          type: string
+      description: Message for maintaing status of the object.
+    RestoreInfoStatusInfoStatus:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - Pending
+      - InProgress
+      - Aborted
+      - Failed
+      - Deleting
+      - Success
+      - Retained
+      - PartialSuccess
+    RestoreInfoVolume:
+      type: object
+      properties:
+        pvc:
+          type: string
+        source_namespace:
+          type: string
+        source_volume:
+          type: string
+        restore_volume:
+          type: string
+        status:
+          $ref: '#/components/schemas/RestoreInfoStatusInfo'
+        driver_name:
+          type: string
+        zones:
+          type: array
+          items:
+            type: string
+        options:
+          type: object
+          additionalProperties:
+            type: string
+    RestoreInspectResponse:
+      title: Define RestoreInspectResponse struct
+      type: object
+      properties:
+        restore:
+          $ref: '#/components/schemas/RestoreObject'
+    RestoreObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        restore_info:
+          $ref: '#/components/schemas/RestoreInfo'
+      description: Message for Restore object which will be stored in Datastore.
+    RestoreUpdateRequest:
+      title: Define RestoreUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+    RestoreUpdateResponse:
+      title: Define RestoreUpdateResponse struct
+      type: object
+    RuleCreateRequest:
+      title: Request message for creating rules
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        rules_info:
+          $ref: '#/components/schemas/RulesInfo'
+    RuleCreateResponse:
+      type: object
+    RuleDeleteResponse:
+      title: Define RuleDeleteResponse struct
+      type: object
+    RuleEnumerateResponse:
+      title: Define RuleEnumerateResponse struct
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RuleObject'
+    RuleInspectResponse:
+      title: Define RuleInspectResponse struct
+      type: object
+      properties:
+        rule:
+          $ref: '#/components/schemas/RuleObject'
+    RuleObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        rules_info:
+          $ref: '#/components/schemas/RulesInfo'
+    RuleUpdateRequest:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        rules_info:
+          $ref: '#/components/schemas/RulesInfo'
+    RuleUpdateResponse:
+      title: Define RuleUpdateResponse struct
+      type: object
+    RulesInfo:
+      title: Message for passing pre and post exec rules for backup
+      type: object
+      properties:
+        rules:
+          type: array
+          items:
+            $ref: '#/components/schemas/RulesInfoRuleItem'
+    RulesInfoRuleAction:
+      type: object
+      properties:
+        background:
+          type: boolean
+          format: boolean
+        run_in_single_pod:
+          type: boolean
+          format: boolean
+        value:
+          type: string
+    RulesInfoRuleItem:
+      type: object
+      properties:
+        pod_selector:
+          type: object
+          additionalProperties:
+            type: string
+        actions:
+          type: array
+          items:
+            $ref: '#/components/schemas/RulesInfoRuleAction'
+    S3Config:
+      type: object
+      properties:
+        endpoint:
+          type: string
+        region:
+          type: string
+        disable_ssl:
+          type: boolean
+          format: boolean
+        disable_path_style:
+          type: boolean
+          format: boolean
+    SchedulePolicyCreateRequest:
+      title: Define SchedulePolicyCreateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        schedule_policy:
+          $ref: '#/components/schemas/SchedulePolicyInfo'
+    SchedulePolicyCreateResponse:
+      title: Define SchedulePolicyCreateResponse struct
+      type: object
+    SchedulePolicyDeleteResponse:
+      title: Define SchedulePolicyDeleteResponse struct
+      type: object
+    SchedulePolicyEnumerateResponse:
+      title: Define SchedulePolicyEnumerateResponse struct
+      type: object
+      properties:
+        schedule_policies:
+          type: array
+          items:
+            $ref: '#/components/schemas/SchedulePolicyObject'
+    SchedulePolicyInfo:
+      type: object
+      properties:
+        interval:
+          $ref: '#/components/schemas/SchedulePolicyInfoIntervalPolicy'
+        daily:
+          $ref: '#/components/schemas/SchedulePolicyInfoDailyPolicy'
+        weekly:
+          $ref: '#/components/schemas/SchedulePolicyInfoWeeklyPolicy'
+        monthly:
+          $ref: '#/components/schemas/SchedulePolicyInfoMonthlyPolicy'
+        backup_schedule:
+          type: array
+          description: list of backup schedule object that uses this schedule policy.
+          items:
+            type: string
+    SchedulePolicyInfoDailyPolicy:
+      type: object
+      properties:
+        time:
+          type: string
+          description: |-
+            Time, when the policy should be triggered. Expected format is
+            time.Kitchen eg 12:04PM or 12:04pm.
+        retain:
+          type: string
+          description: Number of objects to retain for daily policy, default value
+            is 10.
+          format: int64
+    SchedulePolicyInfoIntervalPolicy:
+      type: object
+      properties:
+        minutes:
+          type: string
+          description: Interval in minutes at which an action should be triggered.
+          format: int64
+        retain:
+          type: string
+          description: Number of objects to retain for interval policy, default value
+            is 10.
+          format: int64
+    SchedulePolicyInfoMonthlyPolicy:
+      type: object
+      properties:
+        date:
+          type: string
+          description: |-
+            Date of the month when the policy should be triggered. If a given
+            date
+            doesn't exist in a month it'll rollover to the next date of the
+            month.
+            For example if 31 is specified, it'll trigger on either 1st or 2nd
+            March
+            depending on if it is a leap year.
+          format: int64
+        time:
+          type: string
+          description: |-
+            Time, when the policy should be triggered. Expected format is
+            time.Kitchen eg 12:04PM or 12:04pm.
+        retain:
+          type: string
+          description: Number of objects to retain for monthly policy, default value
+            is 10.
+          format: int64
+    SchedulePolicyInfoWeeklyPolicy:
+      type: object
+      properties:
+        day:
+          title: |-
+            Day of the week when the policy should be triggered.
+            For example, sunday or sun
+          type: string
+        time:
+          type: string
+          description: |-
+            Time, when the policy should be triggered. Expected format is
+            time.Kitchen eg 12:04PM or 12:04pm.
+        retain:
+          type: string
+          description: Number of objects to retain for weekly policy, default value
+            is 10.
+          format: int64
+    SchedulePolicyInspectResponse:
+      title: Define SchedulePolicyInspectResponse struct
+      type: object
+      properties:
+        schedule_policy:
+          $ref: '#/components/schemas/SchedulePolicyObject'
+    SchedulePolicyObject:
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/Metadata'
+        schedule_policy_info:
+          $ref: '#/components/schemas/SchedulePolicyInfo'
+    SchedulePolicyUpdateRequest:
+      title: Define SchedulePolicyUpdateRequest struct
+      type: object
+      properties:
+        metadata:
+          $ref: '#/components/schemas/CreateMetadata'
+        schedule_policy:
+          $ref: '#/components/schemas/SchedulePolicyInfo'
+    SchedulePolicyUpdateResponse:
+      title: Define SchedulePolicyUpdateResponse struct
+      type: object
+    SuspendedBySource:
+      type: string
+      default: Invalid
+      enum:
+      - Invalid
+      - User
+      - LicenseCheck
+    TimeRange:
+      type: object
+      properties:
+        start_time:
+          type: string
+          format: date-time
+        end_time:
+          type: string
+          format: date-time
+    VersionGetResponse:
+      type: object
+      properties:
+        version:
+          $ref: '#/components/schemas/VersionInfo'
+    VersionInfo:
+      type: object
+      properties:
+        major:
+          type: string
+        minor:
+          type: string
+        patch:
+          type: string
+        git_commit:
+          type: string
+        build_date:
+          type: string
+    protobufAny:
+      type: object
+      properties:
+        type_url:
+          type: string
+        value:
+          pattern: ^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=)?$
+          type: string
+          format: byte
+    runtimeError:
+      type: object
+      properties:
+        error:
+          type: string
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+        details:
+          type: array
+          items:
+            $ref: '#/components/schemas/protobufAny'
+
