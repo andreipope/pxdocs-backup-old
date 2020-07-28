@@ -24,7 +24,7 @@ series: backup
 
 ## Install PX-Backup
 
-1. If you're installing PX-Backup alone -- without Portworx -- skip this step. If you do want to install PX-Backup with Portworx, you must first create a storage class on your Kubernetes cluster:
+1. If you're installing PX-Backup alone -- without {{< pxEnterprise >}} -- skip this step. If you do want to install PX-Backup with {{< pxEnterprise >}}, you must first [install Portworx](https://docs.portworx.com/portworx-install-with-kubernetes/), then create the following storage class on your Kubernetes cluster:
 
     ```text
     kind: StorageClass
@@ -38,7 +38,7 @@ series: backup
 
 2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
 
-    If you're installing Portworx alongside PX-Backup, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above. 
+     If you're using Portworx for the PX-Backup installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above. 
 
 2. Using Helm, add the {{< pxEnterprise >}} repo to your cluster and update it:
     <!-- I may instead just push these two steps together and refer users to the spec generator -->
