@@ -20,7 +20,7 @@ To upgrade PX-Backup from an operator-based install to the Helm-based install in
 1. Download the `create_new_pvc_from_snapshot.yaml` spec:
 
     ```text
-    curl -o create_new_pvc_from_snapshot.yaml https://github.com/portworx/helm/blob/chart_upgrade_specs/pxcentral-operator-to-chart-upgrade/create_new_pvc_from_snapshot.yaml
+    curl -o create_new_pvc_from_snapshot.yaml https://raw.githubusercontent.com/portworx/helm/chart_upgrade_specs/pxcentral-operator-to-chart-upgrade/create_new_pvc_from_snapshot.yaml
     ```
 
 2. Change the `meta.helm.sh/release-namespace` annotation, specifying the namespace you installed PX-Central and PX-Backup onto originally:
@@ -31,21 +31,27 @@ To upgrade PX-Backup from an operator-based install to the Helm-based install in
 
 ## Upgrade your operator-based on-prem PX-Central deployment to the Helm chart method
 
-1. Download the `create_volume_snapshot_from_pvc.yaml` spec: 
+1. Fetch the org name from your cluster, specifying the namespace in which your current on-prem PX-Central deployment exists:
+
+    ```text
+    kubectl get cm pxc-central-ui-configmap -o yaml -n <px-central-namespace> | grep PX_BACKUP_ORGID
+    ```
+
+2. Download the `create_volume_snapshot_from_pvc.yaml` spec: 
 
     ```text
     curl -o create_volume_snapshot_from_pvc.yaml https://raw.githubusercontent.com/portworx/helm/chart_upgrade_specs/pxcentral-operator-to-chart-upgrade/create_volume_snapshot_from_pvc.yaml
     ```
 
-2. Edit the spec, changing all occurrences of the `namespace: portworx` field to the namespace in which your current on-prem PX-Central deployment exists.
+3. Edit the spec, changing all occurrences of the `namespace: portworx` field to the namespace in which your current on-prem PX-Central deployment exists.
 
-3. Apply the spec, creating a volume snapshot from the existing PX-Central on-prem PVCs in the namespace you provided in the previous step:
+4. Apply the spec, creating a volume snapshot from the existing PX-Central on-prem PVCs in the namespace you provided in the previous step:
 
     ```console
     kubectl apply -f create_volume_snapshot_from_pvc.yaml
     ```
 
-4.  Verify that the snapshots you've taken in the step above are intact and ready to be restored. Provide the namespace in which your current on-prem PX-Central deployment exists:
+5.  Verify that the snapshots you've taken in the step above are intact and ready to be restored. Provide the namespace in which your current on-prem PX-Central deployment exists:
 
     ```console
     storkctl get snapshot --namespace <px-central-namespace>
@@ -60,7 +66,7 @@ To upgrade PX-Backup from an operator-based install to the Helm-based install in
     theme-pxcentral-keycloak-0-snapshot        theme-pxc-keycloak-0                          Ready    28 Jul 20 01:29 UTC   28 Jul 20 01:29 UTC   local
     ```
 
-5. Cleanup the existing px-central-onprem deployment using the cleanup script.
+6. Cleanup the existing px-central-onprem deployment using the cleanup script.
 
     * If the current PX-Central on-prem deployment is using an existing Portworx cluster for persistent storage, use following commands for cleanup:
 
@@ -76,19 +82,13 @@ To upgrade PX-Backup from an operator-based install to the Helm-based install in
     bash px-central-cleanup.sh
     ```
 
-6. Create new PVCs from the volume snapshots you created in step 1 in the same namespace where PX-Central on-prem was originally deployed:
+7. Create new PVCs from the volume snapshots you created in step 1 in the same namespace where PX-Central on-prem was originally deployed:
 
     ```console
     kubectl apply -f create_new_pvc_from_snapshot.yaml
     ```
 
-7. Fetch the org name from your cluster, specifying the namespace in which your current on-prem PX-Central deployment exists:
-
-    ```text
-    kubectl get cm pxc-central-ui-configmap -o yaml -n <px-central-namespace> | grep PX_BACKUP_ORGID
-    ```
-
-7. Install PX-Backup using the Helm chart, specifying your own values for the following:
+8. Install PX-Backup using the Helm chart, specifying your own values for the following:
 
     * The `--namespace` flag with the namespace in which your current on-prem PX-Central deployment exists
     * As part of the `--set` flag, the `pxbackup.orgName=` parameter with your own org name that you fetched in the step above
