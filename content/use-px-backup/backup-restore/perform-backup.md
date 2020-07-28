@@ -35,6 +35,12 @@ Once you’ve created any backup rules and schedule policies you want, you can u
 
 Once you've created your backup, you can [monitor its status](/use-px-backup/backup-restore/monitor-status).
 
+### Related Videos
+
+  {{< youtube dhXwL9kOC0A >}}
+
+  {{< youtube 0N5axHG_QBc >}}
+
 <!-- 
 ## Perform a namespace-level backup
 

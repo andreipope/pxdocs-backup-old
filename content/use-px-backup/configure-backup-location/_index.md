@@ -27,5 +27,6 @@ series2: get-started
 
     ![configre backup location](/img/config-backup-location.png)
 
+### Related Videos
 
-  
+  {{< youtube S4Y8_SrgFsA >}}
