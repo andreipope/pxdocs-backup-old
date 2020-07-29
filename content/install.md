@@ -8,6 +8,8 @@ disableprevnext: true
 series: backup
 ---
 
+PX-Backup can be installed on any Kubernetes cluster using Helm charts as long as the pre-requisites are met. This can be one of your application clusters or a dedicated cluster. Since it's a multi-cluster backup solution, PX-Backup does not need to be installed on every cluster that will be backed-up. Instead, other clusters are simply added through the PX-Backup user interface.
+
 ## Prerequisites
 
 * Stork 2.4.0 or newer
@@ -47,7 +49,9 @@ series: backup
     helm repo add portworx http://charts.portworx.io/ && helm repo update
     ```
 
-2. Install {{< pxEnterprise >}} using either the `helm set` command or the `values.yml` file provided in the output of the **Complete** tab of the spec generator.
+2. Install PX-Backup using either the `helm set` command or the `values.yml` file provided in the output of the **Complete** tab of the spec generator.
+
+    You can find more information about the PX-Backup Helm chart in the [reference article](/reference/install-helm-chart/).
 
 ## Configure external OIDC endpoints
 
