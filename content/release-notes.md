@@ -18,7 +18,6 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PB-621 | Added support to display CR in a selected namespace |
 | PB-574 | Added support for backing up namespace quotas |
 | PB-573 | Added support for the kubectl oidc authenticator |
 | PB-565 | Provided an option to copy the json output from the **Inspect Data** pane |
@@ -29,7 +28,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 | PB-576 |	The backup view now features a progress bar |
 | PB-575 |	Added a help message to explain the **Path / Bucket** field in the backup location screen |
 | PB-572 |	PX-Backup now reads the OIDC admin secret into a user-provided namespace instead of the PX-Backup namespace.
-| PB-621 |	PX-Backup now shows CRs in the application view. You must use Stork 2.4.3 or older on the application cluster. |
+| PB-621 |	Generic CRD support: PX-Backup now shows CRs in the application view. You must use Stork 2.4.3 or greater on the application cluster. |
 
 ### Fixes
 
