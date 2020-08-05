@@ -15,7 +15,7 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 * Stork 2.4.0 or newer
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
 * If you're using PX-Backup with {{< pxEnterprise >}}, you must use {{< pxEnterprise >}} version 2.5.0 or newer
-* Helm
+* [Helm](https://helm.sh/docs/intro/install/)
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -38,9 +38,9 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
     repl: "3"
     ```
 
-2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
+2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard).
 
-     If you're using Portworx for the PX-Backup installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above. 
+     If you're using Portworx for the PX-Backup installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above.
 
 2. Using Helm, add the {{< pxEnterprise >}} repo to your cluster and update it:
     <!-- I may instead just push these two steps together and refer users to the spec generator -->
