@@ -9,9 +9,7 @@ scrollspy-container: false
 type: common-landing
 ---
 
-By default, the PX-Backup UI is configured <!-- need description of the current default config here. -->. If the standard PX-Backup UI configuration doesn't work with your cluster architecture, you can alter it so that it does. 
-
-<!-- Revisit this whole description -->
+If the standard PX-Backup UI endpoint configuration doesn't meet your requirements, you can configure access using HTTPS, access it through the load balancer, or even navigate to one of your node IPs directly. 
 
 ## Expose the PX-Backup UI on ingress and configure access using HTTPS
 
@@ -90,11 +88,7 @@ You can access PX-Backup by directly navigating to one of your node's IP address
 
 1. Find the public/external IP (NODE_IP) of  any node in your current Kubernetes cluster.
 
-    <!-- any instructions we can provide here? -->
-
-2. Find the node port (NODE_PORT) of the `px-backup-ui` service: 
-
-    <!-- any commands to find this? -->
+2. Find the node port (NODE_PORT) of the `px-backup-ui` service.
 
 Once you've found the node IP and port, you can combine them to access the PX-Backup UI:
 
