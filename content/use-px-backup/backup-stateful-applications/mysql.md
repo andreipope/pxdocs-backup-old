@@ -44,7 +44,7 @@ For more information on how to run MySQL on Kubernetes, refer to [this article](
 
 Create rules for MySQL that will run both before and after the backup operation runs:
 
-#### Create a pre-exec backup rule for Cassandra
+#### Create a pre-exec backup rule for MySQL
 
 Before a backup of MySQL occurs, Portworx, Inc. recommends you to flush certain data to disk so that the backup remains consistent. Database tables and logs are examples of data that should be flushed. It is also important in MySQL to lock the tables so no new I/O transactions attempt to add records during the backup, or MySQL may also become inconsistent. 
 
@@ -72,7 +72,7 @@ Create the following rule within the PX-Backup interface. Modify the username an
 
 	 ![](/img/mysql-pre-rule.png)
 
-#### Create a post-exec backup rule for Cassandra
+#### Create a post-exec backup rule for MySQL
 
 PX-Backup performed a flush and lock on the data in MySQL before our backup. Now, PX-Backup must make sure to also run `UNLOCK` so the database releases the global read lock. It also may be a good idea to use [`FLUSH LOGS`](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-logs). `FLUSH LOGS` will rotate logs and update the sequence number of the log. `FLUSH LOGS` is useful when users need a clear distinction between logs before and after a backup occurs. 
 
