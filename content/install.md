@@ -24,6 +24,24 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 * PX-Essentials
 {{</info>}}
 
+## Prepare air-gapped environments
+
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the following Docker images to either your docker registry, or your server:
+
+* docker.io/portworx/pxcentral-onprem-api:1.0.4
+* docker.io/portworx/pxcentral-onprem-ui-frontend:1.1.2.1
+* docker.io/portworx/pxcentral-onprem-ui-backend:1.1.2.1
+* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.1.2.1
+* docker.io/portworx/px-backup:1.0.2
+* docker.io/portworx/pxcentral-onprem-post-setup:1.0.4
+* docker.io/portworx/keycloak-login-theme:1.0.2
+* docker.io/bitnami/etcd:3.4.7-debian-10-r14
+* docker.io/bitnami/postgresql:11.7.0-debian-10-r9
+* docker.io/jboss/keycloak:9.0.2
+* docker.io/portworx/keycloak-login-theme:1.0.2
+* docker.io/library/busybox:1.31
+* docker.io/library/mysql:5.7.22
+
 ## Install PX-Backup
 
 1. If you're installing PX-Backup alone -- without {{< pxEnterprise >}} -- skip this step. If you do want to install PX-Backup with {{< pxEnterprise >}}, you must first [install Portworx](https://docs.portworx.com/portworx-install-with-kubernetes/), then create the following storage class on your Kubernetes cluster:
