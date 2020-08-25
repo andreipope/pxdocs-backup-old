@@ -46,7 +46,7 @@ export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh 
 export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
 export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
 export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
-export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-5
+export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-6
 export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
 # set the value of the `NGINX_REDIRECTS_FILE` environment variable
 if [ "${VERSIONS_BASE_URL}" '==' "docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf ; fi
