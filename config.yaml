@@ -39,3 +39,6 @@ outputs:
     - RSS
     - Algolia
     - Redirects
+
+markup:
+  defaultMarkdownHandler: blackfriday
