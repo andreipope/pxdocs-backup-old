@@ -32,9 +32,16 @@ series2: get-started
     ![Configure a backup location](/img/config-backup-location-aws.png)
 
 4. Select the **Add** button
+
 <!-- What is the `default` storage class? -->
 
+<!-- The cluster is down, I can't take screenshots
     **Azure Users**
+
+
+    **Google Cloud Users**
+
+-->
 
 ### Related Videos
 
