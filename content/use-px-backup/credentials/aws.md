@@ -47,6 +47,7 @@ Perform the following steps to add an AWS cloud account to PX-Backup:
     * Enter a descriptive account name
     * In the **Public Key** field, add your S3 access key ID
     * In the **Secret Key** field, add your S3 secret access key
-    * Select the **Add** button
 
     ![Populate the fields](/img/aws-credential.png)
+
+5. Select the **Add** button

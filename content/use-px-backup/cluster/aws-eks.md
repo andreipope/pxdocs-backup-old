@@ -24,9 +24,10 @@ disableprevnext: true
     * The name of the cluster
     * Retrieve the Kubeconfig from your cluster and paste it in the **Kubeconfig** text frame, or select the **Browse** button to upload it from a file.
     * Select the **EKS** radio button from the **Kubernetes Service** radio group.
-    * From the **Cloud Account** dropdown, select the cloud account you previously created.
-    * Select the **Submit** button
+    * From the **Cloud Account** dropdown, select your AWS cloud account.
 
     ![Enter the cluster details](/img/enter-eks-cluster-details.png)
+
+3. Select the **Submit** button
 
 

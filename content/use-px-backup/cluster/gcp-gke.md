@@ -23,10 +23,12 @@ disableprevnext: true
     * The name of the cluster
     * Retrieve the Kubeconfig from your cluster and paste it in the **Kubeconfig** text frame, or select the **Browse** button to upload it from a file.
     * Select the **GKE** radio button from the **Kubernetes Service** radio group
-    * From the **Cloud Account** dropdown, select the cloud account you previously created.
+    * From the **Cloud Account** dropdown, select your GCP cloud account.
     * Select the **Submit** button
 
     ![Enter the cluster details](/img/enter-gcp-gke-cluster-details.png)
+
+3. Select the **Submit** button
 
 
 <!-- Modify the node security settings, Create a cluster role with compute engine read/write access.

@@ -31,8 +31,7 @@ disableprevnext: true
     * The name of the cluster
     * Retrieve the Kubeconfig from your cluster and paste it in the **Kubeconfig** text frame, or select the **Browse** button to upload it from a file.
     * Select the **Others** radio button from the **Kubernetes Service** radio group
-    * Select the **Submit** button
 
     ![Enter the cluster details](/img/enter-aks-cluster-details.png)
 
-
+3. Select the **Submit** button

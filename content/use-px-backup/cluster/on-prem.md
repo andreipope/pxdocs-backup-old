@@ -19,9 +19,10 @@ disableprevnext: true
 
 2. On the **Add Kubernetes Cluster** page, enter the cluster details:
 
-    1. The name of the cluster
-    2. Retrieve the Kubeconfig from your cluster and paste it in the **Kubeconfig** text frame, or select the **Browse** button to upload it from a file.
-    3. Select the **Others** radio button from the **Kubernetes Service** radio group
-    5. Select the **Submit** button
+    * The name of the cluster
+    * Retrieve the Kubeconfig from your cluster and paste it in the **Kubeconfig** text frame, or select the **Browse** button to upload it from a file.
+    * Select the **Others** radio button from the **Kubernetes Service** radio group
 
     ![Enter the cluster details](/img/enter-other-kubernetes-distributions-cluster-details.png)
+
+3. Select the **Submit** button

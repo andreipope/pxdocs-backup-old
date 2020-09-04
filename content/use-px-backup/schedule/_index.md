@@ -17,7 +17,7 @@ type: common-landing
 
     ![Add new schedule policy](/img/add-new-schedule.png)
 
-3. From the Add Policy dialogue box, name your policy and select a type:
+3. From the **Add Policy** dialogue box, name your policy and select a type:
 
     * **Periodic**: A periodic policy runs at fixed intervals defined in minutes and hours.
     * **Daily**: Runs every day at a specified time. Provide the hours and minutes from midnight to define the time.

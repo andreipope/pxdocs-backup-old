@@ -14,9 +14,17 @@ Once you’ve created any backup rules and schedule policies you want, you can u
 
     ![Select cluster](/img/select-backup.png)
 
-2. Select the namespaces and apply label selectors to filter the resources you want to back up:
+2. Select the namespaces and apply label selectors to filter the resources you want to back up: <!-- There's a "include any new namespaces created" button that allows you to grab everything when you run the backup, this is different from specifiying every namespace because it will always grab all namespaces through use of a wildcard.  -->
 
     ![Select namespaces and labels](/img/select-namespace-labels.png)
+
+
+    {{<info>}}
+**NOTE:** To back up all namespaces, choose **Select All**:
+
+    ![Select all namespaces](/img/select-all-namespaces.png)
+
+    {{</info>}}
 
 3. Select the **Backup** button:
 
