@@ -9,7 +9,7 @@ disableprevnext: true
 
 ## Prerequisites
 
-* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command located under the **Kubernetes Service** radio group.
+* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command displayed below the **Kubernetes Service** radio group.
 
 * On your cluster, create a secret from your Azure tenant ID, client ID, and client secret, and then set an environment variable for Stork:
 

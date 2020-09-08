@@ -11,7 +11,7 @@ disableprevnext: true
 
 * You've added your GCP cloud account to PX-Backup. See the [GCP](/use-px-backup/credentials/gcp/) page for more details about how you can add an GCP account to PX-Backup.
 
-* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command located under the **Cloud Account** radio group.
+* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command displayed below the **Cloud Account** radio group.
 
 ## Add the cluster to PX-Backup
 

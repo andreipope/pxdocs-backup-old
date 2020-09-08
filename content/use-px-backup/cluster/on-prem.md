@@ -9,7 +9,7 @@ disableprevnext: true
 
 ## Prerequisites
 
-* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command located under the **Kubernetes Service** radio group.
+* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the displayed below the **Kubernetes Service** radio group.
 
 ## Add the cluster to PX-Backup
 

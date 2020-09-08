@@ -9,9 +9,9 @@ disableprevnext: true
 
 ## Prerequisites
 
-* You've added your AWS cloud account to PX-Backup. See the [AWS/S3 compliant object store](/use-px-backup/credentials/aws/) page for more details about how you can add an AWS account to PX-Backup.
+* You've added your AWS cloud account to PX-Backup. See the [AWS/S3 compliant object store](/use-px-backup/credentials/aws/) page for details about how you can add an AWS account to PX-Backup.
 
-* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command located under the **Kubernetes Service** radio group.
+* Your cluster must be running Stork 2.4 or higher. To install Stork on your Kubernetes cluster, copy and paste the command displayed below the **Kubernetes Service** radio group.
 
 ## Add the cluster to PX-Backup
 
