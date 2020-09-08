@@ -1,13 +1,13 @@
 ---
 title: MySQL
 description: 
-keywords: 
+keywords: backup, mysql
 weight: 4
 hidesections: true
 disableprevnext: true
 ---
 
-This page provides instructions for users on how to use pre and post backups rules with PX-Backup to achieve application-consistent backups for MySQL in production.
+You can use the instructions on this page to create pre and post backup rules with PX-Backup, which take application-consistent backups for MySQL in production.
 
 
 MySQL server manages information stored in a location called the [data directory](https://dev.mysql.com/doc/refman/8.0/en/data-directory.html). Often, the data directory is located in the MySQL server filesystem at `/var/lib/mysql`. MySQL stores data within this location that are vital for MySQL. You must make sure to mount Kubernetes PersistentVolumeClaims (PVCs) to the data directory location. In Kubernetes, the spec file `volumeMount` may look like this:
