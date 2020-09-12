@@ -5,7 +5,7 @@ PROTO_AND_VERSION=""
 
 if [ -z "$TRAVIS_BRANCH" ] || [ -z "$BRANCH_VERSION_CONFIG" ] || [ -z "$VERSIONS_BASE_URL" ]
 then
-  echo "One of the following env variable is not defined: \$TRAVIS_BRANCH, \$BRANCH_VERSION_CONFIG."
+  echo "One of the following environment variables is not defined: \$TRAVIS_BRANCH, \$BRANCH_VERSION_CONFIG."
 else
   if [[ $BRANCH_VERSION_CONFIG == *$TRAVIS_BRANCH* ]]
   then

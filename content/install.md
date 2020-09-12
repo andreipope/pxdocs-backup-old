@@ -8,12 +8,14 @@ disableprevnext: true
 series: backup
 ---
 
+PX-Backup can be installed on any Kubernetes cluster using Helm charts as long as the pre-requisites are met. This can be one of your application clusters or a dedicated cluster. Since it's a multi-cluster backup solution, PX-Backup does not need to be installed on every cluster that will be backed-up. Instead, other clusters are simply added through the PX-Backup user interface.
+
 ## Prerequisites
 
 * Stork 2.4.0 or newer
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
 * If you're using PX-Backup with {{< pxEnterprise >}}, you must use {{< pxEnterprise >}} version 2.5.0 or newer
-* Helm
+* [Helm](https://helm.sh/docs/intro/install/)
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -21,6 +23,24 @@ series: backup
 * PX-Security
 * PX-Essentials
 {{</info>}}
+
+## Prepare air-gapped environments
+
+If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the following Docker images to either your docker registry, or your server:
+
+* docker.io/portworx/pxcentral-onprem-api:1.0.4
+* docker.io/portworx/pxcentral-onprem-ui-frontend:1.1.2.1
+* docker.io/portworx/pxcentral-onprem-ui-backend:1.1.2.1
+* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.1.2.1
+* docker.io/portworx/px-backup:1.0.2
+* docker.io/portworx/pxcentral-onprem-post-setup:1.0.4
+* docker.io/portworx/keycloak-login-theme:1.0.2
+* docker.io/bitnami/etcd:3.4.7-debian-10-r14
+* docker.io/bitnami/postgresql:11.7.0-debian-10-r9
+* docker.io/jboss/keycloak:9.0.2
+* docker.io/portworx/keycloak-login-theme:1.0.2
+* docker.io/library/busybox:1.31
+* docker.io/library/mysql:5.7.22
 
 ## Install PX-Backup
 
@@ -36,9 +56,9 @@ series: backup
     repl: "3"
     ```
 
-2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard). 
+2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard).
 
-     If you're using Portworx for the PX-Backup installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above. 
+     If you're using Portworx for the PX-Backup installation, select the **Use storage class** checkbox under the **Storage** section of the **Spec Details** tab of the spec generator and enter the name of the storageclass you created in step 1 above.
 
 2. Using Helm, add the {{< pxEnterprise >}} repo to your cluster and update it:
     <!-- I may instead just push these two steps together and refer users to the spec generator -->
@@ -47,7 +67,9 @@ series: backup
     helm repo add portworx http://charts.portworx.io/ && helm repo update
     ```
 
-2. Install {{< pxEnterprise >}} using either the `helm set` command or the `values.yml` file provided in the output of the **Complete** tab of the spec generator.
+2. Install PX-Backup using either the `helm set` command or the `values.yml` file provided in the output of the **Complete** tab of the spec generator.
+
+    You can find more information about the PX-Backup Helm chart in the [reference article](/reference/install-helm-chart/).
 
 ## Configure external OIDC endpoints
 
