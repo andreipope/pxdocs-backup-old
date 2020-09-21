@@ -23,21 +23,21 @@ Sep 23, 2020
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PB-783 | Added field validation for bucket name field in backup location page to validate user input. |
-| PB-831 | Arrange resources in alphabetical order in the create backup panel. |
-| PB-762 | Display only view json and show details when the backup schedule is in delete pending state. |
-| PB-837 | Do not display Remove option when the backup location is in Delete pending state. |
-| PB-640 | Progress bar added to resources column to indicate backups and restores are in progress |
-| PB-682 | Added a help message explaining Pre/Post Backup rules. Added a link to the docs which has instructions for users on how to use pre- and post- backup rules with PX-Backup |
-| PB-680 | Remove persistent volume from the resource list in Restore pane |
-| PB-706 | Min value for number of backups retained for the scheduled backup is set to 1 |
-| PB-699 | Progress bar added to the resources in the restore page to indicate that restore is in progress |
-| PB-671 | Backup size is now displayed against each namespace selected for restore in Custom Restore pane. |
-| PB-478 | Remove view json and remove options when the backup is in delete or delete pending state |
-| PB-302 | Added Backup location validation option in the UI and API. Backup location validation is done by default during backup creation. |
-| PB-634 | Previously users were allowed to filter resources by labels alone. Now users are allowed to filter resources by resource type along with labels. |
-| PB-747 | When admin wants to share backup location with other users without sharing credentials, they can set one backup credential and one backup location as default. The non admin user can then use these without have to know the credentials details or the bucket name. |
-| PB-768 | <!-- I think this is an improvement--> Issue: Delete confirmation needed the user to type the name of the resource being deleted. Resolution. The new confirmation window only need the user to click on the confirm deletion checkbox instead of asking the user to type in the resource name. |
+| PB-783 | PX-Backup now validates the bucket name field in the **Add Backup Location** view |
+| PB-831 | PX-Backup now displays the resources in alphabetical order in the **Create Backup** view |
+| PB-762 | When a backup schedule is in the delete pending state, PX-Backup no longer displays the remove, suspend, or edit options |
+| PB-837 | When a backup location is in the delete pending state, PX-Backup no longer displays the remove option |
+| PB-640 | The **Backups** view now features a progress bar indicating the progress of your backup operations |
+| PB-682 | The **Backup Rules** page now includes a help message explaining pre and post backup rules |
+| PB-680 | Persistent volumes no longer appear in the **Restore Backup** view |
+| PB-706 | Improved validation rules for the field that specifies the number of scheduled backups PX-Backup retains. |
+| PB-699 | The **Restores** view now features a progress bar indicating the progress of your restore operations |
+| PB-671 | PX-Backup now displays the backup size for each namespace in the **Restore Backup** view. |
+| PB-478 | When a backup is in the delete or delete pending state, PX-Backup no longer displays the **View json** and **Show Details** options |
+| PB-302 | PX-Backup now automatically validates new backup locations when they are added. |
+| PB-634 | Users can now filter resources by resource type |
+| PB-747 | Administrators can now share backup locations with other users without disclosing the credentials or the bucket name by setting a backup location as the default backup location <!-- TODO: Revisit this -->|
+| PB-768 | Users can now delete a resource without being prompted for the name of that resource. |
 
 ### Fixes
 
