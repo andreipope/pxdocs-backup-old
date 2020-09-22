@@ -8,6 +8,10 @@ disableprevnext: true
 
 By default PX-Backup includes a 30 day trial license. Contact [Portworx support](mailto:support@portworx.com) to purchase an enterprise license.
 
+{{<info>}}
+**NOTE:** PX-Backup licenses are node-based, and you can check the node count when you import a license.
+{{</info>}}
+
 Perform the following steps to add your license:
 
 1. From the home screen, select the license icon on the left side of the screen:
