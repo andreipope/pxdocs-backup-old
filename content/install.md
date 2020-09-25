@@ -34,7 +34,7 @@ If your cluster is internet-connected, skip this section. If your cluster is air
 * docker.io/portworx/pxcentral-onprem-ui-frontend:1.1.3
 * docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.1.3
 * docker.io/bitnami/etcd:3.4.7-debian-10-r14
-* docker.io/portworx/pxcentral-onprem-post-setup:1.0.4
+* docker.io/portworx/pxcentral-onprem-post-setup:1.1.1
 * docker.io/bitnami/postgresql:11.7.0-debian-10-r9
 * docker.io/jboss/keycloak:9.0.2
 * docker.io/portworx/keycloak-login-theme:1.0.2
