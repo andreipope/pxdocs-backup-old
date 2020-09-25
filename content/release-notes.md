@@ -11,32 +11,38 @@ series: backup
 
 ## 1.1.0
 
-Sep 23, 2020
+Sep 25, 2020
 
 
 ### New features
 
 * If you add a new cluster using the CLI or API, PX-Backup now displays your cluster in the UI.
-* Added a separate Lighthouse view. <!-- Shall we link out to the PX-Central page-->
+* Added a separate **Lighthouse view**.
+* The new **PX-Backup dashboard** provides insights into your protected applications. You can view the amount of data backed up, and the policies enforced both at the individual cluster level and the multi-cluster level.
+* PX-Backup now features **resource-level backups**, allowing you to perform granular backup operations by resource type and also at the individual resource level.
+* PX-Backup now features **selective restores**, allowing you to selectively restore specific resource types or resources from any selected backup.
+* Introducing **default backup policies**: administrators can now use wildcards to specify backup policies. PX-Backup will add all newly created namespaces to that backup schedule, without requiring a policy update.
+* Administrators can now share the default cloud account and backup location with other users.
+* Added additional metrics for backups, including the size of backups per PVC, namespace, and cluster.
+* To help improve user experience, PX-Backup now uses telemetry to collect information about your use cases, backup metrics, and deployment environments.
+* PX-Backup licenses are node-based, and you can check the node count when you import a license.
 
 ### Improvements
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
 | PB-783 | PX-Backup now validates the bucket name field in the **Add Backup Location** view. |
-| PB-831 | PX-Backup now displays the resources in alphabetical order in the **Create Backup** view. |
 | PB-762 | When a backup schedule is in the delete pending state, PX-Backup no longer displays the remove, suspend, or edit options. |
 | PB-837 | When a backup location is in the delete pending state, PX-Backup no longer displays the remove option. |
 | PB-640 | The **Backups** view now features a progress bar indicating the progress of your backup operations. |
 | PB-682 | The **Backup Rules** page now includes a help message explaining pre and post backup rules. |
-| PB-680 | Persistent volumes no longer appear in the **Restore Backup** view |
+| PB-680 | Persistent volumes no longer appear in the **Restore Backup** view. |
 | PB-706 | Improved validation rules for the field that specifies the number of scheduled backups that PX-Backup retains. |
 | PB-699 | The **Restores** view now features a progress bar indicating the progress of your restore operations. |
 | PB-671 | PX-Backup now displays the backup size for each namespace in the **Restore Backup** view. |
 | PB-478 | When a backup is in the delete or delete pending state, PX-Backup no longer displays the **View json** and **Show Details** options. |
 | PB-302 | PX-Backup now automatically validates backup locations when the users add them. |
 | PB-634 | Users can now filter resources by resource type. |
-| PB-747 | Administrators can now share backup locations with other users without disclosing the credentials or the bucket name by setting a backup location as the default backup location. <!-- TODO: Revisit this -->|
 | PB-768 | Users can now delete a resource without being prompted for the name of that resource. |
 | PB-636 | Improved clarity around the `OrgID` field in the **Add License** view. |
 | PB-645 | In the **Edit Backup Schedule View**,  you can now use a navigation link to go to the **Schedule Policy** view. |
@@ -45,8 +51,9 @@ Sep 23, 2020
 | PB-664 | PX-Backup now displays the status of a cluster as `Inactive`, even if the cluster has been deleted or is not reachable. |
 | PB-712 | Every time you update the cluster configuration, PX-Backup validates whether the cluster is accessible. |
 | PB-637 | If your license expires, PX-Backup pauses all scheduled backups until you apply a new license. |
-| PB-654 | PX-Backup now generates license files without prompting the user for the org name. <!-- Is this correct? --> |
-| PB-775 | PX-Backup now validates bucket names. |
+| PB-654 | The users are no longer required to provide the org name when they generate new license files. |
+| PB-745 | The **Backup Rules** view now features a new  **Container** field that allows the users to specify the container to which PX-Backup will apply the rule. |
+| PB-831 | PX-Backup now displays the resources in alphabetical order in the **Create Backup** view. |
 
 ### Fixes
 
@@ -58,7 +65,7 @@ Portworx, Inc. has fixed the following issues:
 | PB-686 | If you provide an HTTP endpoint in the backup location field, sync backup fails. <!-- I don't get this, what is is a "sync backup"? --></br></br> **User impact:** PX-Backup displays the following error: "Access Denied." </br> </br> **Resolution:** Sync backup now works, even if you provide an HTTP endpoint. |
 | PB-608 | Middleware not able to establish a connection with backup because the grpc connection was not closed. <br/><br/> **User impact:** Because of this issue, PX backup was marked as offline. <br/><br/> **Resolution:** Users will no longer see PX-backup marked as `offline` due to the middleware not being able to establish a connection with PX-Backup. | <!-- We already release noted this JIRA in 1.0.2, but I don't really understand it... -->
 | PB-664 | If a backup schedule is associated with an inactive cluster, users can not remove the cluster from PX-Backup. </br></br> **User impact:** PX-Backup displays an error message saying that the user can not delete the cluster. </br></br> **Resolution:**  The users can now select the inactive cluster and perform all operations except triggering a new backup. |
-| PB-744 | Sometimes, the **All backups** view did not show any backups, even if the users created multiple backups. </br></br> **User impact:** They could not see their backups in the **All backups** views. <br/><br/> **Resolution:** PX-Backup now shows all backups in the **All backups** view. |
+| PB-744 | When the users created a large number of backups, and each backup contained a large number of resources, the **All backups** view did not show any backups. </br></br> **User impact:** They could not see their backups in the **All backups** view. <br/><br/> **Resolution:** PX-Backup always shows all backups in the **All backups** view, even if the users create a large number of backups and resources. |
 
 
 ## 1.0.2
