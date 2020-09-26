@@ -1,7 +1,7 @@
 ---
 title: GCP
-description: 
-keywords: 
+description:
+keywords:
 weight: 1
 hidesections: true
 disableprevnext: true
@@ -11,24 +11,31 @@ series2: get-started
 series2_weight: 2
 ---
 
+## Prerequisites
+
+In GCP, create a **Compute Engine default** service account for use with your cluster. Modify the service account, adding **Read Write** access for each API. Save the JSON key for this service account for future reference.
+
+## Add a GCP cloud account to PX-Backup
+
 Perform the following steps to add a GCP cloud account to PX-Backup:
 
-1. In GCP, create a **Compute Engine default** service account for use with your cluster. Modify the service account, adding **Read Write** access for each API. Save the JSON key for this service account for future reference.
+1. From the home page, select **Settings**, **Cloud Settings** to open the cloud settings page.
 
+    ![Cloud settings](/img/cloud-settings.png)
 
-2. From the home page, select **Settings**, **Cloud Settings** to open the cloud settings page.
+2. Select **Add New**.
 
-    ![cloud settings](/img/cloud-settings.png)
+    ![Add a new cloud account](/img/add-new-cloud-account.png)
 
-3. Under the **Cloud Accounts** section, select **Add New**.
+3. Choose **Google Cloud** from the drop-down list:
 
-    ![add new cloud account](/img/add-new.png)
+    ![Choose Google cloud](/img/choose-google-cloud.png)
 
-3. Populate the fields in the **Add Cloud Account** page:
+4. Populate the fields in the **Add Cloud Account** page:
 
-    * Choose **Google Cloud**
     * Create a descriptive account name
-    * add the JSON key for the service account associated with your GKE cluster
-    * Select the **Add** button
+    * Paste the content of your JSON key for the service account associated with your GKE cluster, or select the **Browse** button to upload it from a file.
 
-    ![](/img/gcp-account-add.png)
+    ![Add a Google cloud account](/img/gcp-account-add.png)
+
+5. Select the **Add** button
