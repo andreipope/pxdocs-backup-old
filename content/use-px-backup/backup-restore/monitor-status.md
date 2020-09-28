@@ -1,6 +1,6 @@
 ---
 title: Monitor backups and restores
-keywords: 
+keywords:
 weight: 12
 hidesections: true
 disableprevnext: true
@@ -14,4 +14,4 @@ Backups and restores indicate their status through the colored icon on the left 
 
 You can get more information by clicking the vertical menu icon on the right and selecting **Show Details**:
 
-![](/img/show-details.png)
+![Show details](/img/show-details.png)

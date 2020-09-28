@@ -4,7 +4,6 @@ keywords:
 weight: 7
 hidesections: true
 disableprevnext: true
-hidden: true
 ---
 
 You can use the PX-Backup API to create, delete, schedule, and restore backups. The PX-Backup API is organized around REST and returns responses in JSON format.

@@ -30,11 +30,11 @@ set -ev
 # Set environment variables
 export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
 export ALGOLIA_APP_ID=EWKZLLNQ9L
-export BRANCH_VERSION_CONFIG=1.0=1.0
+export BRANCH_VERSION_CONFIG=1.0=1.0,1.1=1.1
 export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
-export LATEST_VERSION=1.0
+export LATEST_VERSION=1.1
 export PRODUCT_NAME=PX-Backup
 export VERSIONS_BASE_URL=backup.docs.portworx.com
 # Docker builds cannot use uppercase characters in the image name
