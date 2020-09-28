@@ -1,12 +1,72 @@
 ---
 title: Release notes
 description: See the latest changes associated with recent releases.
-keywords: 
+keywords: Release notes
 weight: 11
 hidesections: true
 disableprevnext: true
 series: backup
 ---
+
+
+## 1.1.0
+
+Sep 28, 2020
+
+
+### New features
+
+* If you add a new cluster using the CLI or API, PX-Backup now displays your cluster in the UI.
+* Added a separate **Lighthouse view**.
+* The new **PX-Backup dashboard** provides insights into your protected applications. You can view the amount of data backed up, and the policies enforced both at the individual cluster level and the multi-cluster level.
+* PX-Backup now features **resource-level backups**, allowing you to perform granular backup operations by resource type and also at the individual resource level.
+* PX-Backup now features **selective restores**, allowing you to selectively restore specific resource types or resources from any selected backup.
+* Introducing **default backup policies**: administrators can now use wildcards to specify backup policies. PX-Backup will add all newly created namespaces to that backup schedule, without requiring a policy update.
+* Administrators can now share the default cloud account and backup location with other users.
+* Added additional metrics for backups, including the size of backups per PVC, namespace, and cluster.
+* To help improve user experience, PX-Backup now uses telemetry to collect information about your use cases, backup metrics, and deployment environments.
+* PX-Backup licenses are node-based, and you can check the node count when you import a license.
+
+### Improvements
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-783 | PX-Backup now validates the bucket name field in the **Add Backup Location** view. |
+| PB-762 | When a backup schedule is in the delete pending state, PX-Backup no longer displays the remove, suspend, or edit options. |
+| PB-837 | When a backup location is in the delete pending state, PX-Backup no longer displays the remove option. |
+| PB-640 | The **Backups** view now features a progress bar indicating the progress of your backup operations. |
+| PB-682 | The **Backup Rules** page now includes a help message explaining pre and post backup rules. |
+| PB-680 | Persistent volumes no longer appear in the **Restore Backup** view. |
+| PB-706 | Improved validation rules for the field that specifies the number of scheduled backups that PX-Backup retains. |
+| PB-699 | The **Restores** view now features a progress bar indicating the progress of your restore operations. |
+| PB-671 | PX-Backup now displays the backup size for each namespace in the **Restore Backup** view. |
+| PB-478 | When a backup is in the delete or delete pending state, PX-Backup no longer displays the **View json** and **Show Details** options. |
+| PB-302 | PX-Backup now automatically validates backup locations when the users add them. |
+| PB-634 | Users can now filter resources by resource type. |
+| PB-768 | Users can now delete a resource without being prompted for the name of that resource. |
+| PB-636 | Improved clarity around the `OrgID` field in the **Add License** view. |
+| PB-645 | In the **Edit Backup Schedule View**,  you can now use a navigation link to go to the **Schedule Policy** view. |
+| PB-710 | Added a tooltip showing whether a backup schedule is being deleted. |
+| PB-509 | When your Keycloak token expires, PX-Backup now redirects you to the login page. |
+| PB-664 | PX-Backup now displays the status of a cluster as `Inactive`, even if the cluster has been deleted or is not reachable. |
+| PB-712 | Every time you update the cluster configuration, PX-Backup validates whether the cluster is accessible. |
+| PB-637 | If your license expires, PX-Backup pauses all scheduled backups until you apply a new license. |
+| PB-654 | The users are no longer required to provide the org name when they generate new license files. |
+| PB-745 | The **Backup Rules** view now features a new  **Container** field that allows the users to specify the container to which PX-Backup will apply the rule. |
+| PB-831 | PX-Backup now displays the resources in alphabetical order in the **Create Backup** view. |
+
+### Fixes
+
+Portworx, Inc. has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-629 | Users were unable to log out and log in as a different user. </br></br> **User impact:** They were seeing an error message saying "You are already authenticated as different user <username> in this session. Please log out first." </br></br> **Resolution:** Users can low log out and log in as a different user. |
+| PB-686 | If you provide an HTTP endpoint in the backup location field, sync backup fails. <!-- I don't get this, what is is a "sync backup"? --></br></br> **User impact:** PX-Backup displays the following error: "Access Denied." </br> </br> **Resolution:** Sync backup now works, even if you provide an HTTP endpoint. |
+| PB-608 | Middleware not able to establish a connection with backup because the grpc connection was not closed. <br/><br/> **User impact:** Because of this issue, PX backup was marked as offline. <br/><br/> **Resolution:** Users will no longer see PX-backup marked as `offline` due to the middleware not being able to establish a connection with PX-Backup. | <!-- We already release noted this JIRA in 1.0.2, but I don't really understand it... -->
+| PB-664 | If a backup schedule is associated with an inactive cluster, users can not remove the cluster from PX-Backup. </br></br> **User impact:** PX-Backup displays an error message saying that the user can not delete the cluster. </br></br> **Resolution:**  The users can now select the inactive cluster and perform all operations except triggering a new backup. |
+| PB-744 | When the users created a large number of backups, and each backup contained a large number of resources, the **All backups** view did not show any backups. </br></br> **User impact:** They could not see their backups in the **All backups** view. <br/><br/> **Resolution:** PX-Backup always shows all backups in the **All backups** view, even if the users create a large number of backups and resources. |
+
 
 ## 1.0.2
 
@@ -38,7 +98,7 @@ Portworx, Inc. has fixed the following issues:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PB-627 | Backup location, schedules, pre, and post rule dropdowns showed only 10 entries, even if there were more. <br/><br/> **User impact:** If they had more than 10 entries, users couldn't access them from the dropdowns. <br/><br/> **Resolution:** PX-Backup now shows all results in these dropdowns. |
-| PB-623 |	Users were unable to delete restore jobs that were in the pending state. <br/><br/> **Resolution:** Users can now delete pending restore jobs. | 
+| PB-623 |	Users were unable to delete restore jobs that were in the pending state. <br/><br/> **Resolution:** Users can now delete pending restore jobs. |
 | PB-610 | Due to a race condition between the schedule delete and reconciler status updates, PX-Backup did not delete backup schedules when prompted to. <br/><br/> **Resolution:** PX-Backup now properly deletes backup schedules. |
 | PB-608 | Middleware not able to establish a connection with backup because the grpc connection was not closed. <br/><br/> **User impact:** Because of this issue, PX backup was marked as offline. <br/><br/> **Resolution:** Users will no longer see PX-backup marked as `offline` due to the middleware not being able to establish a connection with PX-Backup. |
 | PB-599 | Stork continuously retried to update the backup/restore resources when PX-Backup marked a job as failed. <br/><br/> **User impact:** In some cases, Stork would eventually mark the backup CR as successful, but PX-backup would continue to show it as failed. <br/><br/> **Resolution:** PX-backup now accurately reflects the backup CR's status. |
@@ -91,7 +151,7 @@ Portworx, Inc. has fixed the following issues:
 | PB-468 | After the trial license expired, there was no way to let the user know that they had more clusters online on PX-Backup than the license supported until the backup failed.<br/><br/>**User Impact:** Users would not know they have more cluster than the license supports until their backup or restore failed. <br/><br/>**Resolution:** PX-Backup now displays a message on the home screen to let the users know that they need to remove some clusters if they have more clusters than their license supports. |
 | PB-395 | The PX-Backup app view took a long time to load when multiple namespaces were selected. <br/><br/>**User Impact:** Users selecting a large number of namespaces in the app view would either not see, or have to wait a long time for resources to appear <br/><br/>**Resolution:** PX-Backup now loads resources for multiple namespaces faster. |
 | PB-486 | When a user deleted a backup, PX-Backup did not update the reason.<br/><br/>**User Impact:** Users may have seen confusing information about their backup status during deletion<br/><br/>**Resolution:** PX-Backup now shows an appropriate message indicating volumes and resources are being deleted. |
-| PB-477 | The `enter` key did not work in search box on the **All backups** page. <br/><br/> **User Impact:** Users couldn't filter their results on the **All backups** page using the search box. <br/><br/>**Resolution:** The search box now filters results when a user inputs a term and presses `enter`. | 
+| PB-477 | The `enter` key did not work in search box on the **All backups** page. <br/><br/> **User Impact:** Users couldn't filter their results on the **All backups** page using the search box. <br/><br/>**Resolution:** The search box now filters results when a user inputs a term and presses `enter`. |
 
 <!-- need more info
 | PB-467 | Backsync should avoid printing error while processing Backup location with out bucket. |
@@ -110,21 +170,21 @@ PX-Backup includes:
 * Point-and-click recovery for any Kubernetes app—stateless or stateful
 * Fast recovery for applications, including restoring their configuration and data
 * Pod, tag, and namespace granularity for any backup
-* Policy-driven scheduled backups 
+* Policy-driven scheduled backups
 * Continuous backups across multiple clouds and global data centers
 * Complete protection for applications, configurations, and data
 * Application-consistent backup and restore
 * Backup and recover cloud volumes from AWS, Azure, and GCP, even if you are not using PX-Store
 * Built-in multi-tenancy for enterprises via industry-standard OIDC integration
 
-<!-- 
+<!--
 ## 1.0
 
 Month day, 2020
 
 ### New features
 
- * 
+ *
 
 ### Improvements
 
