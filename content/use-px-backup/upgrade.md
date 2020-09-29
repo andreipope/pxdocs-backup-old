@@ -11,6 +11,73 @@ type: common-landing
 
 Depending on which version of PX-Backup you're running, the upgrade method you use will differ. Prior to version 1.0.2, PX-Backup used operator-based installs; versions 1.0.2 and newer use Helm-based installs. Perform the upgrade procedures appropriate for your version.
 
+## Upgrade PX-Backup using Helm
+
+Once you've moved from an operator-based install to a Helm-based install, you can upgrade using Helm.
+
+### Prerequisites
+
+* You must have PX-Backup with a Helm-based install
+
+### Upgrade PX-Backup
+
+Follow the steps in this section to upgrade PX-Backup using Helm.
+
+1. Update your Helm repos:
+
+    ```text
+    helm repo update
+    ```
+
+2. Retrieve all custom values you used during install. Enter the following `helm get values` command to generate a YAML file, adjusting the values of the `<namespace>` and `<release-name>` parameters to match your environment:
+
+    ```text
+    helm get values --namespace <docs-namespace> <release-name> -o yaml > values.yaml
+    ```
+
+    ```
+    oidc:
+        centralOIDC:
+            defaultPassword: examplePassword
+            defaultUsername: exampleUser
+    operatorToChartUpgrade: true
+    persistentStorage:
+        enabled: true
+        storageClassName: px-sc
+    pxbackup:
+        orgName: exampleOrg
+    pxcentralDBPassword: exampleDbPassword
+    ```
+
+    Note the following about this example output:
+
+    * The `persistentStorage.storageClassName` field displays the name of your storage class (`px-sc`).
+    * The `persistentStorage.enabled: true` field indicates that persistent storage is enabled.
+    * The `pxbackup.orgName` field displays the name of your organization (`my-organization`)
+
+
+    {{<info>}}
+**NOTE:** Your username and password may have changed since they were set in the Helm chart. Ensure the username and password shown in the output match your current username and password.
+    {{</info>}}
+
+3. Delete all of the stateful sets:
+
+    ```text
+    kubectl delete sts --namespace <namespace> pxc-backup-etcd pxcentral-keycloak pxcentral-keycloak-postgresql
+    ```
+
+4. Delete the post install hook job:
+
+    ```text
+    kubectl delete job pxcentral-post-install-hook --namespace <namespace>
+    ```
+
+5. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above:
+
+    ```text
+    helm upgrade px-backup portworx/px-backup --namespace -f values.yaml
+    ```
+
 ## Upgrade PX-Backup from an operator-based install
 
 To upgrade PX-Backup from an operator-based install to the Helm-based install introduced with 1.0.2, you must download, modify, and apply the following specs:
@@ -109,53 +176,3 @@ To upgrade PX-Backup from an operator-based install to the Helm-based install in
 **NOTE:** In the Helm install command above, mention the same organization name which was used in previous operator based install.
     {{</info>}}
 
-## Upgrade PX-Backup using Helm
-
-Once you've moved from an operator-based install to a Helm-based install, you can upgrade using Helm.
-
-### Prerequisites
-
-* You must have PX-Backup with a Helm-based install
-
-### Upgrade PX-Backup
-
-Follow the steps in this section to upgrade PX-Backup using Helm.
-
-1. Update your Helm repos:
-
-    ```text
-    helm repo update
-    ```
-
-2. Retrieve all custom values you used during install. Enter the following `helm get values` command, adjusting the values of the `<namespace>` and `<release-name>` parameters to match your environment:
-
-    ```text
-    helm get values -n <docs-namespace> <release-name>
-    ```
-
-    ```
-    USER-SUPPLIED VALUES:
-    persistentStorage:
-      enabled: true
-      storageClassName: px-sc
-    pxbackup:
-      orgName: my-organization
-    ```
-
-    Note the following about this example output:
-
-    * The `persistentStorage.storageClassName` field displays the name of your storage class (`px-sc`)
-    * The `persistentStorage` flag indicates that persistent storage is enabled
-    * The `pxbackup.orgName` field displays the name of your organization (`my-organization`)
-
-3. Delete all of the stateful sets:
-
-    ```text
-    kubectl delete sts --namespace <namespace> pxc-backup-etcd pxcentral-keycloak pxcentral-keycloak-postgresql
-    ```
-
-4. Run the `helm upgrade` command, using the `--set` flag to pass all custom values you've used during install. The following example command enables persistent storage, sets the value of the `persistentStorage.storageClassName` parameter to `px-sc`, and sets the value of the `orgName` parameter to `my-organization`:
-
-    ```text
-    helm upgrade px-backup portworx/px-backup --namespace <namespace> --set persistentStorage.enabled=true,persistentStorage.storageClassName=px-sc,pxbackup.orgName=my-organization
-    ```

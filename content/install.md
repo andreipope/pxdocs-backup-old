@@ -12,9 +12,8 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 
 ## Prerequisites
 
-* Stork 2.4.0 or newer
+* Stork 2.5.0 or newer
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
-* If you're using PX-Backup with {{< pxEnterprise >}}, you must use {{< pxEnterprise >}} version 2.5.0 or newer
 * [Helm](https://helm.sh/docs/intro/install/)
 
 {{<info>}}
