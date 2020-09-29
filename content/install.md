@@ -20,7 +20,7 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 **NOTE:** PX-Backup does not support the following Portworx features:
 
 * PX-Security
-* PX-Essentials
+* Portworx Essentials
 {{</info>}}
 
 ## Prepare air-gapped environments
