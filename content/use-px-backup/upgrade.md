@@ -55,11 +55,6 @@ Follow the steps in this section to upgrade PX-Backup using Helm.
     * The `persistentStorage.enabled: true` field indicates that persistent storage is enabled.
     * The `pxbackup.orgName` field displays the name of your organization (`my-organization`)
 
-
-    {{<info>}}
-**NOTE:** Your username and password may have changed since they were set in the Helm chart. Ensure the username and password shown in the output match your current username and password.
-    {{</info>}}
-
 3. Delete all of the stateful sets:
 
     ```text
@@ -72,10 +67,13 @@ Follow the steps in this section to upgrade PX-Backup using Helm.
     kubectl delete job pxcentral-post-install-hook --namespace <namespace>
     ```
 
-5. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above:
+5. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above and specifying the following `--set` options as a comma-separated list:
+   
+   * `oidc.centralOIDC.defaultPassword=` with your current password
+   * `oidc.centralOIDC.defaultUsername=` with your current username
 
     ```text
-    helm upgrade px-backup portworx/px-backup --namespace -f values.yaml
+    helm upgrade px-backup portworx/px-backup --namespace px-backup -f values.yaml  --set oidc.centralOIDC.defaultPassword=<current-password>,oidc.centralOIDC.defaultUsername=<current-username> 
     ```
 
 ## Upgrade PX-Backup from an operator-based install
