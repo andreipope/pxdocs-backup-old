@@ -48,7 +48,6 @@ develop: image
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
 		-e PRODUCT_URL \
-		-e PRODUCT_NAME \
 		-e PRODUCT_NAMES_AND_INDICES \
 		-p $(PORT):$(PORT) \
 		-v "$(PWD):/pxbackup" \
@@ -66,7 +65,6 @@ publish-docker:
 		-e ALGOLIA_INDEX_NAME \
 		-e TRAVIS_BRANCH \
 		-e PRODUCT_URL \
-		-e PRODUCT_NAME \
 		-e PRODUCT_NAMES_AND_INDICES \
 		-v "$(PWD):/pxbackup" \
 		$(BUILDER_IMAGE) -v --debug --gc --ignoreCache --cleanDestinationDir
@@ -82,7 +80,6 @@ search-index-docker:
 		-e ALGOLIA_INDEX_NAME \
 		-e ALGOLIA_INDEX_FILE=public/algolia.json \
 		-e PRODUCT_URL \
-		-e PRODUCT_NAME \
 		-e PRODUCT_NAMES_AND_INDICES \
 		$(SEARCH_INDEX_IMAGE)
 
