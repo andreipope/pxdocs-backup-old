@@ -14,7 +14,7 @@ IgnoreDirs:
 - "logos"
 - "samples"
 - "shared"
-CacheExpires: "24h"
+CacheExpires: "48h"
 IgnoreInternalEmptyHash: true
 IgnoreDirectoryMissingTrailingSlash: true
 IgnoreAltMissing: true
