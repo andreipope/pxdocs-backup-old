@@ -18,10 +18,10 @@ before_install:
 script:
   # make the build fail if there are any errors
   - set -e
-  - bash ./build.sh 
+  - bash ./build.sh
 notifications:
   email:
     recipients:
-      - harsh@portworx.com
+      - nathaniel.wilson@portworx.com
     on_success: change
     on_failure: always
