@@ -30,26 +30,26 @@ set -ev
 # Set environment variables
 export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
 export ALGOLIA_APP_ID=EWKZLLNQ9L
-export BRANCH_VERSION_CONFIG=1.1=1.1,1.0=1.0
+export BRANCH_VERSION_CONFIG=1.1=1.1,1.0=1.0 # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
 export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
-export LATEST_VERSION=1.1
-export PRODUCT_NAME=PX-Backup
-export PRODUCT_INDEX_NAME=PX-Backup
-export VERSIONS_BASE_URL=backup.docs.portworx.com
+export LATEST_VERSION=1.1 # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
+export PRODUCT_NAME=PX-Backup # The name of the product.
+export PRODUCT_INDEX_NAME=PX-Backup # We use this environment variable to determine the name of the Algolia index
+export VERSIONS_BASE_URL=backup.docs.portworx.com # The base URL
 # Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
 export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
 export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
 export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
-export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
-export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
+export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version) # The current version
+export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions) # A comma-separated list of all versions. We use this variable to build the version selector.
 export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
 export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
-export OTHER_PRODUCT_NAMES_AND_INDICES="Portworx Enterprise=PX-Enterprise-2-6"
-export PRODUCT_NAMES_AND_INDICES="${PRODUCT_INDEX_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
-# set the value of the `NGINX_REDIRECTS_FILE` environment variable
+export OTHER_PRODUCT_NAMES_AND_INDICES="Portworx Enterprise=PX-Enterprise-2-6" # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
+export PRODUCT_NAMES_AND_INDICES="${PRODUCT_INDEX_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}" # A comma-separated list of all product names and indices, in the form of `<product-name>=<product-index>`.
+# Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
 if [ "${VERSIONS_BASE_URL}" '==' "docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf ; fi
 if [ "${VERSIONS_BASE_URL}" '==' "backup.docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-backup-redirects.conf ; fi
 # build images
