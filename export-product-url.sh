@@ -10,7 +10,8 @@ then
   echo "One of the following environment variables is not defined: \$TRAVIS_BRANCH, \$BRANCH_VERSION_CONFIG."
 # If these environment variables are defined, then we assume that this script runs in Travis.
 else
-  if [[ $BRANCH_VERSION_CONFIG == *$TRAVIS_BRANCH* ]] # The `BRANCH_VERSION_CONFIG` environment variable is a comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP. If `BRANCH_VERSION_CONFIG` contains `TRAVIS_BRANCH`, then we assume that this script runs in Travis, and begin constructing the URL by setting `URL` to the base URL (`VERSIONS_BASE_URL).  
+  # The `BRANCH_VERSION_CONFIG` environment variable is a comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP. If `BRANCH_VERSION_CONFIG` contains `TRAVIS_BRANCH`, then we assume that this script runs in Travis, and begin constructing the URL by setting `URL` to the base URL (`VERSIONS_BASE_URL).
+  if [[ $BRANCH_VERSION_CONFIG == *$TRAVIS_BRANCH* ]]
   then
     echo "\$TRAVIS_BRANCH = $TRAVIS_BRANCH is in \$BRANCH_VERSION_CONFIG = $BRANCH_VERSION_CONFIG"
     URL=$VERSIONS_BASE_URL
