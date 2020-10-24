@@ -33,6 +33,8 @@ export TRIGGERING_REPO_NAME=$(basename -s .git `git config --get remote.origin.u
 export PX_ENTERPRISE_REPO_NAME="pxdocs"
 # The name of the PX-Backup repository
 export PX_BACKUP_REPO_NAME="pxdocs-backup"
+export PX_ENTERPRISE_LATEST_VERSION=2.6
+export PX_BACKUP=1.0
 
 # The following environment variables are set based on the triggering repository
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
@@ -53,6 +55,8 @@ if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
   export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf
   # The directory where the PX Enterprise manifests are placed
   export MANIFESTS_DIRECTORY="themes/pxdocs-tooling/deploy/manifests/"
+  export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
+export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
 fi
 
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_BACKUP_REPO_NAME}" ]; then
@@ -71,8 +75,10 @@ if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_BACKUP_REPO_NAME}" ]; then
   export OTHER_PRODUCT_NAMES_AND_INDICES="Portworx Enterprise=PX-Enterprise-2-6"
   # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
   export NGINX_REDIRECTS_FILE=px-backup-redirects.conf
-  # The directory where the PX Enterprise manifests are placed
+  # The directory where the PX Backup manifests are placed
   export MANIFESTS_DIRECTORY="themes/pxdocs-tooling/deploy/manifests/pxbackup/"
+  export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
+  export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
 fi
 
 # The following environment variables are **not** set based on the triggering repository
@@ -83,8 +89,6 @@ export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
 # Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
-export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
-export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
 export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
 # The current version
 export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)

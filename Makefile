@@ -12,7 +12,7 @@ SEARCH_INDEX_IMAGE?=pxdocs-search-index:developer
 DEPLOYMENT_IMAGE?=pxdocs-deployment:developer
 PORT?=1313
 DEVELOP_CONTAINER_NAME=pxdocs-develop
-VOLUME=pxdocs
+VOLUME=docs
 PUBLISH_CONTAINER_NAME=pxdocs-publish
 SEARCH_INDEX_CONTAINER_NAME=pxdocs-search-index
 endif
@@ -23,7 +23,7 @@ SEARCH_INDEX_IMAGE?=pxbackup-search-index:developer
 DEPLOYMENT_IMAGE?=pxbackup-deployment:developer
 PORT?=1515
 DEVELOP_CONTAINER_NAME=pxbackup-develop
-VOLUME=pxbackup
+VOLUME=docs
 PUBLISH_CONTAINER_NAME=pxbackup-publish
 SEARCH_INDEX_CONTAINER_NAME=pxbackup-publish
 SEARCH_INDEX_CONTAINER_NAME=pxbackup-search-index
@@ -73,9 +73,9 @@ develop: image
 		-e TRAVIS_BRANCH \
 		-e PRODUCT_URL \
 		-e PRODUCT_NAMES_AND_INDICES \
-		-p $(PORT):1313 \
+		-p $(PORT):$(PORT) \
 		-v "$(PWD):/$(VOLUME)" \
-		$(BUILDER_IMAGE) server --bind=0.0.0.0 --disableFastRender
+		$(BUILDER_IMAGE) server --bind=0.0.0.0 --port $(PORT) --disableFastRender
 
 .PHONY: publish-docker
 publish-docker: prerequisites
