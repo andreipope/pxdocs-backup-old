@@ -8,6 +8,31 @@ disableprevnext: true
 series: backup
 ---
 
+## 1.1.1
+
+Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+
+Oct 27, 2020
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-868 | On the **Application** page, you can now select the **Backup**  button to perform a new backup operation, even if PX-Backup didn't load all resources yet. |
+| PB-809 | PX-Backup now displays a more descriptive error message containing the full URL when an API call times out. <!-- Unless we provide more details, maybe  we should remove the following sentence.--> You can use this URL to debug the issue you encounter. |
+| PB-871 | PX-Backup now displays an error message when a user that doesn't have the permissions to add a new cluster to PX-Central tries to add one. |
+
+### Fixes
+
+Portworx, Inc. has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-739 | If you use Swagger to query a `backupLocation`, PX-Backup returns an empty response. </br></br> **User Impact:** Swagger displays the following error message: "Method Not Allowed /v1/backuplocation". </br></br> **Resolution:** When you use Swagger to query a `backuplocation`, PX-Backup no longer returns an empty response. |
+| PB-776 | When you restore a backup, PX-Backup selects all namespaces included in that backup for restore. </br></br> **User impact:** Your restore could cause unwanted configuration changes on the destination cluster.</br></br> **Resolution:** PX-Backup no longer selects all namespaces for restore. You must choose which namespaces you want to restore. |
+| PB-856 | When you log in for the first time and no clusters are added to PX-Backup, the dashboard does not reflect this. </br></br> **User impact:** Each section of the dashboard displays three dots. </br></br> | **Resolution:** The dashboard now reflects that no clusters are added to PX-Backup. <!-- TODO: revisit this -->|
+| PB-875 | Issue: During some cases, it has been observed that some backups become orphan without having an appropriate object in the datastore. Such snapshots can be considered an orphan and can be deleted automatically so that previous dependent backup doesn't have to be held permanently in the Delete Pending state due to dependency. Resolution: Orphaned schedule backups are now deleted. But if a manual backup becomes orphaned then the user must manually remove the appropriate object from datastore and etcd. <!-- I don't understand this -->|
+| PB-857 | Issue:  If the same k8s cluster was added by different users, and one of the users did not had permission to list the nodes, then the cluster status for the user (with the correct permission) used to flip/flip. Post this fix the following behaviour is seen  Resolution: Cluster status for a non-admin user without node permission is displayed as online when there is another user who has added the same cluster added with the right node permission. <!-- I don't understand this. -->|
+| PB-655 | PX-Backup fails to create a `backuplocation` in the AWS `us-west-2`regio  if the user specifies the default endpoint (`s3.amazonaws.com`). </br></br> **User Impact:** PX-Backup displays the following error message: "backup location [awsl1] creation failed as provided cloud credential [awscc] is not valid: cloud credential [awscc] doesn't have permission to upload object: BucketRegionError: incorrect region, the bucket is not in 'us-east-2' region at endpoint 's3.amazonaws.com' status code: 301, request id: , host id:" </br></br> PX-Backup now creates a `backuplocation` in the AWS `us-west-2`region, even if the user specifies the default endpoint (`s3.amazonaws.com`) |
+
 
 ## 1.1.0
 
