@@ -33,52 +33,50 @@ export TRIGGERING_REPO_NAME=$(basename -s .git `git config --get remote.origin.u
 export PX_ENTERPRISE_REPO_NAME="pxdocs"
 # The name of the PX-Backup repository
 export PX_BACKUP_REPO_NAME="pxdocs-backup"
-export PX_ENTERPRISE_LATEST_VERSION=2.6
-export PX_BACKUP=1.0
 
 # The following environment variables are set based on the triggering repository
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_ENTERPRISE_REPO_NAME}" ]; then
   echo "The triggering repository is Portworx Enterprise"
   # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
-  export BRANCH_VERSION_CONFIG=2.6=2.6,2.5=2.5,2.4=2.4,2.3=2.3,2.2=2.2,2.1=2.1,2.0.3=2.0,1.7=1.7
+  export BRANCH_VERSION_CONFIG=$(yq r products.yaml PX-Enterprise.BRANCH_VERSION_CONFIG)
   # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
-  export LATEST_VERSION=2.6
+  export LATEST_VERSION=$(yq r products.yaml PX-Enterprise.LATEST_VERSION)
   # The name of the product.
-  export PRODUCT_NAME="Portworx Enterprise"
+  export PRODUCT_NAME=$(yq r products.yaml PX-Enterprise.PRODUCT_NAME)
   # We use this environment variable to determine the name of the Algolia index
-  export PRODUCT_INDEX_NAME=PX-Enterprise
+  export PRODUCT_INDEX_NAME=$(yq r products.yaml PX-Enterprise.PRODUCT_INDEX_NAME)
   # The base URL
-  export VERSIONS_BASE_URL=docs.portworx.com
+  export VERSIONS_BASE_URL=$(yq r products.yaml PX-Enterprise.VERSIONS_BASE_URL)
   # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
-  export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Backup=PX-Backup-1-1
+  export OTHER_PRODUCT_NAMES_AND_INDICES=$(yq r products.yaml PX-Enterprise.OTHER_PRODUCT_NAMES_AND_INDICES)
   # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
-  export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf
+  export NGINX_REDIRECTS_FILE=$(yq r products.yaml PX-Enterprise.NGINX_REDIRECTS_FILE)
   # The directory where the PX Enterprise manifests are placed
-  export MANIFESTS_DIRECTORY="themes/pxdocs-tooling/deploy/manifests/"
-  export BUILDER_IMAGE="pxdocs:$TRAVIS_COMMIT"
-export SEARCH_INDEX_IMAGE="pxdocs-indexer:$TRAVIS_COMMIT"
+  export MANIFESTS_DIRECTORY=$(yq r products.yaml PX-Enterprise.MANIFESTS_DIRECTORY)
+  export BUILDER_IMAGE=$(yq r products.yaml PX-Enterprise.BUILDER_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export SEARCH_INDEX_IMAGE=$(yq r products.yaml PX-Enterprise.SEARCH_INDEX_IMAGE_PREFIX)$TRAVIS_COMMIT
 fi
 
 if [ "${TRIGGERING_REPO_NAME}" '==' "${PX_BACKUP_REPO_NAME}" ]; then
   echo "The triggering repository is PX-Backup"
   # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
-  export BRANCH_VERSION_CONFIG=1.1=1.1,1.0=1.0
+  export BRANCH_VERSION_CONFIG=$(yq r products.yaml PX-Backup.BRANCH_VERSION_CONFIG)
   # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
-  export LATEST_VERSION=1.1
+  export LATEST_VERSION=$(yq r products.yaml PX-Backup.LATEST_VERSION)
   # The name of the product.
-  export PRODUCT_NAME=PX-Backup
+  export PRODUCT_NAME=$(yq r products.yaml PX-Backup.PRODUCT_NAME)
   # We use this environment variable to determine the name of the Algolia index
-  export PRODUCT_INDEX_NAME=PX-Backup
+  export PRODUCT_INDEX_NAME=$(yq r products.yaml PX-Backup.PRODUCT_INDEX_NAME)
   # The base URL
-  export VERSIONS_BASE_URL=backup.docs.portworx.com
+  export VERSIONS_BASE_URL=$(yq r products.yaml PX-Backup.VERSIONS_BASE_URL)
   # A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
-  export OTHER_PRODUCT_NAMES_AND_INDICES="Portworx Enterprise=PX-Enterprise-2-6"
+  export OTHER_PRODUCT_NAMES_AND_INDICES=$(yq r products.yaml PX-Backup.OTHER_PRODUCT_NAMES_AND_INDICES)
   # Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
-  export NGINX_REDIRECTS_FILE=px-backup-redirects.conf
-  # The directory where the PX Backup manifests are placed
-  export MANIFESTS_DIRECTORY="themes/pxdocs-tooling/deploy/manifests/pxbackup/"
-  export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
-  export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
+  export NGINX_REDIRECTS_FILE=$(yq r products.yaml PX-Backup.NGINX_REDIRECTS_FILE)
+  # The directory where the PX Enterprise manifests are placed
+  export MANIFESTS_DIRECTORY=$(yq r products.yaml PX-Backup.MANIFESTS_DIRECTORY)
+  export BUILDER_IMAGE=$(yq r products.yaml PX-Backup.BUILDER_IMAGE_PREFIX)$TRAVIS_COMMIT
+  export SEARCH_INDEX_IMAGE=$(yq r products.yaml PX-Backup.SEARCH_INDEX_IMAGE_PREFIX)$TRAVIS_COMMIT
 fi
 
 # The following environment variables are **not** set based on the triggering repository
@@ -89,7 +87,7 @@ export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
 # Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
-export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxdocs-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
+export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
 # The current version
 export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
 # A comma-separated list of all versions. We use this variable to build the version selector.
