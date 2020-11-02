@@ -10,7 +10,7 @@ series: backup
 
 ## 1.1.1
 
-Oct 30, 2020
+Nov 2, 2020
 
 ### Improvements
 
