@@ -15,6 +15,15 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 * Stork 2.5.0 or newer
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
 * [Helm](https://helm.sh/docs/intro/install/)
+* If you want to install PX-Backup on OpenShift using the `restricted` SCC, then you must add the service accounts used by PX-Backup to the `restricted` SCC. Enter the following `oc adm policy add-scc-to-user` commands, replacing `<YOUR_NAMESPACE>` with your namespace:
+
+
+    ```text
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:default
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:pxcentral-apiserver
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:px-keycloak-account
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:px-backup-account
+    ```
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
