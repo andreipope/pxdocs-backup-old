@@ -17,7 +17,6 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 * [Helm](https://helm.sh/docs/intro/install/)
 * If you want to install PX-Backup on OpenShift using the `restricted` SCC, then you must add the service accounts used by PX-Backup to the `restricted` SCC. Enter the following `oc adm policy add-scc-to-user` commands, replacing `<YOUR_NAMESPACE>` with your namespace:
 
-
     ```text
     oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:default
     oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:pxcentral-apiserver
