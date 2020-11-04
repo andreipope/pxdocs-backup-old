@@ -21,6 +21,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 | PB-868 | On the **Application** page, you can now select the **Backup**  button to perform a new backup operation, even if not all resources are loaded yet. |
 | PB-809 | When an API call times out, PX-Backup now displays a more descriptive error message containing the full URL of the API call. |
 | PB-871 | PX-Backup now displays an error message when a user that does not have adequate permissions to add a new cluster to PX-Central tries to add one. |
+| PB-901 | On the **Add Backup Location** page, the **Endpoint** field can now have a maximum of 256 characters. |
 
 
 ### Fixes
