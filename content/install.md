@@ -59,7 +59,7 @@ If your cluster is internet-connected, skip this section. If your cluster is air
         name: portworx-sc
     provisioner: kubernetes.io/portworx-volume
     parameters:
-    repl: "3"
+        repl: "3"
     ```
 
 2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard).
