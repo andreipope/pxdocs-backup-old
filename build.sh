@@ -30,44 +30,54 @@ set -ev
 # Set environment variables
 export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
 export ALGOLIA_APP_ID=EWKZLLNQ9L
-export BRANCH_VERSION_CONFIG=1.0=1.0,1.1=1.1
+# A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
+export BRANCH_VERSION_CONFIG=1.1=1.1,1.0=1.0
 export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
+# The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
 export LATEST_VERSION=1.1
+# The name of the product.
 export PRODUCT_NAME=PX-Backup
+# We use this environment variable to determine the name of the Algolia index
+export PRODUCT_INDEX_NAME=PX-Backup
+# The base URL
 export VERSIONS_BASE_URL=backup.docs.portworx.com
 # Docker builds cannot use uppercase characters in the image name
 export LOWER_CASE_BRANCH=$(echo -n $TRAVIS_BRANCH | awk '{print tolower($0)}')
 export BUILDER_IMAGE="pxbackup:$TRAVIS_COMMIT"
 export SEARCH_INDEX_IMAGE="pxbackup-indexer:$TRAVIS_COMMIT"
 export DEPLOYMENT_IMAGE="gcr.io/$GCP_PROJECT_ID/pxbackup-$LOWER_CASE_BRANCH:$TRAVIS_COMMIT"
+# The current version
 export VERSIONS_CURRENT=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-current-branch-version)
+# A comma-separated list of all versions. We use this variable to build the version selector.
 export VERSIONS_ALL=$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh get-all-versions)
 export VERSIONS_TAG=$(echo -n "$VERSIONS_CURRENT" | sed 's/\./-/g')
-export ALGOLIA_INDEX_NAME="${PRODUCT_NAME}-${VERSIONS_TAG}"
-export OTHER_PRODUCT_NAMES_AND_INDICES=PX-Enterprise=PX-Enterprise-2-6
-export PRODUCT_NAMES_AND_INDICES="${PRODUCT_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
-# set the value of the `NGINX_REDIRECTS_FILE` environment variable
+export ALGOLIA_INDEX_NAME="${PRODUCT_INDEX_NAME}-${VERSIONS_TAG}"
+# A comma-separated list of other product names and indices, in the form of`<product-name>=<product-index>`.
+export OTHER_PRODUCT_NAMES_AND_INDICES="Portworx Enterprise=PX-Enterprise-2-6"
+# A comma-separated list of all product names and indices, in the form of `<product-name>=<product-index>`.
+export PRODUCT_NAMES_AND_INDICES="${PRODUCT_INDEX_NAME}=${PRODUCT_NAME}-${TRAVIS_BRANCH/./-},${OTHER_PRODUCT_NAMES_AND_INDICES}"
+# Each product has its own list of redirects. For each product, we use the `VERSIONS_BASE_URL` environment variable to determine the name of the file where the redirects are stored, and then we save that name in the `NGINX_REDIRECTS_FILE` environment variable
 if [ "${VERSIONS_BASE_URL}" '==' "docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-enterprise-redirects.conf ; fi
 if [ "${VERSIONS_BASE_URL}" '==' "backup.docs.portworx.com" ]; then export NGINX_REDIRECTS_FILE=px-backup-redirects.conf ; fi
-# build images
+# Build images
 travis_retry make image
-# publish site -> public
+# Publish site -> public
 make publish-docker
-# build the deployment image
+# Build the deployment image
 travis_retry make deployment-image
 travis_retry make check-links
-# if this is a pull request then we don't want to update algolia or deploy
+# If this is a pull request then we don't want to update algolia or deploy
 if [ "${TRAVIS_PULL_REQUEST}" != "false" ]; then exit 0; fi
-# this checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
+# This checks if the current branch is present in the BRANCH_VERSION_CONFIG variable if exists if not
 if [ "${TRAVIS_PULL_REQUEST}" == "false" ] && [ "$(bash themes/pxdocs-tooling/deploy/scripts/versions.sh should-build-current-branch)" != "yes" ]; then exit 0; fi
-# update the Algolia index
+# Update the Algolia index
 travis_retry make search-index-image
 travis_retry make search-index-docker
-# connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
+# Connect the GCLOUD_SERVICE_ACCOUNT_TOKEN, GCP_PROJECT_ID, GCP_ZONE and GCP_CLUSTER_ID vars -> gcloud and kubectl
 bash themes/pxdocs-tooling/deploy/scripts/ci_connect.sh
-# push the image to gcr
+# Push the image to gcr
 echo "Pushing image $DEPLOYMENT_IMAGE"
 gcloud docker -- push $DEPLOYMENT_IMAGE
 echo "Deploying image $DEPLOYMENT_IMAGE"

@@ -1,5 +1,5 @@
 ---
-title: Cassandra
+title: Backup Cassandra on Kubernetes
 description: 
 keywords: backup, cassandra
 weight: 4
@@ -7,8 +7,7 @@ hidesections: true
 disableprevnext: true
 ---
 
-You can use the instructions on this page to create pre and post backup rules with PX-Backup, which take application-consistent backups for Cassandra in production.
-
+You can use the instructions on this page to create pre and post backup rules with PX-Backup, which take application-consistent backups for Cassandra on Kubernetes in production.
 
 On its own, Cassandra is resilient to node failures. However, you still need Cassandra backups to recover from the following scenarios:
 
