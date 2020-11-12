@@ -15,6 +15,14 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 * Stork 2.5.0 or newer
 * If you're using an external OIDC provider, you must use certificates signed by a trusted certificate authority
 * [Helm](https://helm.sh/docs/intro/install/)
+* If you want to install PX-Backup on OpenShift using the `restricted` SCC, then you must add the service accounts used by PX-Backup to the `restricted` SCC. Execute the following `oc adm policy add-scc-to-user` commands, replacing `<YOUR_NAMESPACE>` with your namespace:
+
+    ```text
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:default
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:pxcentral-apiserver
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:px-keycloak-account
+    oc adm policy add-scc-to-user restricted system:serviceaccount:<YOUR_NAMESPACE>:px-backup-account
+    ```
 
 {{<info>}}
 **NOTE:** PX-Backup does not support the following Portworx features:
@@ -27,13 +35,13 @@ PX-Backup can be installed on any Kubernetes cluster using Helm charts as long a
 
 If your cluster is internet-connected, skip this section. If your cluster is air-gapped, you must pull the following Docker images to either your docker registry, or your server:
 
-* docker.io/portworx/px-backup:1.1.0
+* docker.io/portworx/px-backup:1.1.1
 * docker.io/portworx/pxcentral-onprem-api:1.1.0
-* docker.io/portworx/pxcentral-onprem-ui-backend:1.1.3
-* docker.io/portworx/pxcentral-onprem-ui-frontend:1.1.3
-* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.1.3
+* docker.io/portworx/pxcentral-onprem-ui-backend:1.1.4
+* docker.io/portworx/pxcentral-onprem-ui-frontend:1.1.4
+* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.1.4
 * docker.io/bitnami/etcd:3.4.7-debian-10-r14
-* docker.io/portworx/pxcentral-onprem-post-setup:1.1.1
+* docker.io/portworx/pxcentral-onprem-post-setup:1.1.2
 * docker.io/bitnami/postgresql:11.7.0-debian-10-r9
 * docker.io/jboss/keycloak:9.0.2
 * docker.io/portworx/keycloak-login-theme:1.0.2
@@ -51,7 +59,7 @@ If your cluster is internet-connected, skip this section. If your cluster is air
         name: portworx-sc
     provisioner: kubernetes.io/portworx-volume
     parameters:
-    repl: "3"
+        repl: "3"
     ```
 
 2. Generate the install spec through the **PX-Backup** [spec generator](https://central.portworx.com/specGen/wizard).
