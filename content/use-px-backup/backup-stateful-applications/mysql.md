@@ -45,7 +45,7 @@ Create rules for MySQL that will run both before and after the backup operation 
 
 #### Create a pre-exec backup rule for MySQL
 
-Before a backup of MySQL occurs, Portworx, Inc. recommends you to flush certain data to disk so that the backup remains consistent. Database tables and logs are examples of data that should be flushed. It is also important in MySQL to lock the tables so no new I/O transactions attempt to add records during the backup, or MySQL may also become inconsistent. 
+Before a backup of MySQL occurs, {{<companyName>}} recommends you to flush certain data to disk so that the backup remains consistent. Database tables and logs are examples of data that should be flushed. It is also important in MySQL to lock the tables so no new I/O transactions attempt to add records during the backup, or MySQL may also become inconsistent. 
 
 To accomplish this, the [(`FLUSH TABLES WITH READ LOCK`)](https://dev.mysql.com/doc/refman/8.0/en/flush.html#flush-tables-with-read-lock) command is used in a pre-backup rule. The command will lock the tables with a global read lock and allow Portworx to take a application-consistent snapshot.
 
