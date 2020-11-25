@@ -7,6 +7,32 @@ hidesections: true
 disableprevnext: true
 series: backup
 ---
+## 1.2.0
+
+Nov 25, 2020
+### New features
+
+- Introducing **usage-based pricing** for remote cluster nodes.
+- PX-Backup now supports generic CSI driver backup and restore.
+- Introducing cluster-level aggregated metrics for backup and restore with Prometheus metrics and Grafana dashboards
+
+### Improvements
+
+Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-947 | On the **Scheduled Backup Details** pane, the **NEXT SCHEDULED BACKUP ON** field now shows the date and the time when the next backup will run. When a backup is running, the **NEXT SCHEDULED BACKUP ON** field shows **In Progress**. |
+| PB-894 | On the **All Backups** page, PX-Backup now displays the name of the cluster for all backups. |
+
+### Fixes
+
+Portworx, Inc. has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-792| <!-- Needs more details. -->|
+| PB-892 | PX-Backup incorrectly reflected the sizes of your AWS backups. </br></br> **User Impact:** PX-Backup displayed "B" instead of "GiB"  </br></br> **Resolution:** PX-Backup now accurately displays the sizes of your AWS backups. |
 
 ## 1.1.1
 
