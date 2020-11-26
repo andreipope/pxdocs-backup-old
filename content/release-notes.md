@@ -9,7 +9,7 @@ series: backup
 ---
 ## 1.2.0
 
-Nov 25, 2020
+Nov 30, 2020
 ### New features
 
 - Introducing **usage-based pricing** for remote cluster nodes.
@@ -22,8 +22,17 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
-| PB-947 | On the **Scheduled Backup Details** pane, the **NEXT SCHEDULED BACKUP ON** field now shows the date and the time when the next backup will run. When a backup is running, the **NEXT SCHEDULED BACKUP ON** field shows **In Progress**. |
+| PB-553 | PX-Backup now displays a different icon for partially successful restores. This icon helps to distinguish between a partially successful restore and a successful one. |
+| PB-862 | Issue: If the OIDC server is not up during the px-backup server initialization, px-backup used to  panic. Fix: Now px-backup server will come up fine and later when any grpc call is tried, it will try to initialise the auth by connecting to the OIDC server. If the OIDC server is still down, px-backup will return error again |
 | PB-894 | On the **All Backups** page, PX-Backup now displays the name of the cluster for all backups. |
+| PB-932 | If you hover over a paused backup schedule, PX-Backup now shows the reason for that backup being paused. |
+| PB-934 | On the **Applications** page, PX-Backup now properly displays namespaces with long names in the namespace drop-down list. |
+| PB-948 | PX-Backup now displays the date and the time when the next backup will run in the backup schedule details modal. |
+| PB-946 | PX-Backup now uses the same format to display dates for backups, restores, and backup schedules. |
+| PB-947 | On the **Scheduled Backup Details** pane, the **NEXT SCHEDULED BACKUP ON** field now shows the date and the time when the next backup will run. When a backup is running, the **NEXT SCHEDULED BACKUP ON** field shows **In Progress**. |
+| PB-950 | If you select the name of a backup, restore, or backup schedule from the table view, PX-Backup now displays a modal containing details about your backup, restore, or backup schedule. |
+| PB-958 | On the **Applications** page, PX-Backup now displays the list of resource types alphabetically. |
+| PB-966 | PX-Backup now displays the namespaces included in a backup schedule in the backup schedule table view. |
 
 ### Fixes
 
@@ -31,6 +40,7 @@ Portworx, Inc. has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
+| PB-659 | PX-Backup didn't notify the users when the license has expired unless they visited the license page. </br></br> **User Impact:** The backups were failing. </br></br> **Resolution:** PX-Backup now displays a banner saying that the license will expire in seven days. |
 | PB-792| <!-- Needs more details. -->|
 | PB-892 | PX-Backup incorrectly reflected the sizes of your AWS backups. </br></br> **User Impact:** PX-Backup displayed "B" instead of "GiB"  </br></br> **Resolution:** PX-Backup now accurately displays the sizes of your AWS backups. |
 
