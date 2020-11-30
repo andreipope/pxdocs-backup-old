@@ -31,12 +31,12 @@ set -ev
 export ALGOLIA_API_KEY=e0824d7d48a118c054a077bc087bc976
 export ALGOLIA_APP_ID=EWKZLLNQ9L
 # A comma-separated list of branches and versions for which we build the deployment image, update the Algolia index and push the image to GCP
-export BRANCH_VERSION_CONFIG=1.1=1.1,1.0=1.0
+export BRANCH_VERSION_CONFIG=1.2=1.2,1.1=1.1,1.0=1.0
 export GCP_CLUSTER_ID=production-app-cluster
 export GCP_PROJECT_ID=production-apps-210001
 export GCP_ZONE=us-west1-b
 # The latest version. We use this variable in the `export-product-url.sh` script to determine whether the version should be added or not to the URLs that we upload to Algolia.
-export LATEST_VERSION=1.1
+export LATEST_VERSION=1.2
 # The name of the product.
 export PRODUCT_NAME=PX-Backup
 # We use this environment variable to determine the name of the Algolia index
