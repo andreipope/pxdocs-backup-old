@@ -18,7 +18,7 @@ Nov 30, 2020
 
 ### Improvements
 
-{{<companyName>}} has upgraded or enhanced functionality in the following areas:
+Pure Storage has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
@@ -35,7 +35,7 @@ Nov 30, 2020
 
 ### Fixes
 
-{{<companyName>}} has fixed the following issues:
+Pure Storage has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
