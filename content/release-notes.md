@@ -9,7 +9,7 @@ series: backup
 ---
 ## 1.2.0
 
-Nov 30, 2020
+Dec 2, 2020
 ### New features
 
 - Introducing **usage-based pricing** for remote cluster nodes.
