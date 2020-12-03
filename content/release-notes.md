@@ -9,7 +9,7 @@ series: backup
 ---
 ## 1.2.0
 
-Dec 2, 2020
+Dec 3, 2020
 ### New features
 
 - Introducing **usage-based pricing** for remote cluster nodes.
@@ -40,7 +40,6 @@ Pure Storage has fixed the following issues:
 |**Issue Number**|**Issue Description**|
 |----|----|
 | PB-659 | PX-Backup did not notify the users when their license was about to expire. </br></br> **User Impact:** The users would know about expired licenses only when backups and restores started failing due to expired licenses. </br></br> **Resolution:** PX-Backup now displays a warning seven days before license expiration. |
-| PB-792| Etcd pods sometimes did not automatically start after a failure.</br></br> **User Impact:** Etcd pods became stuck in the "CrashLoopBackOff" state. </br></br> **Resolution:** PX-Backup now creates snapshots that you can use to restore your PX-Backup cluster. |
 | PB-862 | If the OIDC server was not reachable during startup, PX-Backup failed to start </br></br> **User Impact:** PX-Backup did not start. </br></br> **Resolution:** If the OIDC server is not reachable during startup, PX-Backup now starts and tries to connect to the OIDC server before a gRPC call is performed. |
 | PB-892 | PX-Backup incorrectly reflected the size of your AWS backup. </br></br> **User Impact:** PX-Backup displayed "B" instead of "GiB"  </br></br> **Resolution:** PX-Backup now accurately displays the size of your AWS backup. |
 
