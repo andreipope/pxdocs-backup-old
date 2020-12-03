@@ -2,7 +2,7 @@
 title: EKS
 description:
 keywords:
-weight: 3
+weight: 2
 hidesections: true
 disableprevnext: true
 ---

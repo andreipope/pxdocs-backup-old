@@ -1,8 +1,8 @@
 ---
 title: Other Kubernetes distributions
-description:
+description: 
 keywords:
-weight: 3
+weight: 6
 hidesections: true
 disableprevnext: true
 ---
