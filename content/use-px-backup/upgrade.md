@@ -61,10 +61,10 @@ Follow the steps in this section to upgrade PX-Backup using Helm.
     kubectl delete job pxcentral-post-install-hook --namespace <namespace>
     ```
 
-4. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above:
-   
+4. Run the `helm upgrade` command, using the `-f` flag to pass the custom `values.yaml` file you generated above and replacing `<namespace>` with your namespace:
+
     ```text
-    helm upgrade px-backup portworx/px-backup --namespace px-backup -f values.yaml
+    helm upgrade px-backup portworx/px-backup --namespace <namespace>  -f values.yaml
     ```
 
 ## Upgrade PX-Backup from an operator-based install
