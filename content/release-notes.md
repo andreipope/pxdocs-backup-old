@@ -2,7 +2,7 @@
 title: Release notes
 description: See the latest changes associated with recent releases.
 keywords: Release notes
-weight: 11
+weight: 7
 hidesections: true
 disableprevnext: true
 series: backup

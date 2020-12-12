@@ -1,7 +1,7 @@
 ---
 title: Manage licenses
 keywords:
-weight: 4
+weight: 5
 hidesections: true
 disableprevnext: true
 ---
