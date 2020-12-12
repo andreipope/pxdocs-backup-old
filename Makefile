@@ -9,4 +9,3 @@ check-links:
 	@make check-links -f ./themes/pxdocs-tooling/build/Makefile
 search-index:
 	@make search-index -f ./themes/pxdocs-tooling/build/Makefile
-
