@@ -6,6 +6,10 @@ cache:
   directories:
     - ./htmltest/tmp
 
+addons:
+  snaps:
+    - yq
+
 before_install:
   # update gcloud apt source
   - bash ./themes/pxdocs-tooling/build/before_install.sh
