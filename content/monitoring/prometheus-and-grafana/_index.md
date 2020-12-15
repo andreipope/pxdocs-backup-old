@@ -13,11 +13,9 @@ This document shows how you can monitor your PX-Backup cluster with Prometheus a
 
 * A PX-Backup cluster
 * You have `kubectl` access to your PX-Backup cluster
-
-
 ## Install and configure Prometheus
 
-1. Enter the following combined spec and `kubectl` command to install Prometheus:
+1\. Enter the following combined spec and `kubectl` command to install Prometheus:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -145,7 +143,8 @@ serviceaccount/prometheus-operator created
 deployment.apps/prometheus-operator created
 ```
 
-2. Enter the following combined spec and `kubectl` command Apply clusterrole, serviceAccount settings to ensure prometheus pod has access to metric api
+2\. To grant Prometheus access to the metrics API, you must create a `ClusterRole` and a `ServiceAccount`:
+
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -225,14 +224,14 @@ kubectl apply -f - <<'_EOF'
  _EOF
  ```
 
-```text
+```output
  clusterrole.rbac.authorization.k8s.io/px-backup-prometheus created
 clusterrolebinding.rbac.authorization.k8s.io/px-backup-prometheus created
 service/px-backup-prometheus created
 serviceaccount/px-backup-prometheus created
 ```
 
-3. Apply secrets with prometheus configuration settings
+3\. Apply secrets with Prometheus configuration settings <!-- I don't understand this step -->:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -257,7 +256,7 @@ _EOF
 secret/prometheus-px-backup-prometheus created
 ```
 
-4. Apply Service Monitor specs:
+4\. Enter the following command to install the service monitor:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -286,7 +285,7 @@ _EOF
 servicemonitor.monitoring.coreos.com/px-backup-prometheus-sm created
 ```
 
-5. Apply prometheus specs for px-backup metrics:
+5\. Apply Prometheus specs for PX-Backup metrics <!-- I don't understand this step -->:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -312,9 +311,11 @@ prometheus.monitoring.coreos.com/px-backup-prometheus created
 
 ## Install and configure Grafana
 
-1. Create PVC:
+1\. Create a `StoragaClass` and a PVC:
 
 ```text
+kubectl apply -f - <<'_EOF'
+---
 kind: StorageClass
 apiVersion: storage.k8s.io/v1
 metadata:
@@ -376,6 +377,8 @@ spec:
    resources:
      requests:
        storage: 1Gi
+---
+_EOF
 ```
 
 ```output
@@ -386,33 +389,89 @@ persistentvolumeclaim/grafana-source-config created
 persistentvolumeclaim/grafana-extensions created
 ```
 
-2. Install Grafana
+2\. Enter the following command to install Grafana:
 
-```tezt
-kubectl apply -npx-backup -f specs/02-grafana.yaml
+```text
+kubectl apply -npx-backup -f - <<'_EOF'
+apiVersion: v1
+kind: Service
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  type: ClusterIP
+  ports:
+    - port: 3000
+  selector:
+    app: grafana
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: grafana
+  labels:
+    app: grafana
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: grafana
+    spec:
+      securityContext:
+       fsGroup: 2000
+      containers:
+        - image: grafana/grafana:6.1.6
+          name: grafana
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 100Mi
+            requests:
+              cpu: 100m
+              memory: 100Mi
+          readinessProbe:
+            httpGet:
+              path: /login
+              port: 3000
+          volumeMounts:
+            - name: grafana
+              mountPath: /etc/grafana/provisioning/dashboard
+              readOnly: false
+            - name: grafana-dash
+              mountPath: /var/lib/grafana/dashboards
+              readOnly: false
+            - name: grafana-source-cfg
+              mountPath: /etc/grafana/provisioning/datasources
+              readOnly: false
+            - name: grafana-plugins
+              mountPath: /var/lib/grafana/plugins
+              readOnly: false
+      volumes:
+      - name: grafana
+        persistentVolumeClaim:
+          claimName: grafana-data
+      - name: grafana-dash
+        persistentVolumeClaim:
+          claimName: grafana-dashboard
+      - name: grafana-source-cfg
+        persistentVolumeClaim:
+          claimName: grafana-source-config
+      - name: grafana-plugins
+        persistentVolumeClaim:
+          claimName: grafana-extensions
+---
+_EOF
 ```
 
-<!--
-All of prometheus install specs are under specs/prometheus directory.
-If prometheus operator is not installed already install via applying spec
-kubectl apply -f specs/prometheus/00-promethues-oper.yaml
-Apply clusterrole, serviceAccount settings to ensure prometheus pod has access to metric api
-kubectl apply -f specs/prometheus/01-prometheus-role.yaml
-Apply secrets with prometheus configuration settings
-kubectl apply -f specs/prometheus/02-secrets.yaml
-Apply Service Monitor specs
- kubectl apply -f specs/prometheus/03-service-monitor.yaml
-Apply prometheus specs for px-backup metrics
-kubectl apply -f specs/prometheus/04-prometheus.yaml
-If grafana is not installed already, install via applying specs -
-kubectl apply -npx-backup -f specs/01-pvc.yaml
-kubectl apply -npx-backup -f specs/02-grafana.yaml
-Use forward proxy to access grafana UI from browser -
- kubectl port-forward svc/grafana --namespace px-backup --address 0.0.0.0 3000
-Add prometheus datasource in grafana for px-backup metrics with name px-backup [https://prometheus.io/docs/visualization/grafana/]
-Follow the link [https://grafana.com/docs/grafana/latest/dashboards/export-import/#importing-a-dashboard] to load grafana dashboard from json in ./specs/grafana/Portworx Backup Overview.json
+3\.  Enter the following `kubectl port-forward` command to forward all connections made to `localhost:3000` to `svc/grafana:3000`:
 
+```text
+kubectl port-forward svc/grafana --namespace px-backup --address 0.0.0.0 3000
+```
 
+4\. Follow the instructions from the [Grafana Support for Prometheus](https://prometheus.io/docs/visualization/grafana/#grafana-support-for-prometheus) page of the Prometheus documentation, to create a Prometheus data source named `px-backup`.
 
-
--->
+5\. Follow the instructions from the [Importing a dashboard](Importing a dashboard) page of the Grafana documentation to import the PX-Backup dashboard [JSON file](/samples/Portworx_Backup_Overview.json?raw=true).
