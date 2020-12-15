@@ -318,7 +318,7 @@ prometheus.monitoring.coreos.com/px-backup-prometheus created
 - grafana-source-config
 - grafana-extensions
 
-<!-- Maybe we should add more details -->
+<!-- Maybe we should add more details and break this step down into two separate steps. -->
 
 ```text
 kubectl apply -f - <<'_EOF'
