@@ -1,13 +1,13 @@
 ---
-title: PX-Backup metrics 
-description: PX-Backup metrics 
+title: PX-Backup metrics
+description: PX-Backup metrics
 keywords: monitoring, metrics
-weight: 12 
+weight: 12
 disableprevnext: true
 scrollspy-container: false
 ---
 
-Scraping endpoint : http://px-backup-svc-endpoint:<rest_port (default:10001)>/metrics
+Scraping endpoint : `http://px-backup-svc-endpoint:<rest_port (default:10001)>/metrics`.
 
 | Name | Description | Type  | Labels | Value |
 | --- | --- | --- | --- | --- |
