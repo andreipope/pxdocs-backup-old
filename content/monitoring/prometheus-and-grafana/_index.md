@@ -478,6 +478,13 @@ spec:
 _EOF
 ```
 
+<!--
+@bhavana-ar I'm getting the following error:
+
+error: unable to recognize "02-grafana.yaml": no matches for kind "Deployment" in version "extensions/v1beta1"
+
+-->
+
 Note the following about this `Deployment`:
   - The `volumes` section references the PVCs you created in the previous step.
 
