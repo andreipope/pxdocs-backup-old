@@ -143,7 +143,7 @@ serviceaccount/prometheus-operator created
 deployment.apps/prometheus-operator created
 ```
 
-2\. To grant Prometheus access to the metrics API, you must create a `ClusterRole` and a `ServiceAccount`:
+2\. To grant Prometheus access to the metrics API, you must create a `ClusterRole` and a `ServiceAccount` by entering the following combined spec and `kubectl` command:
 
 
 ```text
@@ -256,7 +256,7 @@ _EOF
 secret/prometheus-px-backup-prometheus created
 ```
 
-4\. Enter the following command to install the service monitor:
+4\. To specify the monitoring rules for PX-Backup, create a `ServiceMonitor` object by entering the following combined spec and `kubectl` command:
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -311,7 +311,14 @@ prometheus.monitoring.coreos.com/px-backup-prometheus created
 
 ## Install and configure Grafana
 
-1\. Create a `StoragaClass` and a PVC:
+1\. Create a storage class for Grafana and persistent volumes with the following names:
+
+- grafana-data
+- grafana-dashboard
+- grafana-source-config
+- grafana-extensions
+
+<!-- Maybe we should add more details -->
 
 ```text
 kubectl apply -f - <<'_EOF'
@@ -389,6 +396,11 @@ persistentvolumeclaim/grafana-source-config created
 persistentvolumeclaim/grafana-extensions created
 ```
 
+Note the following about this `StorageClass`:
+
+* The `provisioner` parameter is set to  `kubernetes.io/portworx-volume`. For details about the Portworx-specific parameters, refer to the [Portworx Volume](https://kubernetes.io/docs/concepts/storage/storage-classes/#portworx-volume) section of the Kubernetes website.
+* Three replicas of each volume will be created.
+
 2\. Enter the following command to install Grafana:
 
 ```text
@@ -465,6 +477,9 @@ spec:
 ---
 _EOF
 ```
+
+Note the following about this `Deployment`:
+  - The `volumes` section references the PVCs you created in the previous step.
 
 3\.  Enter the following `kubectl port-forward` command to forward all connections made to `localhost:3000` to `svc/grafana:3000`:
 
