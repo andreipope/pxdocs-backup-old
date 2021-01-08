@@ -7,6 +7,18 @@ hidesections: true
 disableprevnext: true
 series: backup
 ---
+
+## 1.2.1
+
+Jan 4, 2020
+
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-1034 | The users could not use a license file to activate a license. </br></br> **User Impact:** PX-Backup displayed the following error message: "no license provided for activation."  </br></br> **Resolution:** The users can now use a license file to activate a license. |
 ## 1.2.0
 
 Dec 3, 2020
