@@ -15,10 +15,15 @@ series2_weight: 2
 
 In AWS, create an IAM role with the following permissions:
 
-  * `ec2:CreateSnapshot`
-  * `ec2:CreateSnapshots`
-  * `ec2:DeleteSnapshot`
-  * `ec2:DescribeSnapshots`
+* `ec2:DeleteSnapshot`
+* `ec2:DescribeInstances`
+* `ec2:CreateTags`
+* `ec2:CreateSnapshots`
+* `ec2:DescribeVolumes`
+* `ec2:CreateSnapshot`
+* `ec2:DescribeRegions`
+* `ec2:DescribeSnapshots`
+* `ec2:CreateVolume`
 
 <!-- Should we move the following note to the "Create and restore backups" section? --->
 

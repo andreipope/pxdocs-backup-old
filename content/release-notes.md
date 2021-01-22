@@ -8,13 +8,60 @@ disableprevnext: true
 series: backup
 ---
 
+## 1.2.1
+
+Jan 4, 2020
+
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-1034 | The users could not use a license file to activate a license. </br></br> **User Impact:** PX-Backup displayed the following error message: "no license provided for activation."  </br></br> **Resolution:** The users can now use a license file to activate a license. |
+## 1.2.0
+
+Dec 3, 2020
+### New features
+
+- Introducing **usage-based pricing** for remote cluster nodes.
+- PX-Backup now supports generic CSI driver backup and restore.
+- Introducing cluster-level aggregated metrics for backup and restore with Prometheus metrics and Grafana dashboards
+
+### Improvements
+
+Pure Storage has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-553 | On the **Restores** page, PX-Backup now displays a different icon for partially successful restores. This icon helps to distinguish between a partially successful restore and a successful one. |
+| PB-894 | On the **All Backups** page, PX-Backup now displays the name of the cluster for each backup. |
+| PB-932 | On the **Schedules** page, you can now hover over a paused backup schedule to see the reason for that backup being paused. |
+| PB-934 | On the **Applications** page, PX-Backup now properly displays namespaces with long names in the namespace drop-down list. |
+| PB-948 | PX-Backup now displays the date and the time when the next backup will run in the modal containing details about your backup schedule. |
+| PB-946 | PX-Backup now uses the same format to display dates for backups, restores, and backup schedules. |
+| PB-947 | On the **Scheduled Backup Details** pane, the **NEXT SCHEDULED BACKUP ON** field now shows the date and the time when the next backup will run. When a backup is running, the **NEXT SCHEDULED BACKUP ON** field shows **In Progress**. |
+| PB-950 | If you select the name of a backup, restore, or backup schedule from the table view, PX-Backup now displays a modal containing details about your backup, restore, or backup schedule. |
+| PB-958 | On the **Applications** page, the list of resource types is now sorted alphabetically. |
+| PB-966 | On the **Schedules** page, PX-Backup now displays the namespaces included in a backup. |
+
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-659 | PX-Backup did not notify the users when their license was about to expire. </br></br> **User Impact:** The users would know about expired licenses only when backups and restores started failing due to expired licenses. </br></br> **Resolution:** PX-Backup now displays a warning seven days before license expiration. |
+| PB-862 | If the OIDC server was not reachable during startup, PX-Backup failed to start </br></br> **User Impact:** PX-Backup did not start. </br></br> **Resolution:** If the OIDC server is not reachable during startup, PX-Backup now starts and tries to connect to the OIDC server before a gRPC call is performed. |
+| PB-892 | PX-Backup incorrectly reflected the size of your AWS backup. </br></br> **User Impact:** PX-Backup displayed "B" instead of "GiB"  </br></br> **Resolution:** PX-Backup now accurately displays the size of your AWS backup. |
+
 ## 1.1.1
 
 Nov 2, 2020
 
 ### Improvements
 
-Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+{{<companyName>}} has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
@@ -26,7 +73,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 ### Fixes
 
-Portworx, Inc. has fixed the following issues:
+{{<companyName>}} has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
@@ -86,7 +133,7 @@ Sep 28, 2020
 
 ### Fixes
 
-Portworx, Inc. has fixed the following issues:
+{{<companyName>}} has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
@@ -103,7 +150,7 @@ July 28, 2020
 
 ### Improvements
 
-Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+{{<companyName>}} has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
@@ -122,7 +169,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 ### Fixes
 
-Portworx, Inc. has fixed the following issues:
+{{<companyName>}} has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
@@ -146,7 +193,7 @@ June 5, 2020
 
 ### Improvements
 
-Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+{{<companyName>}} has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
@@ -167,7 +214,7 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 ### Fixes
 
-Portworx, Inc. has fixed the following issues:
+{{<companyName>}} has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
@@ -217,7 +264,7 @@ Month day, 2020
 
 ### Improvements
 
-Portworx, Inc. has upgraded or enhanced functionality in the following areas:
+{{<companyName>}} has upgraded or enhanced functionality in the following areas:
 
 | **Improvement Number** | **Improvement Description** |
 |----|----|
@@ -225,14 +272,14 @@ Portworx, Inc. has upgraded or enhanced functionality in the following areas:
 
 ### Fixes
 
-Portworx, Inc. has fixed the following issues:
+{{<companyName>}} has fixed the following issues:
 
 |**Issue Number**|**Issue Description**|
 |----|----|
 
 
 ### Known Issues
-Portworx, Inc. is aware of the following issues, check future release notes for fixes:
+{{<companyName>}} is aware of the following issues, check future release notes for fixes:
 
 |**Issue Number**|**Issue Description**|**Workaround**|
 |----|----|----| -->
