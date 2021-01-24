@@ -134,9 +134,6 @@ You can access the Keycloak UI at the `/auth` path:
 http://LB_ENDPOINT/auth
 ```
 
-
-
-
 ## Configure access to the PX-Backup UI on OpenShift
 
 This section shows how you can configure access to the PX-Backup UI on OpenShift.
@@ -150,8 +147,8 @@ This section shows how you can configure access to the PX-Backup UI on OpenShift
     - **Hostname**: specify a public hostname. If you leave this field empty, OpenShift will generate a hostname.
     - **Path**: leave this field unchanged.
     - **Service**: choose `px-backup-ui` from the drop-down list.
-    - **Target Port**: choose `80 -> 80` <!-- Not sure. Needs validation as PX-Backup is not deployed onto https://console-openshift-console.vinayak-vpc-ocp4-3-80e1e1cd66534115bf44691bf8f01a6b-0000.us-south.containers.appdomain.cloud/dashboards -->
+    - **Target Port**: choose `80 -> 8080`
 
 3. When you've finished configuring your route, select the **Create button**.
 
-<!-- Are there any other steps? I can't verify this as PX-Backup is not deployed onto https://console-openshift-console.vinayak-vpc-ocp4-3-80e1e1cd66534115bf44691bf8f01a6b-0000.us-south.containers.appdomain.cloud/dashboards -->
+4. OpenShift now displays a link to the PX-Backup UI on the **Routes** page. To access PX-Backup, select that link.
