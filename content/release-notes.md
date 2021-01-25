@@ -24,7 +24,9 @@ Pure Storage has upgraded or enhanced functionality in the following areas:
 
 Pure Storage has fixed the following issues:
 
-| PB-1003 |<!-- Need more details in the following format: issue, user impact, resolution. --> Backup schedule view json was not showing complete list of backups taken by the backup schedule. </br></br> **User Impact:** </br></br> **Resolution:** |
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-1003 | <!-- Need more details in the following format: issue, user impact, resolution. --> Backup schedule view json was not showing complete list of backups taken by the backup schedule. </br></br> **User Impact:** </br></br> **Resolution:** |
 | PB-1015 | Sometimes, when a cluster became online, PX-Backup did not update the status of that cluster. </br></br> **User Impact:** Users saw their online clusters marked as offline. </br></br> **Resolution:** PX-Backup now correctly reflects the status of your cluster. |
 | PB-1036 | Users could not apply a new license. </br></br> **User Impact:** PX-Backup displayed the following error message: "Can't update license as current license type is invalid." </br></br> **Resolution:** Users can now apply new licenses. |
 | PB-1039 | When the number of namespaces being backed up was very large, PX-Backup took a long time to load all resources, and timed out. </br></br> **User Impact:**  PX-Backup marked the backup as failed. </br></br> **Resolution:** PX-Backup no longer times out and marks backups as failed when the number of namespaces being backup up is very large. |
