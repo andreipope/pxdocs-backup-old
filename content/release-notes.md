@@ -7,7 +7,32 @@ hidesections: true
 disableprevnext: true
 series: backup
 ---
+## 1.2.2
 
+Jan 25, 2020
+
+### Improvements
+
+Pure Storage has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-773 | PX-Backup now displays an improved error message when users choose the "Include any namespace created" option on a cluster running a version of Stork older than 2.5.0. |
+| PB-981 | PX-Backup now displays different icons for partially successful restores. These icons help to distinguish between partially successful restore and successful ones. |
+| PB-1050 | When the number of resources that are backed up is very large, PX-Backup now displays a message indicating that resources are being loaded. |
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+| PB-1003 |<!-- Need more details in the following format: issue, user impact, resolution. --> Backup schedule view json was not showing complete list of backups taken by the backup schedule. </br></br> **User Impact:** </br></br> **Resolution:** |
+| PB-1015 | Sometimes, when a cluster became online, PX-Backup did not update the status of that cluster. </br></br> **User Impact:** Users saw their online clusters marked as offline. </br></br> **Resolution:** PX-Backup now correctly reflects the status of your cluster. |
+| PB-1036 | Users could not apply a new license. </br></br> **User Impact:** PX-Backup displayed the following error message: "Can't update license as current license type is invalid." </br></br> **Resolution:** Users can now apply new licenses. |
+| PB-1039 | When the number of namespaces being backed up was very large, PX-Backup took a long time to load all resources, and timed out. </br></br> **User Impact:**  PX-Backup marked the backup as failed. </br></br> **Resolution:** PX-Backup no longer times out and marks backups as failed when the number of namespaces being backup up is very large. |
+| PB-1047 | <!-- Revisit this --> On the **Applications** page, PX-Backup displayed the **Backup** button before it loaded.</br></br> **User Impact:** Sometimes, PX-Backup did not back up all resources. </br></br> **Resolution:** PX-Backup now displays the **Backup** button only after it loads and displays all resources them on the **Applications** page.|
+| PB-1056 | Backup jobs became stuck in the "In progress" state when the application cluster on which you triggered the backup has been shut down or terminated. </br></br> **User Impact:** Users saw these backup jobs sit in the "In progress" state in the PX-Backup UI and never converge to the "Failed state. </br></br> **Resolution:** PX-Backup now correctly marks backup jobs as "Failed" when the application cluster on which you triggered the backup has been shut down or terminated. |
+| PB-1063 | <!-- Need more details in the following format: issue, user impact, resolution. -- >The objects created to validate the cloud credentials were not getting cleaned up when there was a failure to create backup location. | </br></br> **User Impact:** </br></br> **Resolution:**  |
+| PB-1068| <!-- What is the user impact here? --> License check was not performed immediately after PX-backup pod is restart. </br></br> **User Impact:** In a case when the license has expired and px-backup pod is restarted, there is a window of 10 minutes after pod restart where the license expiry is not checked. </br></br> **Resolution:** A license check is performed immediately after the pod restart. |
+| PB-1069 | PX-Backup marked a backup job as "Done" even if a volume backup was still in progress.  </br></br> **User Impact:** Users saw their jobs being marked as "Done" even if a volume backup was still in progress </br></br> **Resolution:** PX-Backup now marks a backup job as "Done" only after all volume backups are successfully completed. |
 ## 1.2.1
 
 Jan 4, 2020
