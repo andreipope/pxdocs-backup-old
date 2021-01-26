@@ -13,11 +13,11 @@ Jan 26, 2020
 
 ### New features
 
-- On the **All Backups** page, you can now delete multiple backup and restore jobs.
-- PX-Backup now supports cross-cluster restores on clusters running Pure Service Orchestrator (PSO) v6.0.5
-- You can now duplicate successful or failed backup or restore jobs.
+- PX-Backup now allows you to delete multiple backup and restore jobs.
+- Users can recreate a backup or restore job from an existing job by duplicating a successful or failed backup and restore job.
 - If you're using a CSI driver and the original cluster is no longer available, you can now choose any other CSI cluster to delete your CSI backup.
 - You can now specify the CSI snapshot class that PX-Backup will use to back up a CSI volume.
+- PX-Backup now supports cross-cluster restores on clusters running Pure Service Orchestrator (PSO) v6.0.5
 ### Improvements
 
 Pure Storage has upgraded or enhanced functionality in the following areas:
@@ -26,7 +26,7 @@ Pure Storage has upgraded or enhanced functionality in the following areas:
 |----|----|
 | PB-773 | PX-Backup now displays an improved error message when users choose the "Include any namespace created" option on a cluster running a version of Stork older than 2.5.0. |
 | PB-981 | PX-Backup now displays different icons for partially successful restores. These icons help to distinguish between partially successful restores and successful ones. |
-| PB-1050 | When the number of resources that are backed up is very large, PX-Backup now displays a message indicating that resources are being loaded. |
+| PB-1050 | When the number of resources that are backed up is very large, the PX-Backup **Details** modal now displays a message indicating that resources are being loaded. |
 ### Fixes
 
 Pure Storage has fixed the following issues:
