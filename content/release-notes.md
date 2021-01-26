@@ -11,6 +11,13 @@ series: backup
 
 Jan 25, 2020
 
+### New features
+
+- On the **All Backups** page, you can now delete multiple backup and restore jobs.
+- PX-Backup now supports cross-cluster restores on clusters running Pure Service Orchestrator (PSO) v6.0.5
+- You can now duplicate successful or failed backup or restore jobs.
+- If you're using a CSI driver and the original cluster is no longer available, you can now choose any other CSI cluster to delete your CSI backup.
+- You can now specify the CSI snapshot class that PX-Backup will use to back up a CSI volume.
 ### Improvements
 
 Pure Storage has upgraded or enhanced functionality in the following areas:
