@@ -42,11 +42,11 @@ If your cluster is internet-connected, skip this section. If your cluster is air
 * docker.io/library/busybox:1.31
 * docker.io/library/mysql:5.7.22
 * docker.io/portworx/pxcentral-onprem-api:1.2.1
-* docker.io/portworx/pxcentral-onprem-ui-frontend:1.2.1
-* docker.io/portworx/pxcentral-onprem-ui-backend:1.2.1
-* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.2.0
-* docker.io/portworx/px-backup:1.2.1
-* docker.io/portworx/pxcentral-onprem-post-setup:1.2.1
+* docker.io/portworx/pxcentral-onprem-ui-frontend:1.2.2
+* docker.io/portworx/pxcentral-onprem-ui-backend:1.2.2
+* docker.io/portworx/pxcentral-onprem-ui-lhbackend:1.2.2
+* docker.io/portworx/px-backup:1.2.2
+* docker.io/portworx/pxcentral-onprem-post-setup:1.2.2
 
 ## Install PX-Backup
 
