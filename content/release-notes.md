@@ -7,6 +7,52 @@ hidesections: true
 disableprevnext: true
 series: backup
 ---
+## 1.2.2
+
+Jan 26, 2020
+
+### New features
+
+- PX-Backup now allows you to delete multiple backup and restore jobs.
+- Users can recreate a backup or restore job from an existing job by duplicating a successful or failed backup and restore job.
+- If you're using a CSI driver and the original cluster is no longer available, you can now choose any other CSI cluster to delete your CSI backup.
+- You can now specify the CSI snapshot class that PX-Backup will use to back up a CSI volume.
+- PX-Backup now supports cross-cluster restores on clusters running Pure Service Orchestrator (PSO) v6.0.5
+### Improvements
+
+Pure Storage has upgraded or enhanced functionality in the following areas:
+
+| **Improvement Number** | **Improvement Description** |
+|----|----|
+| PB-773 | PX-Backup now displays an improved error message when users choose the "Include any namespace created" option on a cluster running a version of Stork older than 2.5.0. |
+| PB-981 | PX-Backup now displays different icons for partially successful restores. These icons help to distinguish between partially successful restores and successful ones. |
+| PB-1050 | When the number of resources that are backed up is very large, the PX-Backup **Details** modal now displays a message indicating that resources are being loaded. |
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-1003 | The view JSON output for a backup schedule did not show all the successful backups taken by that backup schedule. </br></br> **User Impact:** The users could not see all their successful backups. </br></br> **Resolution:** The view JSON output for a backup schedule now shows all the successful backups thats were taken by that backup schedule. |
+| PB-1015 | Sometimes, when a cluster came back online, PX-backup did not update the status of that cluster immediately. </br></br> **User Impact:** There was a delay in updating the cluster status during which users saw their online clusters marked as offline. </br></br> **Resolution:** PX-Backup now correctly reflects the status of your cluster. |
+| PB-1036 | Users could not apply a new license. </br></br> **User Impact:** PX-Backup displayed the following error message: "Can't update license as current license type is invalid." </br></br> **Resolution:** Users can now apply new licenses. |
+| PB-1039 | When the number of namespaces being backed up was very large, PX-Backup took a long time to load all resources, and backups would fail with a timeout error. </br></br> **User Impact:**  PX-Backup marked the backup as failed. </br></br> **Resolution:** PX-Backup no longer times out and marks backups as failed when the number of namespaces being backup up is very large. |
+| PB-1047 | On the **Applications** page, if the user selected a particular resource type to back up, PX-Backup enabled the **Backup** button before all the resources were loaded. </br></br> **User Impact:** Sometimes, PX-Backup backed up only a subset of the resources the user has selected. </br></br> **Resolution:** PX-Backup now enables the **Backup** button only after it loads all resources, and backs up all resources. |
+| PB-1056 | Backup jobs became stuck in the "In progress" state when the application cluster on which you triggered the backup has been shut down or terminated. </br></br> **User Impact:** Users saw these backup jobs sit in the "In progress" state in the PX-Backup UI and never converge to the "Failed" state. </br></br> **Resolution:** PX-Backup now correctly marks backup jobs as "Failed" when the application cluster on which you triggered the backup has been shut down or terminated. |
+| PB-1063 | If PX-Backup failed to create a backup location, the objects created to validate the cloud credentials were not cleaned up. </br></br> **User Impact:** If PX-Backup failed to create a backup location, the objects created to validate the cloud credentials were not cleaned up. <!-- I still don't understand what is the user impact --></br></br> **Resolution:**  When PX-Backup fails to create a backup location, it now removes all objects created to validate the cloud credentials. |
+| PB-1068| PX-Backup did not verify the license immediately after the PX-Backup pod was restarted. </br></br> **User Impact:** If the license was expired and the users restarted the PX-Backup pod, there was a ten minutes period during which users could create backups </br></br> **Resolution:** PX-Backup now verifies the license immediately after the PX-Backup pod is restarted. If the license is expired, the backups fail, and PX-Backup displays an error saying that the license is expired. |
+| PB-1069 | Sometimes, PX-Backup marked a backup job as "Done" even if a volume backup was still in progress.  </br></br> **User Impact:** Sometimes, users saw their jobs being marked as "Done" even if a volume backup was still in progress </br></br> **Resolution:** PX-Backup now marks a backup job as "Done" only after all volume backups are successfully completed. |
+## 1.2.1
+
+Jan 4, 2020
+
+### Fixes
+
+Pure Storage has fixed the following issues:
+
+|**Issue Number**|**Issue Description**|
+|----|----|
+| PB-1034 | The users could not use a license file to activate a license. </br></br> **User Impact:** PX-Backup displayed the following error message: "no license provided for activation."  </br></br> **Resolution:** The users can now use a license file to activate a license. |
 ## 1.2.0
 
 Dec 3, 2020

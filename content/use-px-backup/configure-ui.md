@@ -9,9 +9,12 @@ scrollspy-container: false
 type: common-landing
 ---
 
-If the standard PX-Backup UI endpoint configuration doesn't meet your requirements, you can configure access using HTTPS, access it through the load balancer, or even navigate to one of your node IPs directly. 
+If the standard PX-Backup UI endpoint configuration doesn't meet your requirements, you can configure access using HTTPS, access it through the load balancer, or even navigate to one of your node IPs directly.
 
-## Expose the PX-Backup UI on ingress and configure access using HTTPS
+## Configure access to the PX-Backup UI on Kubernetes
+
+This section shows you how you can configure access to the PX-Backup UI on Kubernetes.
+### Expose the PX-Backup UI on ingress and configure access using HTTPS
 
 You can configure access to PX-Backup through HTTPS by creating an ingress rule.
 
@@ -21,7 +24,7 @@ You can configure access to PX-Backup through HTTPS by creating an ingress rule.
     * **spec.tls.hosts** specify the name of the host on which you've installed PX-Backup
     * **spec.tls.hosts.secretName:** specify the name of the secret that holds your Kubernetes TLS certificates
 
-            cat <<< ' 
+            cat <<< '
             apiVersion: extensions/v1beta1
             kind: Ingress
             metadata:
@@ -75,14 +78,14 @@ Once you've retrieved the `INGRESS_ENDPOINT`, you can use it to access the PX-Ba
 https://INGRESS_ENDPOINT
 ```
 
-Additionally, you can access the Keycloak UI at the `/auth` path: 
+Additionally, you can access the Keycloak UI at the `/auth` path:
 
 ```
 https://INGRESS_ENDPOINT/auth
 ```
 
 
-## Access the PX-Backup UI using a node IP:
+### Access the PX-Backup UI using a node IP
 
 You can access PX-Backup by directly navigating to one of your node's IP addresses.
 
@@ -101,9 +104,7 @@ Additionally, you can access the Keycloak UI at the `/auth` path:
 ```
 http://NODE_IP:NODE_PORT/auth
 ```
-
-
-## Access the PX-Backup UI using the load balancer endpoint:
+### Access the PX-Backup UI using the load balancer endpoint
 
 You can also the access PX-Backup UI by navigating to the load balancer using either its host name or IP address.
 
@@ -120,7 +121,7 @@ You can also the access PX-Backup UI by navigating to the load balancer using ei
         ```text
         kubectl get ingress --namespace {{ .Release.Namespace }} px-backup-ui -o jsonpath="{.status.loadBalancer.ingress[0].ip}"`
         ```
-  
+
 Once you've retrieved the load balancer endpoint, you can use it to access the PX-Backup UI:
 
 ```
@@ -132,3 +133,22 @@ You can access the Keycloak UI at the `/auth` path:
 ```
 http://LB_ENDPOINT/auth
 ```
+
+## Configure access to the PX-Backup UI on OpenShift
+
+This section shows how you can configure access to the PX-Backup UI on OpenShift.
+
+### Access the PX-Backup UI using a route
+
+1. Open the web console, go to  **Networking** > **Routes**, and then select the **Create Route** button.
+
+2. On the **Create Route** page, configure your route by populating the following fields:
+    - **Name**: enter a descriptive name
+    - **Hostname**: specify a public hostname. If you leave this field empty, OpenShift will generate a hostname.
+    - **Path**: leave this field unchanged.
+    - **Service**: choose `px-backup-ui` from the drop-down list.
+    - **Target Port**: choose `80 -> 8080`
+
+3. When you've finished configuring your route, select the **Create button**.
+
+4. OpenShift now displays a link to the PX-Backup UI on the **Routes** page. To access PX-Backup, select that link.
