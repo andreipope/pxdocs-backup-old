@@ -8,6 +8,10 @@ disableprevnext: true
 
 You can restore backups to the cluster you created it from, or to a new cluster.
 
+{{<info>}}
+**NOTE:** PX-Backup does not support restoring of backed up data stored in storage classes for archiving such as Amazon S3 Glacier or Google Nearline Storage.
+{{</info>}}
+
 1. From the home page, select your cluster:
 
     ![Select your cluster](/img/cluster-backups.png)
