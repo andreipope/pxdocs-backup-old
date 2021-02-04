@@ -9,8 +9,7 @@ cache:
 addons:
   snaps:
     - name: yq
-      channel: v3/stable
-
+      
 before_install:
   # update gcloud apt source
   - bash ./themes/pxdocs-tooling/build/before_install.sh
@@ -23,6 +22,6 @@ script:
 notifications:
   email:
     recipients:
-      - harsh@portworx.com
+      - nwilson@purestorage.com 
     on_success: change
     on_failure: always
